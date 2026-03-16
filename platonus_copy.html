@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тест по информационной безопасности</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header {
+    text-align: center;
+    padding: 30px 20px 20px;
+    width: 100%;
+    max-width: 700px;
+  }
+  .header h1 { font-size: 1.6rem; font-weight: 700; color: #38bdf8; margin-bottom: 6px; }
+  .header p { color: #94a3b8; font-size: 0.9rem; }
+
+  /* ===== ЭКРАН СТАРТА ===== */
+  .start-screen {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    animation: fadeSlideIn 0.4s ease;
+  }
+  .start-card {
+    background: #1e293b;
+    border: 2px solid #38bdf8;
+    border-radius: 18px;
+    padding: 40px 32px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    width: 100%;
+    max-width: 420px;
+  }
+  .start-card:hover {
+    background: #1a2f44;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(56,189,248,0.18);
+  }
+  .start-card .mode-icon { font-size: 3rem; margin-bottom: 16px; display: block; }
+  .start-card .mode-title { font-size: 1.25rem; font-weight: 700; color: #f1f5f9; margin-bottom: 10px; }
+  .start-card .mode-desc { font-size: 0.88rem; color: #94a3b8; line-height: 1.6; }
+
+  /* ===== ЛОАДЕР ===== */
+  .loader-wrap {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 40px;
+    color: #64748b;
+    font-size: 0.92rem;
+  }
+  .loader-wrap.show { display: flex; }
+  .spinner {
+    width: 36px; height: 36px;
+    border: 3px solid #334155;
+    border-top-color: #38bdf8;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ===== СТАТИСТИКА ===== */
+  .stats-bar {
+    width: 100%;
+    max-width: 700px;
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 14px 22px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 1px solid #334155;
+    margin-bottom: 24px;
+  }
+  .stat { display: flex; flex-direction: column; gap: 2px; }
+  .stat-val { font-size: 1.3rem; font-weight: 700; color: #38bdf8; }
+  .stat-val.correct { color: #22c55e; }
+  .stat-val.wrong { color: #f87171; }
+  .stat-label { font-size: 0.72rem; color: #94a3b8; }
+  .progress-wrap { flex: 1; min-width: 140px; }
+  .progress-track { height: 8px; background: #334155; border-radius: 4px; overflow: hidden; margin-top: 6px; }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+
+  /* ===== КАРТОЧКА ВОПРОСА ===== */
+  .card-wrap { width: 100%; max-width: 700px; }
+  .question-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 28px;
+    animation: fadeSlideIn 0.35s ease;
+  }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .question-num {
+    font-size: 0.72rem;
+    color: #64748b;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /*
+   * ── ЗАЩИТА №2: CSS-псевдоэлемент для первого символа ──────────
+   * JavaScript (innerText/textContent) видит только хвост строки.
+   * Первый символ живёт исключительно в CSS ::before и в DOM недоступен.
+   */
+  .q-text-protected::before,
+  .opt-text-protected::before {
+    content: attr(data-fc); /* data-fc = first char */
+  }
+
+  .question-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    line-height: 1.65;
+    margin-bottom: 22px;
+  }
+
+  .options { display: flex; flex-direction: column; gap: 10px; }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 13px 16px;
+    border-radius: 10px;
+    border: 1px solid #334155;
+    background: #0f172a;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 0.93rem;
+    line-height: 1.5;
+    text-align: left;
+    color: #cbd5e1;
+    width: 100%;
+    user-select: none;
+  }
+  .option:hover:not(:disabled) { border-color: #38bdf8; background: #0f2236; color: #f1f5f9; }
+
+  .option .letter {
+    min-width: 26px; height: 26px;
+    border-radius: 50%;
+    background: #1e293b;
+    border: 1px solid #475569;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 700;
+    color: #94a3b8; flex-shrink: 0;
+    margin-top: 1px; transition: all 0.15s;
+  }
+
+  .option.correct { background: #14532d33; border-color: #22c55e; color: #bbf7d0; }
+  .option.correct .letter { background: #22c55e; border-color: #22c55e; color: #fff; }
+  .option.wrong   { background: #7f1d1d33; border-color: #f87171; color: #fecaca; }
+  .option.wrong   .letter { background: #ef4444; border-color: #ef4444; color: #fff; }
+  .option.show-correct { border-color: #22c55e; background: #14532d22; color: #86efac; }
+  .option.show-correct .letter { background: #16a34a; border-color: #16a34a; color: #fff; }
+  .option:disabled { cursor: default; }
+
+  .result-row {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+    margin-top: 18px; min-height: 44px;
+  }
+
+  .result-badge {
+    padding: 8px 14px; border-radius: 8px;
+    font-size: 0.85rem; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 6px;
+    animation: fadeIn 0.25s ease;
+  }
+  .result-badge.correct { background: #14532d44; color: #4ade80; border: 1px solid #16a34a; }
+  .result-badge.wrong   { background: #7f1d1d44; color: #f87171; border: 1px solid #dc2626; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .btn-next {
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    color: #0f172a; border: none;
+    padding: 10px 26px; border-radius: 9px;
+    font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; transition: opacity 0.2s, transform 0.15s;
+    display: none; animation: fadeIn 0.25s ease;
+  }
+  .btn-next:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-next.visible { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* ===== ФИНАЛЬНЫЙ ЭКРАН ===== */
+  .final-screen {
+    display: none;
+    text-align: center; padding: 60px 28px;
+    background: #1e293b;
+    border-radius: 20px; border: 1px solid #334155;
+    width: 100%; max-width: 700px;
+    animation: fadeSlideIn 0.4s ease;
+  }
+  .final-screen.show { display: block; }
+  .final-score { font-size: 4.5rem; font-weight: 800; margin-bottom: 8px; }
+  .final-screen h2 { font-size: 1.4rem; color: #94a3b8; margin-bottom: 10px; }
+  .final-grade { font-size: 1rem; margin-bottom: 32px; color: #cbd5e1; line-height: 1.6; }
+  .btn-restart {
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    color: #0f172a; border: none;
+    padding: 14px 36px; border-radius: 10px;
+    font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: opacity 0.2s;
+    margin: 6px;
+  }
+  .btn-restart:hover { opacity: 0.85; }
+
+  /* ===== СООБЩЕНИЕ ОБ ОШИБКЕ ===== */
+  .error-msg {
+    display: none;
+    background: #7f1d1d33; border: 1px solid #dc2626;
+    color: #f87171; border-radius: 10px;
+    padding: 16px 20px; font-size: 0.9rem;
+    width: 100%; max-width: 700px; text-align: center;
+  }
+  .error-msg.show { display: block; }
+
+  /* ===== КНОПКА "СМЕНИТЬ РЕЖИМ" ===== */
+  .btn-change-mode {
+    background: transparent; color: #64748b;
+    border: 1px solid #334155;
+    padding: 8px 18px; border-radius: 8px;
+    font-size: 0.82rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+    margin-bottom: 16px; align-self: flex-start;
+  }
+  .btn-change-mode:hover { color: #94a3b8; border-color: #475569; }
+
+  @media (max-width: 600px) {
+    .question-card { padding: 20px 16px; }
+    .stats-bar { gap: 14px; }
+    .final-score { font-size: 3.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🔐 Информационная безопасность</h1>
+  <p>Администрирование аппаратно-программных средств ИБ</p>
+</div>
+
+<!-- СТАРТОВЫЙ ЭКРАН -->
+<div class="start-screen" id="start-screen">
+  <div class="start-card" id="start-btn">
+    <span class="mode-icon">➡️</span>
+    <div class="mode-title">Начать тест</div>
+    <div class="mode-desc">Вопросы идут по одному. После ответа нажмите «Далее» для перехода к следующему вопросу.</div>
+  </div>
+</div>
+
+<!-- ЛОАДЕР -->
+<div class="loader-wrap" id="loader">
+  <div class="spinner"></div>
+  <span>Загрузка вопроса…</span>
+</div>
+
+<!-- ОШИБКА -->
+<div class="error-msg" id="error-msg">
+  ⚠️ Не удалось загрузить вопрос с сервера. Проверьте соединение.
+  <br><br>
+  <button class="btn-restart" onclick="retryLoad()">🔄 Повторить</button>
+</div>
+
+<!-- СТАТИСТИКА -->
+<div class="stats-bar" id="stats-bar" style="display:none;">
+  <div class="stat">
+    <span class="stat-val" id="stat-total">0/0</span>
+    <span class="stat-label">Отвечено</span>
+  </div>
+  <div class="stat">
+    <span class="stat-val correct" id="stat-correct">0</span>
+    <span class="stat-label">Правильно</span>
+  </div>
+  <div class="stat">
+    <span class="stat-val wrong" id="stat-wrong">0</span>
+    <span class="stat-label">Неверно</span>
+  </div>
+  <div class="progress-wrap">
+    <div style="font-size:0.72rem;color:#94a3b8;">Прогресс</div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+</div>
+
+<!-- КНОПКА НАЗАД -->
+<div id="change-mode-wrap" style="display:none;width:100%;max-width:700px;">
+  <button class="btn-change-mode" onclick="goToStart()">← В начало</button>
+</div>
+
+<!-- КАРТОЧКА ВОПРОСА -->
+<div class="card-wrap" id="card-wrap" style="display:none;">
+  <div class="question-card" id="question-card">
+    <div class="question-num" id="q-num"></div>
+    <!-- Защита №2: сам q-text — это обёртка, текст внутри обрезан на 1 символ -->
+    <div class="question-text" id="q-text"></div>
+    <div class="options" id="q-options"></div>
+    <div class="result-row">
+      <div id="q-badge"></div>
+      <button class="btn-next" id="btn-next">Далее →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ФИНАЛЬНЫЙ ЭКРАН -->
+<div class="final-screen" id="final-screen">
+  <div class="final-score" id="final-pct"></div>
+  <h2 id="final-label"></h2>
+  <p class="final-grade" id="final-detail"></p>
+  <button class="btn-restart" onclick="restart()">🔄 Пройти снова</button>
+  <button class="btn-restart"
+          style="background:linear-gradient(135deg,#818cf8,#6366f1);"
+          onclick="goToStart()">🏠 В начало</button>
+</div>
+
+<script>
+// ============================================================
+// СОСТОЯНИЕ
+// ============================================================
+let _currentIndex  = 0;   // текущий номер вопроса (0-based)
+let _total         = 0;   // всего вопросов
+let _correctCount  = 0;
+let _wrongCount    = 0;
+let _isAnswered    = false;
+
+// Индекс правильного ответа В ПЕРЕТАСОВАННОМ массиве
+// (никогда не хранится как текст в JS)
+let _correctPos    = -1;
+
+// Чистый текст правильного ответа — нужен ТОЛЬКО для отображения в бейдже
+// не доступен через DOM, только через JS-переменную
+let _correctText   = '';
+
+// MutationObserver — глобальная ссылка для отключения перед нашими изменениями
+let _observer      = null;
+
+// Запомненный index последней неудавшейся загрузки
+let _retryIndex    = 0;
+
+// ============================================================
+// ИНИЦИАЛИЗАЦИЯ
+// ============================================================
+document.getElementById('start-btn').addEventListener('click', function(e) {
+  // Защита №4 – проверяем isTrusted
+  if (!e.isTrusted) return;
+  startQuiz();
+});
+
+document.getElementById('btn-next').addEventListener('click', function(e) {
+  if (!e.isTrusted) return;
+  nextQuestion();
+});
+
+// ============================================================
+// СТАРТ
+// ============================================================
+async function startQuiz() {
+  _currentIndex = 0;
+  _correctCount = 0;
+  _wrongCount   = 0;
+  _isAnswered   = false;
+
+  document.getElementById('start-screen').style.display   = 'none';
+  document.getElementById('final-screen').classList.remove('show');
+  document.getElementById('stats-bar').style.display      = '';
+  document.getElementById('change-mode-wrap').style.display = '';
+  document.getElementById('card-wrap').style.display      = '';
+
+  updateStats();
+  await loadAndRender(_currentIndex);
+}
+
+// ============================================================
+// ЗАГРУЗКА ВОПРОСА С СЕРВЕРА
+// ============================================================
+async function loadAndRender(index) {
+  showLoader(true);
+  hideError();
+  try {
+    const res  = await fetch(`/exam?index=${index}`);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+
+    _total = data.total;
+    updateStats();
+    renderQuestion(data);
+    showLoader(false);
+  } catch (err) {
+    showLoader(false);
+    _retryIndex = index;
+    showError();
+  }
+}
+
+function retryLoad() {
+  hideError();
+  loadAndRender(_retryIndex);
+}
+
+// ============================================================
+// РЕНДЕР ВОПРОСА
+// ============================================================
+function renderQuestion(data) {
+  _isAnswered = false;
+  const letters = ['А','Б','В','Г','Д','Е','Ж','З'];
+  const isLast  = _currentIndex + 1 >= _total;
+
+  // Номер вопроса
+  document.getElementById('q-num').textContent =
+    `Вопрос ${_currentIndex + 1} из ${_total}`;
+
+  // ── Защита №2: CSS-маскировка первого символа вопроса ───────
+  const qEl = document.getElementById('q-text');
+  qEl.innerHTML = ''; // очищаем
+  const qSpan = document.createElement('span');
+  qSpan.className = 'q-text-protected';
+  const qParts = splitFirstChar(data.question);
+  qSpan.setAttribute('data-fc', qParts.first);   // первый символ — только CSS
+  // ── Защита №1: шум из невидимых символов в остатке текста ───
+  qSpan.textContent = injectZeroWidth(qParts.rest);
+  qEl.appendChild(qSpan);
+
+  // Сбрасываем бейдж и кнопку
+  document.getElementById('q-badge').innerHTML = '';
+  const btnNext = document.getElementById('btn-next');
+  btnNext.classList.remove('visible');
+  btnNext.textContent = isLast ? 'Завершить →' : 'Далее →';
+
+  // Перемешиваем варианты, запоминаем позицию правильного
+  const shuffled = shuffle(data.variants);
+  _correctPos  = shuffled.indexOf(data.correct);
+  // На случай если indexOf подведёт (не должен, но страховка)
+  if (_correctPos === -1) {
+    for (let i = 0; i < shuffled.length; i++) {
+      if (shuffled[i].trim() === data.correct.trim()) { _correctPos = i; break; }
+    }
+  }
+  _correctText = data.correct; // для показа в бейдже
+
+  // Строим кнопки вариантов
+  const optionsContainer = document.getElementById('q-options');
+  optionsContainer.innerHTML = '';
+
+  shuffled.forEach((optText, j) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.id = `opt-${j}`;
+
+    // Буква-кружок
+    const letterSpan = document.createElement('span');
+    letterSpan.className = 'letter';
+    letterSpan.textContent = letters[j] || String(j + 1);
+
+    // ── Защита №2: CSS-маскировка первого символа варианта ──────
+    const textSpan = document.createElement('span');
+    textSpan.className = 'opt-text-protected';
+    const optParts = splitFirstChar(optText.trim());
+    textSpan.setAttribute('data-fc', optParts.first);
+    // ── Защита №1: шум из невидимых символов ───────────────────
+    textSpan.textContent = injectZeroWidth(optParts.rest);
+
+    btn.appendChild(letterSpan);
+    btn.appendChild(textSpan);
+
+    // ── Защита №4: isTrusted — блокируем программные клики ──────
+    btn.addEventListener('click', (function(idx) {
+      return function(e) {
+        if (!e.isTrusted) return; // element.click() → отклонить
+        answerOption(idx);
+      };
+    })(j));
+
+    optionsContainer.appendChild(btn);
+  });
+
+  // ── Защита №3: MutationObserver — откатываем чужие изменения DOM
+  setupMutationObserver(optionsContainer);
+
+  // Анимация карточки
+  const card = document.getElementById('question-card');
+  card.style.animation = 'none';
+  void card.offsetHeight;
+  card.style.animation = '';
+}
+
+// ============================================================
+// ОБРАБОТКА ОТВЕТА
+// ============================================================
+function answerOption(optIdx) {
+  if (_isAnswered) return;
+
+  // Отключаем наблюдатель ДО наших собственных изменений DOM
+  if (_observer) { _observer.disconnect(); _observer = null; }
+
+  _isAnswered = true;
+  const isCorrect = (optIdx === _correctPos);
+
+  // Блокируем все кнопки
+  document.querySelectorAll('#q-options .option').forEach(b => b.disabled = true);
+
+  // Подсвечиваем выбранный
+  document.getElementById(`opt-${optIdx}`)
+          .classList.add(isCorrect ? 'correct' : 'wrong');
+
+  // Показываем правильный если ответ неверный
+  if (!isCorrect) {
+    document.getElementById(`opt-${_correctPos}`)
+            .classList.add('show-correct');
+  }
+
+  // Бейдж — здесь намеренно используем чистую переменную _correctText,
+  // а не textContent из DOM (который содержит нулевые символы и обрезан)
+  const badge = document.getElementById('q-badge');
+  badge.innerHTML = isCorrect
+    ? '<span class="result-badge correct">✓ Верно!</span>'
+    : `<span class="result-badge wrong">✗ Неверно. Правильный ответ: ${escHtml(_correctText)}</span>`;
+
+  if (isCorrect) _correctCount++; else _wrongCount++;
+  updateStats();
+
+  document.getElementById('btn-next').classList.add('visible');
+}
+
+// ============================================================
+// СЛЕДУЮЩИЙ ВОПРОС
+// ============================================================
+function nextQuestion() {
+  _currentIndex++;
+  if (_currentIndex >= _total) {
+    showFinal();
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    loadAndRender(_currentIndex);
+  }
+}
+
+// ============================================================
+// ФИНАЛ
+// ============================================================
+function showFinal() {
+  if (_observer) { _observer.disconnect(); _observer = null; }
+  document.getElementById('card-wrap').style.display    = 'none';
+  document.getElementById('change-mode-wrap').style.display = 'none';
+
+  const pct = _total ? Math.round((_correctCount / _total) * 100) : 0;
+  const pctEl = document.getElementById('final-pct');
+  pctEl.textContent = pct + '%';
+
+  let grade, color, label;
+  if      (pct >= 90) { grade = '5 — Отлично';             color = '#22c55e'; label = '🏆 Превосходный результат!'; }
+  else if (pct >= 75) { grade = '4 — Хорошо';              color = '#38bdf8'; label = '👍 Хороший результат!'; }
+  else if (pct >= 50) { grade = '3 — Удовлетворительно';   color = '#f59e0b'; label = '📚 Стоит повторить материал'; }
+  else                { grade = '2 — Неудовлетворительно'; color = '#f87171'; label = '❌ Нужно больше практики'; }
+
+  pctEl.style.color = color;
+  document.getElementById('final-label').textContent = label;
+  document.getElementById('final-detail').textContent =
+    `Правильных ответов: ${_correctCount} из ${_total} — Оценка: ${grade}`;
+  document.getElementById('final-screen').classList.add('show');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  startQuiz();
+}
+
+function goToStart() {
+  if (_observer) { _observer.disconnect(); _observer = null; }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('final-screen').classList.remove('show');
+  document.getElementById('stats-bar').style.display      = 'none';
+  document.getElementById('change-mode-wrap').style.display = 'none';
+  document.getElementById('card-wrap').style.display      = 'none';
+  document.getElementById('start-screen').style.display   = '';
+  hideError();
+}
+
+// ============================================================
+// СТАТИСТИКА
+// ============================================================
+function updateStats() {
+  const done = _correctCount + _wrongCount;
+  document.getElementById('stat-total').textContent   = `${done}/${_total || '?'}`;
+  document.getElementById('stat-correct').textContent = _correctCount;
+  document.getElementById('stat-wrong').textContent   = _wrongCount;
+  document.getElementById('progress-fill').style.width =
+    `${_total ? (done / _total) * 100 : 0}%`;
+}
+
+// ============================================================
+// UI ХЕЛПЕРЫ
+// ============================================================
+function showLoader(show) {
+  const el = document.getElementById('loader');
+  el.classList.toggle('show', show);
+  if (show) {
+    document.getElementById('card-wrap').style.display = 'none';
+  }
+}
+function showError() {
+  document.getElementById('error-msg').classList.add('show');
+  document.getElementById('card-wrap').style.display = 'none';
+}
+function hideError() {
+  document.getElementById('error-msg').classList.remove('show');
+}
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ============================================================
+// ЗАЩИТА №1 — ШУМ ИЗ НЕВИДИМЫХ СИМВОЛОВ (Zero-Width Characters)
+// Между буквами случайно вставляем нулевые символы Unicode.
+// Скрипт, читающий textContent, получит строку с «мусором» и не
+// сможет совпасть со своей базой ответов.
+// Наш код сравнивает по ИНДЕКСУ (_correctPos), поэтому не страдает.
+// ============================================================
+const _ZW = [
+  '\u200B', // Zero Width Space
+  '\u200C', // Zero Width Non-Joiner
+  '\u200D', // Zero Width Joiner
+  '\u2060', // Word Joiner
+  '\uFEFF', // BOM / Zero Width No-Break Space
+];
+
+function injectZeroWidth(text) {
+  // Вставляем 1–2 невидимых символа примерно каждые 3–6 знаков
+  let out = '';
+  for (let i = 0; i < text.length; i++) {
+    out += text[i];
+    // Не вставляем сразу после пробела или в начало строки
+    if (i > 0 && text[i] !== ' ' && text[i - 1] !== ' ') {
+      if (Math.random() < 0.28) {
+        out += _ZW[Math.floor(Math.random() * _ZW.length)];
+      }
+    }
+  }
+  return out;
+}
+
+// ============================================================
+// ЗАЩИТА №2 — CSS-МАСКИРОВКА ПЕРВОГО СИМВОЛА
+// Первый символ вырезается из строки, помещается в data-fc,
+// и показывается только через CSS ::before.
+// element.textContent возвращает строку без первого символа.
+// ============================================================
+function splitFirstChar(str) {
+  if (!str || str.length === 0) return { first: '', rest: '' };
+  // Учитываем суррогатные пары (emoji, etc.)
+  const cp = str.codePointAt(0);
+  const len = cp > 0xFFFF ? 2 : 1;
+  return {
+    first: str.slice(0, len),
+    rest:  str.slice(len),
+  };
+}
+
+// ============================================================
+// ЗАЩИТА №3 — MutationObserver
+// Наблюдаем за контейнером вариантов. Как только сторонний скрипт
+// попытается изменить текст кнопки (добавить точку, пометить ответ),
+// немедленно откатываем изменение.
+// Отключаем наблюдатель перед нашими СОБСТВЕННЫМИ правками.
+// ============================================================
+function setupMutationObserver(container) {
+  if (_observer) _observer.disconnect();
+
+  // Снимок HTML каждой кнопки-варианта сразу после рендера
+  const snapshots = new Map();
+  container.querySelectorAll('.option').forEach(btn => {
+    snapshots.set(btn.id, btn.innerHTML);
+  });
+
+  _observer = new MutationObserver(mutations => {
+    for (const mut of mutations) {
+      // Ищем ближайшую кнопку-вариант
+      let node = mut.target;
+      // Обходим вверх до .option
+      for (let i = 0; i < 5; i++) {
+        if (!node) break;
+        if (node.classList && node.classList.contains('option')) break;
+        node = node.parentElement;
+      }
+      if (!node || !node.classList.contains('option')) continue;
+      if (!snapshots.has(node.id)) continue;
+
+      const saved = snapshots.get(node.id);
+      if (node.innerHTML !== saved) {
+        // Восстанавливаем и вешаем обработчик заново
+        node.innerHTML = saved;
+        const idx = parseInt(node.id.replace('opt-', ''), 10);
+        node.addEventListener('click', function reAttach(e) {
+          if (!e.isTrusted) return;
+          answerOption(idx);
+        });
+      }
+    }
+  });
+
+  _observer.observe(container, {
+    subtree:       true,
+    childList:     true,
+    characterData: true,
+    attributes:    true,
+    attributeOldValue: true,
+    characterDataOldValue: true,
+  });
+}
+
+// ============================================================
+// УТИЛИТА: перемешать массив (Fisher-Yates)
+// ============================================================
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+</script>
+</body>
+</html>
