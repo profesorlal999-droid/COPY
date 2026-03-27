@@ -3,159 +3,166 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Подготовка к экзамену — ПМ 06</title>
+<title>Подготовка к экзамену — ПМ 06 Облачные технологии</title>
 <style>
   :root {
-    --bg: #0a0e1a;
-    --surface: #131929;
-    --card: #1a2236;
-    --border: #243050;
-    --accent: #3d8ef0;
-    --accent2: #6c63ff;
-    --text: #e2e8f8;
-    --muted: #7a8aaa;
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --card: #22263a;
+    --border: #2e3350;
+    --accent: #4f6ef7;
+    --text: #e8eaf6;
+    --muted: #8892b0;
     --radius: 14px;
-    --easy: #22c55e; --easy-bg: #052e16; --easy-border: #166534; --easy-glow: rgba(34,197,94,.18);
-    --med:  #f59e0b; --med-bg:  #1c1200; --med-border:  #92400e; --med-glow:  rgba(245,158,11,.18);
-    --hard: #ef4444; --hard-bg: #2d0a0a; --hard-border: #7f1d1d; --hard-glow: rgba(239,68,68,.18);
+
+    --easy: #22c55e;
+    --easy-bg: #052e16;
+    --easy-border: #166534;
+    --easy-glow: rgba(34,197,94,0.18);
+
+    --med: #f59e0b;
+    --med-bg: #1c1200;
+    --med-border: #92400e;
+    --med-glow: rgba(245,158,11,0.18);
+
+    --hard: #ef4444;
+    --hard-bg: #2d0a0a;
+    --hard-border: #7f1d1d;
+    --hard-glow: rgba(239,68,68,0.18);
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
 
-  nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;flex-wrap:wrap}
-  nav .brand{font-size:1rem;font-weight:700;color:var(--accent);padding:1rem 1.5rem 1rem 0;border-right:1px solid var(--border);margin-right:1rem;white-space:nowrap}
-  nav .brand span{color:var(--accent2)}
-  nav button{background:none;border:none;color:var(--muted);cursor:pointer;padding:1.1rem 1.1rem;font-size:.9rem;font-weight:600;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
-  nav button.active,nav button:hover{color:var(--text);border-bottom-color:var(--accent)}
-  nav .legend{margin-left:auto;display:flex;gap:.7rem;align-items:center;padding:.5rem 0;flex-wrap:wrap}
-  nav .leg-item{display:flex;align-items:center;gap:.35rem;font-size:.78rem;color:var(--muted)}
-  nav .leg-dot{width:10px;height:10px;border-radius:50%}
+  nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 1.5rem; display: flex; align-items: center; gap: 0; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; }
+  nav .brand { font-size: 1rem; font-weight: 700; color: var(--accent); padding: 1rem 1.5rem 1rem 0; border-right: 1px solid var(--border); margin-right: 1rem; white-space: nowrap; }
+  nav button { background: none; border: none; color: var(--muted); cursor: pointer; padding: 1.1rem 1.1rem; font-size: .9rem; font-weight: 600; border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap; }
+  nav button.active, nav button:hover { color: var(--text); border-bottom-color: var(--accent); }
+  nav .legend { margin-left: auto; display: flex; gap: .7rem; align-items: center; padding: .5rem 0; flex-wrap: wrap; }
+  nav .leg-item { display: flex; align-items: center; gap: .35rem; font-size: .78rem; color: var(--muted); }
+  nav .leg-dot { width: 10px; height: 10px; border-radius: 50%; }
 
-  .page{display:none;padding:2rem 1.5rem;max-width:1100px;margin:0 auto}
-  .page.active{display:block}
+  .page { display: none; padding: 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+  .page.active { display: block; }
 
-  .diff-badge{display:inline-block;padding:.2rem .6rem;border-radius:99px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-  .diff-easy{background:var(--easy-bg);color:var(--easy);border:1px solid var(--easy-border)}
-  .diff-med {background:var(--med-bg); color:var(--med); border:1px solid var(--med-border)}
-  .diff-hard{background:var(--hard-bg);color:var(--hard);border:1px solid var(--hard-border)}
+  .diff-badge { display: inline-block; padding: .2rem .6rem; border-radius: 99px; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .diff-easy  { background: var(--easy-bg);  color: var(--easy);  border: 1px solid var(--easy-border); }
+  .diff-med   { background: var(--med-bg);   color: var(--med);   border: 1px solid var(--med-border); }
+  .diff-hard  { background: var(--hard-bg);  color: var(--hard);  border: 1px solid var(--hard-border); }
 
-  .controls{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:1.2rem;align-items:center}
-  .ticket-grid{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.5rem}
-  .ticket-btn{border:2px solid transparent;color:#fff;padding:.32rem .65rem;border-radius:8px;cursor:pointer;font-size:.82rem;font-weight:700;transition:all .2s;opacity:.55}
-  .ticket-btn:hover{opacity:.85;transform:translateY(-1px)}
-  .ticket-btn.active{opacity:1;box-shadow:0 0 10px 2px currentColor}
-  .ticket-btn.tb-easy{background:var(--easy-bg);border-color:var(--easy);color:var(--easy)}
-  .ticket-btn.tb-med {background:var(--med-bg); border-color:var(--med); color:var(--med)}
-  .ticket-btn.tb-hard{background:var(--hard-bg);border-color:var(--hard);color:var(--hard)}
-  .ticket-btn.tb-all {background:var(--card);border-color:var(--border);color:var(--text)}
+  .controls { display: flex; flex-wrap: wrap; gap: .7rem; margin-bottom: 1.2rem; align-items: center; }
+  .ticket-grid { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.5rem; }
+  .ticket-btn { border: 2px solid transparent; color: #fff; padding: .32rem .65rem; border-radius: 8px; cursor: pointer; font-size: .82rem; font-weight: 700; transition: all .2s; opacity: .55; }
+  .ticket-btn:hover { opacity: .85; transform: translateY(-1px); }
+  .ticket-btn.active { opacity: 1; box-shadow: 0 0 10px 2px currentColor; }
+  .ticket-btn.tb-easy { background: var(--easy-bg); border-color: var(--easy); color: var(--easy); }
+  .ticket-btn.tb-med  { background: var(--med-bg);  border-color: var(--med);  color: var(--med); }
+  .ticket-btn.tb-hard { background: var(--hard-bg); border-color: var(--hard); color: var(--hard); }
+  .ticket-btn.tb-all  { background: var(--card); border-color: var(--border); color: var(--text); }
 
-  .diff-filter{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
-  .diff-filter-btn{padding:.35rem .9rem;border-radius:8px;border:2px solid;cursor:pointer;font-size:.82rem;font-weight:700;transition:all .2s}
-  .df-all {background:var(--card);border-color:var(--border);color:var(--text)}
-  .df-easy{background:var(--easy-bg);border-color:var(--easy);color:var(--easy)}
-  .df-med {background:var(--med-bg); border-color:var(--med); color:var(--med)}
-  .df-hard{background:var(--hard-bg);border-color:var(--hard);color:var(--hard)}
-  .diff-filter-btn.active{filter:brightness(1.4);box-shadow:0 0 8px 2px currentColor}
+  .diff-filter { display: flex; gap: .5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+  .diff-filter-btn { padding: .35rem .9rem; border-radius: 8px; border: 2px solid; cursor: pointer; font-size: .82rem; font-weight: 700; transition: all .2s; }
+  .df-all  { background: var(--card); border-color: var(--border); color: var(--text); }
+  .df-easy { background: var(--easy-bg); border-color: var(--easy); color: var(--easy); }
+  .df-med  { background: var(--med-bg);  border-color: var(--med);  color: var(--med); }
+  .df-hard { background: var(--hard-bg); border-color: var(--hard); color: var(--hard); }
+  .diff-filter-btn.active { filter: brightness(1.4); box-shadow: 0 0 8px 2px currentColor; }
 
-  .flashcard-wrap{perspective:1200px;margin-bottom:1.5rem}
-  .flashcard{width:100%;min-height:280px;position:relative;transform-style:preserve-3d;transition:transform .5s ease;cursor:pointer}
-  .flashcard.flipped{transform:rotateY(180deg)}
-  .card-face{position:absolute;width:100%;min-height:280px;backface-visibility:hidden;border-radius:var(--radius);padding:2rem;display:flex;flex-direction:column;justify-content:center;border:2px solid}
-  .card-front{background:var(--card)}
-  .card-back {transform:rotateY(180deg)}
+  .flashcard-wrap { perspective: 1200px; margin-bottom: 1.5rem; }
+  .flashcard { width: 100%; min-height: 300px; position: relative; transform-style: preserve-3d; transition: transform .5s ease; cursor: pointer; }
+  .flashcard.flipped { transform: rotateY(180deg); }
+  .card-face { position: absolute; width: 100%; min-height: 300px; backface-visibility: hidden; border-radius: var(--radius); padding: 2rem; display: flex; flex-direction: column; justify-content: center; border: 2px solid; }
+  .card-front { background: var(--card); }
+  .card-back  { transform: rotateY(180deg); }
 
-  .cf-easy .card-front{border-color:var(--easy-border);box-shadow:0 0 24px var(--easy-glow)}
-  .cf-easy .card-back {background:var(--easy-bg);border-color:var(--easy);box-shadow:0 0 24px var(--easy-glow)}
-  .cf-med  .card-front{border-color:var(--med-border); box-shadow:0 0 24px var(--med-glow)}
-  .cf-med  .card-back {background:var(--med-bg); border-color:var(--med); box-shadow:0 0 24px var(--med-glow)}
-  .cf-hard .card-front{border-color:var(--hard-border);box-shadow:0 0 24px var(--hard-glow)}
-  .cf-hard .card-back {background:var(--hard-bg);border-color:var(--hard);box-shadow:0 0 24px var(--hard-glow)}
+  .cf-easy .card-front { border-color: var(--easy-border); box-shadow: 0 0 24px var(--easy-glow); }
+  .cf-easy .card-back  { background: var(--easy-bg); border-color: var(--easy); box-shadow: 0 0 24px var(--easy-glow); }
+  .cf-med  .card-front { border-color: var(--med-border);  box-shadow: 0 0 24px var(--med-glow); }
+  .cf-med  .card-back  { background: var(--med-bg);  border-color: var(--med);  box-shadow: 0 0 24px var(--med-glow); }
+  .cf-hard .card-front { border-color: var(--hard-border); box-shadow: 0 0 24px var(--hard-glow); }
+  .cf-hard .card-back  { background: var(--hard-bg); border-color: var(--hard); box-shadow: 0 0 24px var(--hard-glow); }
 
-  .card-top{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;flex-wrap:wrap}
-  .card-ticket{font-size:.8rem;color:var(--muted);font-weight:700;letter-spacing:.05em}
-  .card-question{font-size:1.2rem;font-weight:600;line-height:1.55}
-  .card-hint{color:var(--muted);font-size:.83rem;margin-top:1.5rem}
-  .card-answer{font-size:.95rem;line-height:1.75}
-  .cf-easy .card-answer{color:#bbf7d0}
-  .cf-med  .card-answer{color:#fde68a}
-  .cf-hard .card-answer{color:#fecaca}
+  .card-top { display: flex; align-items: center; gap: .7rem; margin-bottom: 1rem; flex-wrap: wrap; }
+  .card-ticket { font-size: .8rem; color: var(--muted); font-weight: 700; letter-spacing: .05em; }
+  .card-question { font-size: 1.2rem; font-weight: 600; line-height: 1.55; }
+  .card-hint { color: var(--muted); font-size: .83rem; margin-top: 1.5rem; }
+  .card-answer { font-size: .97rem; line-height: 1.75; }
+  .cf-easy .card-answer { color: #bbf7d0; }
+  .cf-med  .card-answer { color: #fde68a; }
+  .cf-hard .card-answer { color: #fecaca; }
 
-  .ai-loading{display:flex;align-items:center;gap:.7rem;color:var(--muted);font-size:.9rem}
-  .ai-dots{display:flex;gap:4px}
-  .ai-dots span{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:dot-bounce .8s infinite}
-  .ai-dots span:nth-child(2){animation-delay:.15s}
-  .ai-dots span:nth-child(3){animation-delay:.3s}
-  @keyframes dot-bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-8px)}}
+  .card-nav { display: flex; gap: .8rem; align-items: center; flex-wrap: wrap; }
+  .btn { background: var(--accent); color: #fff; border: none; padding: .6rem 1.3rem; border-radius: 8px; cursor: pointer; font-size: .88rem; font-weight: 600; transition: opacity .2s; }
+  .btn:hover { opacity: .85; }
+  .btn.secondary { background: var(--card); border: 1px solid var(--border); color: var(--text); }
+  .btn.green { background: #16a34a; }
+  .progress-wrap { flex: 1; min-width: 140px; }
+  .progress-bar { background: var(--border); border-radius: 99px; height: 8px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 99px; transition: width .3s; }
+  .pf-easy { background: var(--easy); }
+  .pf-med  { background: var(--med); }
+  .pf-hard { background: var(--hard); }
+  .pf-all  { background: var(--accent); }
+  .progress-label { font-size: .78rem; color: var(--muted); margin-top: .35rem; }
 
-  .ai-badge{display:inline-flex;align-items:center;gap:.35rem;background:rgba(61,142,240,.12);border:1px solid rgba(61,142,240,.3);border-radius:99px;padding:.15rem .6rem;font-size:.7rem;color:var(--accent);margin-bottom:.8rem;font-weight:600}
+  .quiz-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+  .quiz-q { background: var(--card); border-radius: var(--radius); padding: 1.6rem; margin-bottom: 1.2rem; border-left: 4px solid; }
+  .quiz-q.ql-easy { border-left-color: var(--easy); }
+  .quiz-q.ql-med  { border-left-color: var(--med); }
+  .quiz-q.ql-hard { border-left-color: var(--hard); }
+  .quiz-top { display: flex; align-items: center; gap: .6rem; margin-bottom: .8rem; flex-wrap: wrap; }
+  .quiz-ticket-label { font-size: .75rem; color: var(--muted); font-weight: 700; letter-spacing: .05em; }
+  .quiz-qtext { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; line-height: 1.5; }
+  .quiz-opts { display: grid; gap: .6rem; }
+  .quiz-opt { background: var(--surface); border: 1.5px solid var(--border); color: var(--text); padding: .75rem 1rem; border-radius: 10px; cursor: pointer; text-align: left; font-size: .88rem; transition: all .2s; line-height: 1.4; }
+  .quiz-opt:hover:not(.disabled) { border-color: var(--accent); background: #1e2a4a; }
+  .quiz-opt.correct  { border-color: var(--easy) !important; background: var(--easy-bg) !important; color: var(--easy) !important; }
+  .quiz-opt.wrong    { border-color: var(--hard) !important; background: var(--hard-bg) !important; color: var(--hard) !important; }
+  .quiz-opt.disabled { cursor: default; }
+  .quiz-explanation  { margin-top: .8rem; padding: .75rem 1rem; border-radius: 0 8px 8px 0; font-size: .85rem; line-height: 1.5; display: none; border-left: 3px solid; }
+  .quiz-explanation.show { display: block; }
+  .ql-easy .quiz-explanation { background: #052e16; border-left-color: var(--easy); color: #86efac; }
+  .ql-med  .quiz-explanation { background: #1c1200; border-left-color: var(--med);  color: #fde68a; }
+  .ql-hard .quiz-explanation { background: var(--hard-bg); border-left-color: var(--hard); color: #fca5a5; }
 
-  .card-nav{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
-  .btn{background:var(--accent);color:#fff;border:none;padding:.6rem 1.3rem;border-radius:8px;cursor:pointer;font-size:.88rem;font-weight:600;transition:opacity .2s}
-  .btn:hover{opacity:.85}
-  .btn.secondary{background:var(--card);border:1px solid var(--border);color:var(--text)}
-  .btn.green{background:#16a34a}
-  .progress-wrap{flex:1;min-width:140px}
-  .progress-bar{background:var(--border);border-radius:99px;height:8px;overflow:hidden}
-  .progress-fill{height:100%;border-radius:99px;transition:width .3s}
-  .pf-easy{background:var(--easy)}.pf-med{background:var(--med)}.pf-hard{background:var(--hard)}.pf-all{background:var(--accent)}
-  .progress-label{font-size:.78rem;color:var(--muted);margin-top:.35rem}
+  .results { text-align: center; padding: 3rem 1rem; }
+  .results h2 { font-size: 1.8rem; margin-bottom: .8rem; }
+  .score-big { font-size: 3.5rem; font-weight: 700; color: var(--accent); }
+  .results p { color: var(--muted); margin: .8rem 0 1.5rem; }
 
-  .quiz-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem}
-  .quiz-q{background:var(--card);border-radius:var(--radius);padding:1.6rem;margin-bottom:1.2rem;border-left:4px solid}
-  .quiz-q.ql-easy{border-left-color:var(--easy)}.quiz-q.ql-med{border-left-color:var(--med)}.quiz-q.ql-hard{border-left-color:var(--hard)}
-  .quiz-top{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem;flex-wrap:wrap}
-  .quiz-ticket-label{font-size:.75rem;color:var(--muted);font-weight:700;letter-spacing:.05em}
-  .quiz-qtext{font-size:1rem;font-weight:600;margin-bottom:1rem;line-height:1.5}
-  .quiz-opts{display:grid;gap:.6rem}
-  .quiz-opt{background:var(--surface);border:1.5px solid var(--border);color:var(--text);padding:.75rem 1rem;border-radius:10px;cursor:pointer;text-align:left;font-size:.88rem;transition:all .2s;line-height:1.4}
-  .quiz-opt:hover:not(.disabled){border-color:var(--accent);background:#1a2d4a}
-  .quiz-opt.correct{border-color:var(--easy)!important;background:var(--easy-bg)!important;color:var(--easy)!important}
-  .quiz-opt.wrong  {border-color:var(--hard)!important;background:var(--hard-bg)!important;color:var(--hard)!important}
-  .quiz-opt.disabled{cursor:default}
-  .quiz-explanation{margin-top:.8rem;padding:.75rem 1rem;border-radius:0 8px 8px 0;font-size:.85rem;line-height:1.5;display:none;border-left:3px solid}
-  .quiz-explanation.show{display:block}
-  .ql-easy .quiz-explanation{background:#052e16;border-left-color:var(--easy);color:#86efac}
-  .ql-med  .quiz-explanation{background:#1c1200;border-left-color:var(--med); color:#fde68a}
-  .ql-hard .quiz-explanation{background:var(--hard-bg);border-left-color:var(--hard);color:#fca5a5}
+  .ov-legend { display: flex; gap: 1rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+  .ov-legend-item { display: flex; align-items: center; gap: .4rem; font-size: .82rem; }
+  .ov-dot { width: 12px; height: 12px; border-radius: 50%; }
+  .overview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; }
+  .ov-card { border-radius: var(--radius); padding: 1.1rem; border: 2px solid; }
+  .ov-card.ov-easy { background: var(--easy-bg); border-color: var(--easy-border); }
+  .ov-card.ov-med  { background: var(--med-bg);  border-color: var(--med-border); }
+  .ov-card.ov-hard { background: var(--hard-bg); border-color: var(--hard-border); }
+  .ov-card h3 { font-size: .82rem; font-weight: 700; margin-bottom: .6rem; display: flex; align-items: center; gap: .5rem; }
+  .ov-card.ov-easy h3 { color: var(--easy); }
+  .ov-card.ov-med  h3 { color: var(--med); }
+  .ov-card.ov-hard h3 { color: var(--hard); }
+  .ov-card ul { list-style: none; }
+  .ov-card li { font-size: .78rem; color: var(--muted); padding: .22rem 0; border-bottom: 1px solid var(--border); line-height: 1.35; }
+  .ov-card li:last-child { border: none; }
 
-  .results{text-align:center;padding:3rem 1rem}
-  .results h2{font-size:1.8rem;margin-bottom:.8rem}
-  .score-big{font-size:3.5rem;font-weight:700;color:var(--accent)}
-  .results p{color:var(--muted);margin:.8rem 0 1.5rem}
-
-  .ov-legend{display:flex;gap:1rem;margin-bottom:1.2rem;flex-wrap:wrap}
-  .ov-legend-item{display:flex;align-items:center;gap:.4rem;font-size:.82rem}
-  .ov-dot{width:12px;height:12px;border-radius:50%}
-  .overview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem}
-  .ov-card{border-radius:var(--radius);padding:1.1rem;border:2px solid}
-  .ov-card.ov-easy{background:var(--easy-bg);border-color:var(--easy-border)}
-  .ov-card.ov-med {background:var(--med-bg); border-color:var(--med-border)}
-  .ov-card.ov-hard{background:var(--hard-bg);border-color:var(--hard-border)}
-  .ov-card h3{font-size:.82rem;font-weight:700;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
-  .ov-card.ov-easy h3{color:var(--easy)}.ov-card.ov-med h3{color:var(--med)}.ov-card.ov-hard h3{color:var(--hard)}
-  .ov-card ul{list-style:none}
-  .ov-card li{font-size:.78rem;color:var(--muted);padding:.22rem 0;border-bottom:1px solid var(--border);line-height:1.35}
-  .ov-card li:last-child{border:none}
-
-  .stat-row{display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
-  .stat-box{flex:1;min-width:120px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center}
-  .stat-num{font-size:1.8rem;font-weight:700}
-  .stat-label{font-size:.78rem;color:var(--muted);margin-top:.2rem}
-
-  .topic-tag{display:inline-block;background:rgba(108,99,255,.12);border:1px solid rgba(108,99,255,.25);color:#9b96ff;border-radius:6px;padding:.1rem .5rem;font-size:.72rem;margin-right:.4rem;margin-top:.4rem}
+  .stat-row { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .stat-box { flex: 1; min-width: 120px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; text-align: center; }
+  .stat-num { font-size: 1.8rem; font-weight: 700; }
+  .stat-label { font-size: .78rem; color: var(--muted); margin-top: .2rem; }
 
   @media(max-width:600px){
-    nav .brand{border-right:none}
-    nav .legend{display:none}
-    .card-question{font-size:1rem}
-    .card-face{padding:1.4rem}
+    nav .brand { border-right: none; }
+    nav .legend { display: none; }
+    .card-question { font-size: 1rem; }
+    .card-face { padding: 1.4rem; }
   }
 </style>
+<base target="_blank">
 </head>
 <body>
 
 <nav>
-  <div class="brand">☁️ ПМ <span>06</span></div>
+  <div class="brand">☁️ ПМ 06</div>
   <button class="active" onclick="showPage('flashcards',this)">🃏 Карточки</button>
   <button onclick="showPage('quiz',this)">📝 Тест</button>
   <button onclick="showPage('overview',this)">📋 Все билеты</button>
@@ -163,7 +170,6 @@
     <div class="leg-item"><div class="leg-dot" style="background:#22c55e"></div>Простые</div>
     <div class="leg-item"><div class="leg-dot" style="background:#f59e0b"></div>Средние</div>
     <div class="leg-item"><div class="leg-dot" style="background:#ef4444"></div>Сложные</div>
-    <div class="leg-item"><div class="leg-dot" style="background:var(--accent)"></div>AI-ответы</div>
   </div>
 </nav>
 
@@ -188,20 +194,14 @@
           <span class="diff-badge" id="cBadge"></span>
         </div>
         <div class="card-question" id="cQuestion"></div>
-        <div class="card-hint">👆 Нажмите, чтобы получить AI-ответ</div>
+        <div class="card-hint">👆 Нажмите, чтобы увидеть ответ</div>
       </div>
       <div class="card-face card-back">
         <div class="card-top">
           <span class="card-ticket" id="cTicketB"></span>
           <span class="diff-badge" id="cBadgeB"></span>
-          <span class="ai-badge">✨ AI-ответ</span>
         </div>
-        <div class="card-answer" id="cAnswer">
-          <div class="ai-loading" id="aiLoading">
-            <div class="ai-dots"><span></span><span></span><span></span></div>
-            Генерирую ответ...
-          </div>
-        </div>
+        <div class="card-answer" id="cAnswer"></div>
       </div>
     </div>
   </div>
@@ -221,11 +221,10 @@
 </div>
 
 <div id="overview" class="page">
-  <h2 style="margin-bottom:.5rem">Все 30 экзаменационных билетов</h2>
-  <p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem">ПМ 06 · Управление ресурсами облака и обслуживание облачной инфраструктуры · РО 6.1</p>
+  <h2 style="margin-bottom:1rem">Все 30 экзаменационных билетов</h2>
   <div class="ov-legend">
-    <div class="ov-legend-item"><div class="ov-dot" style="background:#22c55e"></div><span>🟢 Простые — базовые понятия</span></div>
-    <div class="ov-legend-item"><div class="ov-dot" style="background:#f59e0b"></div><span>🟡 Средние — нужно разобраться</span></div>
+    <div class="ov-legend-item"><div class="ov-dot" style="background:#22c55e"></div><span>🟢 Простые — определения и базовые понятия</span></div>
+    <div class="ov-legend-item"><div class="ov-dot" style="background:#f59e0b"></div><span>🟡 Средние — нужно вникнуть</span></div>
     <div class="ov-legend-item"><div class="ov-dot" style="background:#ef4444"></div><span>🔴 Сложные — требуют понимания</span></div>
   </div>
   <div class="stat-row" id="statRow"></div>
@@ -233,121 +232,201 @@
 </div>
 
 <script>
-// ── ДАННЫЕ БИЛЕТОВ ────────────────────────────────────────────
-const TICKETS = [
-  { n:1,  qs:["Понятие облачных технологий и их назначение","Основные характеристики облачных вычислений","Примеры использования облаков в организациях"] },
-  { n:2,  qs:["Архитектура облачной инфраструктуры","Роль серверов в облачной среде","Назначение облачных хранилищ данных"] },
-  { n:3,  qs:["Публичное облако: понятие и особенности","Частное облако: преимущества и недостатки","Гибридное облако и области его применения"] },
-  { n:4,  qs:["Модели предоставления облачных услуг (IaaS, PaaS, SaaS)","Характеристика модели IaaS","Характеристика модели SaaS"] },
-  { n:5,  qs:["Основные провайдеры облачных услуг","Краткая характеристика AWS","Краткая характеристика Microsoft Azure"] },
-  { n:6,  qs:["Google Cloud Platform и его возможности","Сравнение AWS, Azure и Google Cloud","Критерии выбора облачного провайдера"] },
-  { n:7,  qs:["Понятие виртуализации","Роль виртуализации в облачных технологиях","Типы виртуализации"] },
-  { n:8,  qs:["Виртуальная машина: понятие","Основные параметры виртуальной машины","Этапы создания виртуального сервера"] },
-  { n:9,  qs:["Настройка CPU и RAM виртуальной машины","Настройка дискового пространства","Проверка доступности виртуального сервера"] },
-  { n:10, qs:["Понятие облачного хранилища","Типы облачных хранилищ","Преимущества облачного хранения данных"] },
-  { n:11, qs:["Подключение облачного хранилища","Разграничение прав доступа к данным","Резервирование данных в облаке"] },
-  { n:12, qs:["Понятие виртуальной сети","Назначение сетевых настроек в облаке","Принципы работы виртуальных сетей"] },
-  { n:13, qs:["IP-адресация в облачной инфраструктуре","Настройка сетевых правил доступа","Проверка соединения между сервисами"] },
-  { n:14, qs:["Основы информационной безопасности в облаке","Угрозы безопасности облачной инфраструктуры","Методы защиты облачных ресурсов"] },
-  { n:15, qs:["Управление пользователями в облаке","Настройка ролей и политик доступа","Принцип минимальных привилегий"] },
-  { n:16, qs:["Шифрование данных в облаке","Шифрование при хранении и передаче данных","Значение шифрования для безопасности"] },
-  { n:17, qs:["Понятие мониторинга облачных ресурсов","Основные параметры мониторинга","Инструменты мониторинга в облаке"] },
-  { n:18, qs:["Мониторинг загрузки процессора","Мониторинг памяти и сети","Настройка уведомлений о сбоях"] },
-  { n:19, qs:["Понятие оптимизации ресурсов","Анализ затрат в облачной среде","Методы снижения расходов"] },
-  { n:20, qs:["Автоматическое масштабирование","Горизонтальное и вертикальное масштабирование","Преимущества авто-масштабирования"] },
-  { n:21, qs:["Резервное копирование данных","Виды резервного копирования","Значение резервного копирования"] },
-  { n:22, qs:["Настройка автоматического резервного копирования","Восстановление данных из резервной копии","Оценка надёжности системы бэкапов"] },
-  { n:23, qs:["Администрирование облачной инфраструктуры","Обновление компонентов облачных сервисов","Установка патчей безопасности"] },
-  { n:24, qs:["Журналирование действий в облаке","Аудит пользователей и операций","Значение логирования для безопасности"] },
-  { n:25, qs:["Обеспечение высокой доступности сервисов","Понятие отказоустойчивости","Методы повышения доступности"] },
-  { n:26, qs:["Документирование облачной инфраструктуры","Назначение технической документации","Виды документации в IT"] },
-  { n:27, qs:["Интеграция облачных и локальных систем","Преимущества гибридной инфраструктуры","Примеры интеграции"] },
-  { n:28, qs:["Использование стандартов при настройке облака","Нормативно-техническая документация","Роль стандартов в администрировании"] },
-  { n:29, qs:["Типичные ошибки при настройке облачной инфраструктуры","Способы устранения ошибок","Профилактика сбоев в облаке"] },
-  { n:30, qs:["Перспективы развития облачных технологий","Роль облаков в цифровизации","Значение облачной инфраструктуры для бизнеса"] },
-];
-
-// Сложность билетов
 const DIFF = {
-  1:'easy',2:'easy',3:'easy',4:'med',5:'easy',
-  6:'med',7:'easy',8:'easy',9:'med',10:'easy',
-  11:'med',12:'med',13:'med',14:'hard',15:'hard',
-  16:'hard',17:'easy',18:'med',19:'med',20:'hard',
-  21:'easy',22:'med',23:'med',24:'hard',25:'hard',
-  26:'med',27:'hard',28:'med',29:'hard',30:'easy'
+  1:'easy', 2:'easy', 3:'easy', 4:'easy', 5:'easy',
+  6:'med', 7:'easy', 8:'easy', 9:'med', 10:'easy',
+  11:'med', 12:'med', 13:'med', 14:'hard', 15:'med',
+  16:'med', 17:'easy', 18:'med', 19:'med', 20:'med',
+  21:'easy', 22:'med', 23:'med', 24:'hard', 25:'med',
+  26:'easy', 27:'hard', 28:'hard', 29:'med', 30:'easy'
 };
 
-const DIFF_LABEL={easy:'Простой',med:'Средний',hard:'Сложный'};
-const DIFF_CLASS={easy:'diff-easy',med:'diff-med',hard:'diff-hard'};
-const CF_CLASS  ={easy:'cf-easy', med:'cf-med', hard:'cf-hard'};
-const TB_CLASS  ={easy:'tb-easy', med:'tb-med', hard:'tb-hard'};
-const PF_CLASS  ={easy:'pf-easy', med:'pf-med', hard:'pf-hard'};
+const DIFF_LABEL = { easy:'Простой', med:'Средний', hard:'Сложный' };
+const DIFF_CLASS = { easy:'diff-easy', med:'diff-med', hard:'diff-hard' };
+const CF_CLASS   = { easy:'cf-easy',  med:'cf-med',  hard:'cf-hard'  };
+const TB_CLASS   = { easy:'tb-easy',  med:'tb-med',  hard:'tb-hard'  };
+const PF_CLASS   = { easy:'pf-easy',  med:'pf-med',  hard:'pf-hard'  };
 
-// ── AI-КЭШ ────────────────────────────────────────────────────
-const answerCache = {};
+const TICKETS = [
+  { n:1, qs:[
+    { q:"Понятие облачных технологий и их назначение", a:"Облачные технологии — это модель предоставления доступа к вычислительным ресурсам (серверам, хранилищам, базам данных, сетям, программному обеспечению) через интернет по запросу. Назначение: снижение затрат на IT-инфраструктуру, быстрое развертывание ресурсов, масштабируемость, доступность из любой точки мира, оплата только за использованные ресурсы (pay-as-you-go), концентрация на бизнесе вместо управления железом." },
+    { q:"Основные характеристики облачных вычислений", a:"5 основных характеристик по NIST: 1) Самообслуживание по требованию — пользователь сам получает ресурсы без взаимодействия с провайдером. 2) Широкий сетевой доступ — доступ через интернет с любых устройств. 3) Объединение ресурсов — ресурсы пула динамически распределяются между пользователями. 4) Эластичность — возможность быстро увеличивать или уменьшать ресурсы. 5) Измеряемый сервис — автоматический учет использования ресурсов для оптимизации и биллинга." },
+    { q:"Примеры использования облаков в организациях", a:"1) Хранение и резервное копирование данных (AWS S3, Google Drive). 2) Веб-хостинг и размещение приложений. 3) Разработка и тестирование ПО (DevOps, CI/CD). 4) Big Data и аналитика (обработка больших данных). 5) Машинное обучение и ИИ (Amazon SageMaker, Google AI). 6) Корпоративные приложения (CRM, ERP в облаке). 7) Виртуальные рабочие столы (VDI) для удаленной работы. 8) Коллаборация (Office 365, Google Workspace)." }
+  ]},
+  { n:2, qs:[
+    { q:"Архитектура облачной инфраструктуры", a:"Облачная архитектура состоит из: 1) Фронтенд — клиентская часть (браузеры, приложения, API). 2) Бэкенд — серверная часть (серверы, базы данных, хранилища). 3) Сетевая инфраструктура — маршрутизаторы, коммутаторы, балансировщики нагрузки. 4) Гипервизор — ПО для виртуализации (VMware, Hyper-V, KVM). 5) Платформа управления — панель для администрирования ресурсов. 6) Системы безопасности — фаерволы, шифрование, IAM. Архитектура может быть публичной, частной или гибридной." },
+    { q:"Роль серверов в облачной среде", a:"Серверы — основа облачной инфраструктуры. Их роли: 1) Вычислительные серверы — обработка данных и запуск приложений (compute instances). 2) Серверы баз данных — хранение структурированных данных (SQL, NoSQL). 3) Веб-серверы — обработка HTTP-запросов и отдача контента. 4) Серверы хранения — файловые и объектные хранилища. 5) Серверы приложений — выполнение бизнес-логики. В облаке серверы виртуализированы — один физический сервер может содержать множество виртуальных машин." },
+    { q:"Назначение облачных хранилищ данных", a:"Облачные хранилища предназначены для: 1) Хранения неструктурированных данных (файлы, изображения, видео) — объектное хранилище (S3, Azure Blob). 2) Хранения структурированных данных — блоковые хранилища для ВМ (EBS, Azure Disk). 3) Архивирования и бэкапов — долгосрочное хранение с низкой стоимостью (Glacier, Archive). 4) Распределенного доступа — данные доступны из любой точки мира. 5) Масштабируемости — увеличение объема без остановки сервиса. 6) Защиты данных — репликация между дата-центрами." }
+  ]},
+  { n:3, qs:[
+    { q:"Публичное облако: понятие и особенности", a:"Публичное облако — модель, где IT-ресурсы (серверы, хранилища, сети) принадлежат провайдеру и предоставляются множеству клиентов через интернет. Особенности: инфраструктура управляется провайдером (AWS, Azure, GCP), мультиарендность (shared resources), оплата по факту использования, мгновенное масштабирование, доступность из любой точки мира, отсутствие затрат на оборудование. Подходит для: веб-сайтов, разработки, тестирования, переменных нагрузок, стартапов." },
+    { q:"Частное облако: преимущества и недостатки", a:"Частное облако — инфраструктура, используемая исключительно одной организацией, может размещаться в собственном ЦОД или у провайдера. Преимущества: полный контроль над данными и безопасностью, соответствие требованиям регуляторов, кастомизация под нужды компании, выделенные ресурсы (no multi-tenancy). Недостатки: высокие капитальные затраты (Capex), необходимость собственных IT-специалистов, дольше развертывание новых ресурсов, ответственность за обслуживание лежит на компании." },
+    { q:"Гибридное облако и области его применения", a:"Гибридное облако — комбинация публичного и частного облака с возможностью переноса данных и приложений между ними. Области применения: 1) Чувствительные данные в частном облаке, публичная нагрузка — в публичном. 2) Cloud bursting — переполнение частного облака перенаправляется в публичное. 3) Постепенная миграция — перенос части систем в облако. 4) Резервное копирование — бэкапы в публичное облако. 5) Разработка в публичном, продакшн в частном. 6) Высокая доступность — failover между облаками." }
+  ]},
+  { n:4, qs:[
+    { q:"Модели предоставления облачных услуг (IaaS, PaaS, SaaS)", a:"Три основные модели: 1) IaaS (Infrastructure as a Service) — инфраструктура как услуга. Провайдер дает серверы, хранилища, сети. Клиент управляет ОС и приложениями. 2) PaaS (Platform as a Service) — платформа как услуга. Провайдер дает среду разработки и развертывания. Клиент управляет только приложениями и данными. 3) SaaS (Software as a Service) — ПО как услуга. Готовое приложение через браузер. Клиент только использует (Gmail, Office 365). Иерархия: IaaS — больше контроля, SaaS — меньше контроля, но проще." },
+    { q:"Характеристика модели IaaS", a:"IaaS (Infrastructure as a Service) — модель, где провайдер предоставляет виртуализированные вычислительные ресурсы: виртуальные машины, хранилища, сети, балансировщики. Примеры: AWS EC2, Azure VMs, Google Compute Engine. Характеристики: пользователь устанавливает свою ОС, полный контроль над инфраструктурой, гибкое масштабирование, оплата за время использования ресурсов. Подходит для: хостинга сайтов, тестовых сред, высокопроизводительных вычислений, disaster recovery." },
+    { q:"Характеристика модели SaaS", a:"SaaS (Software as a Service) — модель, где провайдер предоставляет готовое к использованию приложение через интернет, обычно через веб-браузер. Примеры: Google Workspace, Microsoft 365, Salesforce, Zoom. Характеристики: нулевая установка на клиенте, автоматические обновления, работа с любого устройства, оплата по подписке (monthly/yearly), провайдер отвечает за безопасность и доступность. Подходит для: офисных приложений, CRM, коммуникаций, коллаборации, когда нет собственных IT-ресурсов." }
+  ]},
+  { n:5, qs:[
+    { q:"Основные провайдеры облачных услуг", a:"Глобальные лидеры: 1) Amazon Web Services (AWS) — крупнейший провайдер, более 200 сервисов. 2) Microsoft Azure — интеграция с Windows и Office, сильная позиция в enterprise. 3) Google Cloud Platform (GCP) — сильные позиции в data analytics и AI. 4) Alibaba Cloud — лидер в Китае и Азии. 5) IBM Cloud — enterprise-решения, гибридные облака. 6) Oracle Cloud — базы данных и enterprise приложения. 7) Salesforce — SaaS для CRM. Региональные: Yandex Cloud, VK Cloud (Россия), Cloud.kz (Казахстан)." },
+    { q:"Краткая характеристика AWS", a:"Amazon Web Services (AWS) — дочерняя компания Amazon, запущена в 2006 году. Крупнейший облачный провайдер с ~32% рынка. Ключевые сервисы: EC2 (виртуальные машины), S3 (объектное хранилище), RDS (базы данных), Lambda (serverless), VPC (виртуальные сети), CloudWatch (мониторинг). Преимущества: самая широкая география дата-центров (регионы и зоны доступности), зрелость сервисов, огромное комьюнити, сертификации безопасности. Используется Netflix, Airbnb, NASA." },
+    { q:"Краткая характеристика Microsoft Azure", a:"Microsoft Azure — облачная платформа Microsoft, запущена в 2010 году. Второй по величине провайдер (~23% рынка). Ключевые сервисы: Azure VMs, Azure Storage, Azure SQL Database, Azure Active Directory, Azure DevOps. Особенности: глубокая интеграция с Windows Server, Office 365, Active Directory, гибридные облачные решения (Azure Stack), сильные позиции в корпоративном секторе. Преимущества для enterprise: легкая миграция с on-premise Windows-инфраструктуры, единая система лицензирования." }
+  ]},
+  { n:6, qs:[
+    { q:"Google Cloud Platform и его возможности", a:"Google Cloud Platform (GCP) — облачная платформа Google, запущена в 2008 году. Третий по величине провайдер (~10% рынка). Ключевые сервисы: Compute Engine (ВМ), Cloud Storage, BigQuery (аналитика), Kubernetes Engine (GKE), AI Platform, Firebase. Особенности: лидер в data analytics и machine learning, открытые технологии (Kubernetes создали в Google), высокопроизводительная сеть (собственная оптоволоконная сеть), конкурентные цены на вычисления. BigQuery — один из самых быстрых аналитических движков." },
+    { q:"Сравнение AWS, Azure и Google Cloud", a:"AWS: самый широкий выбор сервисов, зрелость, глобальное покрытие, но сложнее в освоении и дороже. Azure: лучшая интеграция с Microsoft-экосистемой, сильна в гибридных облаках, enterprise-ориентирована. GCP: лучший выбор для data analytics, ML/AI, Kubernetes, открытые стандарты, чаще использует open-source, но меньше сервисов чем AWS. Цены: GCP часто дешевле для вычислений, Azure выгодна с existing Microsoft лицензиями, AWS — pay-as-you-go. Выбор зависит от существующей инфраструктуры и задач." },
+    { q:"Критерии выбора облачного провайдера", a:"1) Соответствие бизнес-требованиям — наличие нужных сервисов. 2) География — наличие дата-центров в нужных регионах (latency, compliance). 3) Безопасность и сертификаты (ISO 27001, SOC 2, GDPR). 4) Ценообразование — модель оплаты, reserved instances, скидки. 5) Интеграция с существующими системами. 6) Производительность и SLA (гарантии доступности 99.9%, 99.99%). 7) Поддержка — уровни технической поддержки. 8) Экосистема и партнеры. 9) Vendor lock-in — зависимость от проприетарных технологий. 10) Опыт команды — знание конкретной платформы." }
+  ]},
+  { n:7, qs:[
+    { q:"Понятие виртуализации", a:"Виртуализация — технология создания виртуальной (логической) версии вычислительных ресурсов: серверов, хранилищ, сетей, операционных систем. Позволяет запускать несколько виртуальных машин (ВМ) на одном физическом сервере. Каждая ВМ работает изолированно, имеет свою ОС, приложения и ресурсы (CPU, RAM, диск). Основной компонент — гипервизор (VMware ESXi, Hyper-V, KVM, Xen), который управляет доступом ВМ к физическим ресурсам." },
+    { q:"Роль виртуализации в облачных технологиях", a:"Виртуализация — фундамент облачных вычислений. Без нее облака не существовали бы. Роль: 1) Абстракция ресурсов — отделение логических ресурсов от физического оборудования. 2) Мультиарендность — возможность предоставлять ресурсы множеству клиентов на одном железе. 3) Эластичность — быстрое создание и удаление ВМ. 4) Изоляция — безопасное разделение клиентов. 5) Оптимизация использования железа — повышение загрузки серверов. 6) Миграция — перенос ВМ между физическими серверами без остановки." },
+    { q:"Типы виртуализации", a:"1) Аппаратная виртуализация (полная) — гипервизор работает прямо на железе (Type 1: VMware ESXi, Hyper-V, Xen). 2) Паравиртуализация — гостевая ОС модифицирована для работы с гипервизором (более эффективно). 3) Виртуализация на уровне ОС (контейнеры) — разделение ядра ОС (Docker, LXC, Kubernetes). 4) Виртуализация приложений — изоляция приложений без полной ОС. 5) Виртуализация сетей (SDN) — программно-конфигурируемые сети. 6) Виртуализация хранилищ (SDS) — абстракция дисковых ресурсов. В облаках чаще всего используется аппаратная виртуализация и контейнеры." }
+  ]},
+  { n:8, qs:[
+    { q:"Виртуальная машина: понятие", a:"Виртуальная машина (ВМ) — программная эмуляция физического компьютера, работающая на виртуализированных ресурсах. ВМ включает: виртуальный процессор (vCPU), виртуальную оперативную память (vRAM), виртуальные диски (VMDK, VHD), виртуальные сетевые адаптеры. Каждая ВМ работает изолированно от других ВМ на том же хосте. ВМ позволяет запускать разные ОС (Windows, Linux) на одном физическом сервере. Преимущества: быстрое развертывание, легкое клонирование, снапшоты (состояния), миграция между хостами." },
+    { q:"Основные параметры виртуальной машины", a:"1) vCPU (виртуальные процессоры) — количество ядер, выделенных ВМ. 2) vRAM (виртуальная память) — объем оперативной памяти (GB). 3) Дисковое пространство — размер системного и дополнительных дисков, тип (HDD/SSD). 4) Сетевая конфигурация — IP-адрес, подсеть, группы безопасности. 5) Операционная система — образ ОС (AMI, образ диска). 6) Тип инстанса — конфигурация ресурсов (t2.micro, m5.large и т.д.). 7) Зона доступности — физическое расположение. 8) Ключи доступа — SSH-ключи для Linux, пароли для Windows." },
+    { q:"Этапы создания виртуального сервера", a:"1) Выбор образа ОС — шаблон с предустановленной системой (Windows Server, Ubuntu, CentOS). 2) Выбор типа инстанса — конфигурация CPU/RAM под задачи. 3) Настройка сети — VPC, подсеть, назначение публичного IP. 4) Настройка хранилища — размер и тип диска (SSD для скорости, HDD для объема). 5) Настройка безопасности — Security Groups (фаервол), ключи SSH. 6) Конфигурация пользовательских данных — скрипты для первого запуска. 7) Запуск инстанса — создание ВМ. 8) Подключение — SSH для Linux, RDP для Windows. 9) Настройка и установка ПО." }
+  ]},
+  { n:9, qs:[
+    { q:"Настройка CPU и RAM виртуальной машины", a:"CPU: выбирается исходя из нагрузки приложения. Для веб-сервера достаточно 1-2 vCPU, для базы данных — 4-8 и более. Важно учитывать соотношение vCPU к физическим ядрам (oversubscription). RAM: объем памяти критичен для производительности. Мало RAM — свопинг на диск, тормоза. Много RAM — переплата. Примеры: тестовый сервер — 1 vCPU, 1 GB RAM; веб-сервер — 2 vCPU, 4 GB RAM; база данных — 4 vCPU, 16 GB RAM. В облаках можно изменять конфигурацию (resize) с остановкой ВМ или без (в зависимости от платформы)." },
+    { q:"Настройка дискового пространства", a:"Типы дисков: 1) Образ диска (root volume) — системный диск с ОС. 2) Дополнительные диски (data volumes) — для данных и приложений. Типы хранилищ: SSD (gp2, gp3, io1/io2) — высокая скорость IOPS, для баз данных и приложений. HDD (st1, sc1) — большой объем, низкая цена, для архивов. Размер: можно увеличивать на лету (resize), уменьшение обычно требует пересоздания. IOPS — операции ввода-вывода в секунду, важны для баз данных. Бэкап дисков — снапшоты (snapshots) для восстановления." },
+    { q:"Проверка доступности виртуального сервера", a:"Методы проверки: 1) Ping — проверка сетевой доступности по ICMP (если разрешен в Security Group). 2) SSH/RDP — подключение к серверу (проверка работы ОС и сети). 3) Проверка портов — telnet или nc (netcat) на нужный порт (80, 443, 3306). 4) Health checks — встроенные проверки облака (AWS Status Checks, Azure VM Health). 5) Мониторинг метрик — CPU, RAM, диск, сеть в CloudWatch/Monitor. 6) Логи системы — /var/log/syslog, Event Viewer. 7) Внешние мониторинги — UptimeRobot, Pingdom. Если сервер недоступен: проверить Security Group, сетевые ACL, статус ВМ, системные логи." }
+  ]},
+  { n:10, qs:[
+    { q:"Понятие облачного хранилища", a:"Облачное хранилище — сервис для хранения данных в облаке с доступом через интернет. Данные хранятся на серверах провайдера в распределенной инфраструктуре. Основные характеристики: доступность из любой точки, масштабируемость (увеличение объема без остановки), репликация (копии данных в разных дата-центрах), API для программного доступа, различные классы хранения (hot, warm, cold). Примеры: AWS S3, Azure Blob Storage, Google Cloud Storage, Yandex Object Storage." },
+    { q:"Типы облачных хранилищ", a:"1) Объектное хранилище (Object Storage) — хранение файлов как объектов с метаданными (S3, Blob). Для неструктурированных данных, медиа, бэкапов. 2) Блочное хранилище (Block Storage) — тома для подключения к ВМ как диски (EBS, Azure Disk). Для баз данных, файловых систем. 3) Файловое хранилище (File Storage) — сетевая файловая система (EFS, Azure Files). Для общих папок, NAS. 4) Архивное хранилище (Archive) — дешевое долгосрочное хранение с длительным доступом (Glacier, Archive). Для бэкапов, compliance." },
+    { q:"Преимущества облачного хранения данных", a:"1) Надежность — данные реплицируются в несколько зон/регионов (99.999999999% durability). 2) Масштабируемость — неограниченный рост без закупки железа. 3) Доступность — доступ из любой точки мира. 4) Экономичность — оплата только за использованный объем, нет CapEx. 5) Безопасность — шифрование at rest и in transit, контроль доступа. 6) Версионирование — хранение версий файлов. 7) Интеграция — API для приложений. 8) Жизненный цикл — автоматический переход между классами хранения (hot → cold → archive)." }
+  ]},
+  { n:11, qs:[
+    { q:"Подключение облачного хранилища", a:"Способы подключения: 1) Через веб-консоль — загрузка/скачивание файлов через браузер. 2) CLI — командная строка (aws s3, az storage, gsutil). 3) API/SDK — программный доступ из приложений (REST API, библиотеки Python, Java, Node.js). 4) Mount — монтирование как файловой системы (s3fs, Azure Files SMB). 5) FTP/SFTP — некоторые провайдеры предоставляют FTP-шлюзы. 6) Синхронизация — клиенты для синхронизации папок (AWS File Gateway, Dropbox-like). Для ВМ — подключение блочных томов через iSCSI или встроенные механизмы облака." },
+    { q:"Разграничение прав доступа к данным", a:"Механизмы контроля доступа: 1) IAM Policies — политики на уровне пользователей и ролей (кто что может делать). 2) Bucket Policies — политики на уровне бакета/контейнера (S3 Bucket Policy). 3) ACL (Access Control Lists) — списки контроля доступа к объектам. 4) Подписанные URL — временные ссылки с ограниченным сроком действия. 5) Шифрование — шифрование данных с управлением ключами (KMS). 6) MFA Delete — требование MFA для удаления. 7) VPC Endpoint — доступ только из определенной виртуальной сети. Принцип: минимальные привилегии, разделение доступа по ролям." },
+    { q:"Резервирование данных в облаке", a:"Методы резервирования: 1) Снапшоты (Snapshots) — точечные копии состояния диска в определенный момент времени. 2) Репликация — автоматическое копирование данных в другой регион (cross-region replication). 3) Версионирование — хранение всех версий объекта при изменении. 4) Lifecycle Policies — автоматический переход старых данных в архивные хранилища. 5) Backup-сервисы — централизованное управление бэкапами (AWS Backup, Azure Backup). 6) 3-2-1 правило: 3 копии, 2 разных носителя, 1 копия offsite (в другом месте)." }
+  ]},
+  { n:12, qs:[
+    { q:"Понятие виртуальной сети", a:"Виртуальная сеть (VPC — Virtual Private Cloud) — изолированная виртуальная сеть в облаке, полностью контролируемая пользователем. VPC позволяет создать собственную сетевую инфраструктуру с заданной топологией: подсети (subnets), маршрутизация, фаерволы. VPC изолирована от других клиентов облака. Можно настроить IP-адресацию (CIDR блок), подсети (public и private), таблицы маршрутизации, сетевые ACL, NAT-шлюзы. VPC соединяется с интернетом через Internet Gateway, с on-premise — через VPN или Direct Connect." },
+    { q:"Назначение сетевых настроек в облаке", a:"Сетевые настройки обеспечивают: 1) Связность — коммуникацию между компонентами системы (ВМ, базы данных, балансировщики). 2) Безопасность — изоляцию ресурсов и контроль трафика (Security Groups, NACL). 3) Доступ в интернет — для публичных сервисов (Internet Gateway, NAT). 4) Приватность — защищенные подсети для баз данных и внутренних сервисов. 5) Масштабируемость — балансировку нагрузки между серверами. 6) Гибридную интеграцию — соединение облака с локальной сетью (VPN, Direct Connect). 7) DNS — разрешение имен внутри VPC (Route 53, Azure DNS)." },
+    { q:"Принципы работы виртуальных сетей", a:"1) CIDR-блок — диапазон IP-адресов VPC (например, 10.0.0.0/16). 2) Подсети (Subnets) — разделение VPC на сегменты по зонам доступности (public с доступом в интернет, private — без). 3) Таблицы маршрутизации — определяют куда направлять трафик (локально, в интернет, в VPN). 4) Internet Gateway — шлюз для доступа в интернет из public-подсетей. 5) NAT Gateway — позволяет private-подсетям выходить в интернет без публичного IP. 6) Security Groups — stateful фаервол на уровне инстанса (разрешающие правила). 7) NACL — stateless фаервол на уровне подсети (разрешающие и запрещающие правила)." }
+  ]},
+  { n:13, qs:[
+    { q:"IP-адресация в облачной инфраструктуре", a:"Типы IP-адресов: 1) Private IP — внутренний адрес в VPC, недоступен из интернета (10.x.x.x, 172.16-31.x.x, 192.168.x.x). 2) Public IP — публичный адрес для доступа из интернета (динамический или эластичный/статический). 3) Elastic IP — статический публичный IP, который можно переназначать между инстансами. CIDR — метод деления сети на подсети (например, /24 = 256 адресов, /16 = 65536 адресов). Резервирование: первые несколько и последний адреса в подсети зарезервированы AWS/Azure для системных нужд." },
+    { q:"Настройка сетевых правил доступа", a:"Security Groups (SG) — виртуальные фаерволы на уровне инстанса: stateful (если разрешен вход, ответ автоматически разрешен), только разрешающие правила, привязаны к инстансам. Правила: входящие (Inbound) — какие порты открыты (22 SSH, 80 HTTP, 443 HTTPS, 3389 RDP), откуда (IP, CIDR, другая SG). Исходящие (Outbound) — куда может обращаться инстанс. NACL (Network ACL) — фаервол на уровне подсети: stateless, есть номера правил (приоритет), есть явные запрещающие правила. Рекомендация: использовать SG для инстансов, NACL для дополнительной защиты подсетей." },
+    { q:"Проверка соединения между сервисами", a:"Инструменты проверки: 1) Ping — проверка ICMP (если разрешен в SG). 2) Telnet/nc — проверка доступности порта (telnet ip port, nc -zv ip port). 3) Curl — проверка HTTP/HTTPS endpoints (curl -v http://ip). 4) Traceroute — трассировка маршрута до цели. 5) Netstat/ss — проверка слушающих портов на сервере. 6) tcpdump — захват сетевого трафика. В облаках: VPC Flow Logs — логи сетевого трафика для анализа, Reachability Analyzer — инструмент проверки достижимости (AWS), Network Watcher (Azure). Частые проблемы: неправильные SG, NACL, отсутствие маршрута, DNS-проблемы." }
+  ]},
+  { n:14, qs:[
+    { q:"Основы информационной безопасности в облаке", a:"Облачная безопасность — Shared Responsibility Model (модель общей ответственности): провайдер отвечает за безопасность ОБЛАКА (физическая безопасность, сеть, гипервизор), клиент отвечает за безопасность В ОБЛАКЕ (данные, приложения, ОС, настройки доступа). Основные принципы: конфиденциальность (шифрование), целостность (контроль изменений), доступность (резервирование). Ключевые меры: IAM (управление доступом), шифрование (at rest и in transit), мониторинг (логи, алерты), сегментация сети, регулярные аудиты и обновления." },
+    { q:"Угрозы безопасности облачной инфраструктуры", a:"Основные угрозы: 1) Утечка данных — неправильная конфигурация доступа, открытые бакеты. 2) Учетные данные — компрометация ключей API, паролей. 3) Инсайдеры — злонамеренные действия сотрудников. 4) DDoS-атаки — перегрузка сервисов. 5) Уязвимости — непропатченные системы, устаревшее ПО. 6) Мультиарендность — потенциальный выход из песочницы (sandbox escape). 7) API-атаки — эксплуатация уязвимостей API облака. 8) Shadow IT — использование несанкционированных облачных сервисов. 9) Потеря данных — отсутствие бэкапов." },
+    { q:"Методы защиты облачных ресурсов", a:"1) IAM — строгий контроль доступа, MFA, принцип минимальных привилегий. 2) Шифрование — шифрование данных на диске (at rest) и в сети (in transit, TLS). 3) Сетевая сегментация — VPC, private подсети, Security Groups. 4) Мониторинг — CloudTrail, GuardDuty, SIEM. 5) Бэкапы — регулярное резервное копирование. 6) Обновления — патчинг ОС и приложений. 7) WAF — защита веб-приложений. 8) DDoS-защита — AWS Shield, Cloudflare. 9) Secrets Management — хранение ключей в KMS/Secrets Manager. 10) Аудит — регулярные проверки конфигурации (CIS Benchmarks)." }
+  ]},
+  { n:15, qs:[
+    { q:"Управление пользователями в облаке", a:"Управление идентификацией и доступом (IAM): создание пользователей (users), групп (groups), ролей (roles). Пользователи — физические лица с учетными данными (логин/пароль или ключи доступа). Группы — объединение пользователей по функциям (администраторы, разработчики). Роли — временные права доступа для сервисов или пользователей (например, роль для EC2 чтобы обращаться к S3). Политики (Policies) — JSON-документы, определяющие разрешения (Allow/Deny) на действия с ресурсами. Рекомендации: не использовать root-аккаунт, создавать отдельных пользователей, использовать MFA." },
+    { q:"Настройка ролей и политик доступа", a:"Роли (Roles): 1) Service Roles — для сервисов (EC2, Lambda) чтобы получать доступ к другим сервисам. 2) Cross-Account Roles — доступ между аккаунтами. 3) Federation Roles — для SSO через Active Directory. Политики: структура JSON с элементами Version, Statement (Effect: Allow/Deny, Action: список действий, Resource: ARN ресурса, Condition: условия). Типы политик: Managed (управляемые AWS/Azure), Inline (встроенные в пользователя), Customer Managed (созданные клиентом). Проверка: IAM Policy Simulator для тестирования политик." },
+    { q:"Принцип минимальных привилегий", a:"Principle of Least Privilege (PoLP) — пользователь или сервис должен иметь ровно столько прав, сколько необходимо для выполнения задачи, и не больше. Применение: 1) Не давать админские права обычным пользователям. 2) Разделять права по ролям (read-only, write, admin). 3) Использовать роли вместо долгосрочных ключей. 4) Регулярно пересматривать и отзывать неиспользуемые права. 5) Анализировать фактическое использование прав (IAM Access Analyzer). 6) Запрещать wildcard (*) в политиках где возможно. Польза: снижение поверхности атаки, ограничение ущерба при компрометации." }
+  ]},
+  { n:16, qs:[
+    { q:"Шифрование данных в облаке", a:"Шифрование — преобразование данных в нечитаемый формат для защиты от несанкционированного доступа. В облаке применяется: 1) Шифрование at rest (в покое) — данные на дисках, в базах, в хранилищах. 2) Шифрование in transit (в пути) — данные при передаче по сети. Методы: симметричное (один ключ для шифрования/дешифрования, быстрое), асимметричное (пара ключей публичный/приватный). Алгоритмы: AES-256 (стандарт), RSA, TLS 1.2/1.3 для транспорта. Управление ключами: KMS (Key Management Service) — AWS KMS, Azure Key Vault." },
+    { q:"Шифрование при хранении и передаче данных", a:"At rest (хранение): шифрование дисков ВМ (EBS encryption), шифрование баз данных (RDS encryption, TDE), шифрование объектных хранилищ (S3 SSE — Server-Side Encryption), шифрование файловых систем (EFS encryption). In transit (передача): TLS/SSL для HTTPS, VPN для защищенных туннелей, IPSec для site-to-site соединений. Практика: всегда включать HTTPS для веб-приложений, использовать VPN для административного доступа, шифровать чувствительные данные в базах, использовать end-to-end encryption для особо важных данных." },
+    { q:"Значение шифрования для безопасности", a:"Шифрование обеспечивает: 1) Конфиденциальность — даже при физическом доступе к диску данные нечитаемы без ключа. 2) Защиту от утечек — при компрометации сети перехваченные данные бесполезны. 3) Соответствие требованиям — GDPR, HIPAA, PCI DSS требуют шифрования персональных и платежных данных. 4) Защиту от инсайдеров — администраторы облака не видят содержимого зашифрованных данных. 5) Безопасность в мультиарендной среде — изоляция данных клиентов на shared-инфраструктуре. Важно: ключи шифрования должны храниться отдельно от данных (KMS)." }
+  ]},
+  { n:17, qs:[
+    { q:"Понятие мониторинга облачных ресурсов", a:"Мониторинг — постоянное наблюдение за состоянием облачной инфраструктуры, сбор метрик, логов и событий для обеспечения доступности, производительности и безопасности. Цели: раннее обнаружение проблем, анализ трендов, планирование мощностей, оптимизация затрат, обеспечение SLA, безопасность (обнаружение аномалий). Что мониторить: метрики (CPU, RAM, диск, сеть), логи (системные, приложений, доступа), события (создание/удаление ресурсов), состояние сервисов (health checks)." },
+    { q:"Основные параметры мониторинга", a:"Метрки инфраструктуры: CPU Utilization (загрузка процессора), Memory Usage (использование RAM), Disk I/O (операции диска), Network In/Out (сетевой трафик). Метрики приложений: Latency (время отклика), Error Rate (процент ошибок), Request Count (количество запросов), Throughput (пропускная способность). Метрики бизнеса: количество пользователей, транзакций, конверсия. Пороговые значения (Thresholds): пределы при которых срабатывают алерты (CPU > 80%, свободное место < 10%). Базовые линии (Baselines) — нормальные значения для сравнения." },
+    { q:"Инструменты мониторинга в облаке", a:"Встроенные инструменты: AWS CloudWatch (метрики, логи, алерты), Azure Monitor, Google Cloud Operations Suite (Stackdriver). Расширенные: AWS X-Ray (трассировка запросов), CloudTrail (аудит API), GuardDuty (анализ угроз). Сторонние: Datadog, New Relic, Prometheus + Grafana (open source), Zabbix, Nagios, Splunk (SIEM). Выбор: встроенные — хороши для базового мониторинга, сторонние — для сложных сценариев, мультиоблачности, детального APM (Application Performance Monitoring)." }
+  ]},
+  { n:18, qs:[
+    { q:"Мониторинг загрузки процессора", a:"CPU Utilization — процент времени, когда процессор занят работой. Важность: высокая загрузка (>80-90% sustained) указывает на нехватку мощности, низкая (<10%) — на переплату за ресурсы. Метрики: User Time (пользовательские процессы), System Time (системные процессы), IOWait (ожидание диска — может указывать на проблемы с хранилищем). Инструменты: CloudWatch (AWS), top/htop (Linux), Task Manager (Windows). Алерты: уведомление при CPU > 80% в течение 5 минут. Решение проблем: масштабирование (увеличение инстанса), оптимизация кода, балансировка нагрузки." },
+    { q:"Мониторинг памяти и сети", a:"Memory: Available Memory (доступно), Used Memory (использовано), Swap Usage (использование подкачки — если высокое, значит не хватает RAM). Важно: приложения тормозят при нехватке RAM из-за свопинга. Network: Network In/Out (входящий/исходящий трафик в bytes), Packets In/Out (количество пакетов), Error Packets (ошибки). Важно: внезапный всплеск трафика может быть DDoS или вирусом, низкий трафик — проблемы с доступностью. Network Latency — задержка при передаче (ping)." },
+    { q:"Настройка уведомлений о сбоях", a:"Алерты (Alerts/Alarms) — автоматические уведомления при достижении пороговых значений. Настройка: 1) Выбор метрики (CPU, RAM, ошибки). 2) Условие срабатывания (CPU > 80% в течение 5 минут). 3) Период оценки (1 минута, 5 минут). 4) Статистика (Average, Maximum). 5) Действие — отправка email, SMS, сообщение в Slack, запуск Lambda/Function. Типы алертов: Warning (предупреждение), Critical (критический). Best practices: настраивать алерты на бизнес-метрики, а не только инфраструктуру, избегать алерт-фатigue (слишком много ложных срабатываний), иметь runbook (инструкции) для реагирования." }
+  ]},
+  { n:19, qs:[
+    { q:"Понятие оптимизации ресурсов", a:"Оптимизация ресурсов — процесс повышения эффективности использования облачных ресурсов для снижения затрат при сохранении производительности и доступности. Цели: снижение счетов за облако, повышение производительности, улучшение масштабируемости, устранение простаивающих ресурсов. Области оптимизации: вычисления (правильный размер инстансов), хранение (классы хранения), сеть (передача данных), лицензии (reserved instances)." },
+    { q:"Анализ затрат в облачной среде", a:"Инструменты анализа: Cost Explorer (AWS), Cost Management (Azure), Billing Reports (GCP). Что анализировать: 1) Распределение затрат по сервисам (что больше всего " },
+    { q:"Методы снижения расходов", a:"1) Правильный подбор инстансов — не переплачивать за неиспользуемые ресурсы (downsizing). 2) Reserved Instances / Savings Plans — резервирование на 1-3 года со скидкой до 72%. 3) Spot Instances — использование неиспользуемых мощностей со скидкой до 90% (для fault-tolerant нагрузок). 4) Автоматическое отключение — выключение ВМ в нерабочее время (dev/test). 5) Lifecycle policies — автоматический переход данных в дешевые хранилища. 6) Удаление неиспользуемых ресурсов — unattached диски, старые снапшоты, неиспользуемые IP. 7) CDN — кэширование для снижения исходящего трафика. 8) Consolidated Billing — объединение аккаунтов для скидок на объем." }
+  ]},
+  { n:20, qs:[
+    { q:"Автоматическое масштабирование", a:"Auto Scaling — автоматическое изменение количества вычислительных ресурсов в зависимости от нагрузки. Цель: обеспечение нужной производительности при минимальных затратах. Типы: Horizontal Scaling (масштабирование вширь) — добавление/удаление инстансов. Vertical Scaling (масштабирование вверх) — увеличение/уменьшение ресурсов одного инстанса (CPU/RAM). Компоненты: Launch Template (шаблон создания инстанса), Auto Scaling Group (группа с min/max/desired capacity), Scaling Policies (правила масштабирования)." },
+    { q:"Горизонтальное и вертикальное масштабирование", a:"Горизонтальное (Scale Out/In): добавление новых серверов в пул при росте нагрузки, удаление при снижении. Плюсы: практически неограниченная масштабируемость, отказоустойчивость (если один упал, остальные работают). Минусы: сложность архитектуры (stateless приложения, балансировка), eventual consistency. Вертикальное (Scale Up/Down): увеличение мощности существующего сервера (больше CPU/RAM). Плюсы: простота, не требует изменения архитектуры. Минусы: ограничен потолком железа, downtime при изменении размера, дороже за единицу ресурса. В облаках чаще используется горизонтальное." },
+    { q:"Преимущества авто-масштабирования", a:"1) Эластичность — ресурсы появляются когда нужны, исчезают когда не нужны. 2) Экономия — платишь только за реальное использование, нет простоя ресурсов. 3) Высокая доступность — автоматическое восстановление при сбоях (health checks, replacement). 4) Производительность — справляемся с всплесками нагрузки без ручного вмешательства. 5) Удобство — не нужно будить админа ночью. 6) Предсказуемость — заданные min/max ограничивают расходы. Сценарии: интернет-магазин в Черную пятницу, стриминг во время прямых трансляций, обработка ночных batch-заданий." }
+  ]},
+  { n:21, qs:[
+    { q:"Резервное копирование данных", a:"Бэкап — создание копий данных для восстановления в случае потери, повреждения или удаления. Почему важно: отказ оборудования, человеческие ошибки (удаление), кибератаки (ransomware), стихийные бедствия. Что бэкапить: базы данных, файлы приложений, конфигурации систем, образы ВМ. Где хранить: в том же облаке (другой регион), в другом облаке (multi-cloud), on-premise (гибрид). Правило 3-2-1: 3 копии данных, на 2 разных носителях, 1 копия offsite (в другом месте)." },
+    { q:"Виды резервного копирования", a:"1) Полный бэкап (Full) — копия всех данных. Плюсы: быстрое восстановление. Минусы: долгое создание, много места. 2) Инкрементальный (Incremental) — копия только изменений с последнего бэкапа (любого типа). Плюсы: быстро, мало места. Минусы: медленное восстановление (нужна цепочка). 3) Дифференциальный (Differential) — копия изменений с последнего полного бэкапа. Плюсы: быстрее инкрементального восстановления. Минусы: занимает больше места со временем. 4) Снапшоты — мгновенные копии состояния диска. 5) Continuous Backup — непрерывное копирование изменений (Point-in-Time Recovery)." },
+    { q:"Значение резервного копирования", a:"Бэкапы — последняя линия защиты данных. Значение: 1) Восстановление после сбоев — минимизация downtime. 2) Защита от ransomware — если данные зашифрованы, восстанавливаем из чистого бэкапа. 3) Архивирование — хранение исторических данных для compliance. 4) Тестирование — использование копий для dev/test сред. 5) Миграция — перенос данных между системами. 6) Откат изменений — восстановление после неудачного обновления. Важно: регулярно тестировать восстановление (backup без restore testing — это надежда, а не бэкап), хранить копии в изолированном месте (air-gapped)." }
+  ]},
+  { n:22, qs:[
+    { q:"Настройка автоматического резервного копирования", a:"Автоматизация бэкапов: 1) Backup Plans/Policy — расписание (ежедневно в 2:00), retention period (хранение 30 дней). 2) Backup Window — время когда выполняется бэкап (вне пиковой нагрузки). 3) Selection — что бэкапить (теги ресурсов, конкретные ВМ). 4) Vault — защищенное хранилище бэкапов с шифрованием. 5) Notifications — уведомления об успехе/неудаче. Инструменты: AWS Backup (централизованное управление), Azure Backup, Google Backup and DR. Лучшие практики: разные расписания для разных типов данных, копирование в другой регион (cross-region), проверка целостности бэкапов." },
+    { q:"Восстановление данных из резервной копии", a:"Типы восстановления: 1) Полное восстановление (Full Restore) — восстановление всего из бэкапа. 2) Выборочное восстановление — только нужные файлы/таблицы. 3) Point-in-Time Recovery (PITR) — восстановление на конкретный момент времени (для баз данных). 4) Disaster Recovery — восстановление всей инфраструктуры в другом регионе. Процесс: 1) Определение что и куда восстанавливать. 2) Выбор бэкапа (проверка даты). 3) Запуск restore job. 4) Проверка целостности восстановленных данных. 5) Переключение приложения на восстановленные данные. RTO (Recovery Time Objective) — допустимое время простоя, RPO (Recovery Point Objective) — допустимая потеря данных." },
+    { q:"Оценка надежности системы бэкапов", a:"Критерии надежности: 1) Регулярность — бэкапы выполняются по расписанию без пропусков. 2) Целостность — данные не повреждены (checksum verification). 3) Доступность — бэкапы доступны когда нужны. 4) Безопасность — шифрование, контроль доступа, immutable backups (невозможность удаления). 5) Тестируемость — успешные тестовые восстановления. 6) Покрытие — все критичные данные включены в бэкап. 7) Географическая избыточность — копии в разных локациях. Метрики: Backup Success Rate, RTO/RPO compliance, Time to Restore." }
+  ]},
+  { n:23, qs:[
+    { q:"Администрирование облачной инфраструктуры", a:"Администрирование включает: 1) Управление ресурсами — создание, настройка, мониторинг ВМ, сетей, хранилищ. 2) Управление доступом — IAM, роли, политики. 3) Безопасность — фаерволы, шифрование, аудит. 4) Обновления — патчи ОС, обновление приложений. 5) Бэкапы и восстановление. 6) Оптимизация затрат. 7) Документирование. Инструменты: веб-консоль, CLI, SDK, Infrastructure as Code (Terraform, CloudFormation), Ansible/Puppet/Chef для конфигурации. Best practices: автоматизация рутинных операций, использование тегов для ресурсов, логирование всех действий." },
+    { q:"Обновление компонентов облачных сервисов", a:"Обновления: 1) Обновление ОС — патчи безопасности, новые версии (Ubuntu 20.04 → 22.04). 2) Обновление ПО — базы данных (MySQL 5.7 → 8.0), веб-серверы, приложения. 3) Обновление провайдера — новые версии сервисов, API. Стратегии: Rolling Update — постепенное обновление инстансов без downtime. Blue-Green Deployment — две среды, переключение трафика. Canary — обновление части пользователей для проверки. Maintenance Window — плановое окно обслуживания. Важно: тестирование обновлений в dev/staging, создание бэкапа перед обновлением, rollback plan." },
+    { q:"Установка патчей безопасности", a:"Патчинг — установка исправлений уязвимостей (security patches). Процесс: 1) Мониторинг уведомлений о уязвимостях (CVE, vendor advisories). 2) Оценка критичности (CVSS score). 3) Тестирование патча в staging. 4) Установка в production (вручную или автоматически). 5) Проверка работоспособности. 6) Документирование. Инструменты: AWS Systems Manager Patch Manager, Azure Update Manager, WSUS (Windows), unattended-upgrades (Linux). Критичные патчи (zero-day) — установка вне очереди. Регулярные — по расписанию (Patch Tuesday для Windows)." }
+  ]},
+  { n:24, qs:[
+    { q:"Журналирование действий в облаке", a:"Логирование — запись событий и действий для аудита, отладки и безопасности. Типы логов: 1) Audit Logs — кто и когда создал/удалил/изменил ресурс (CloudTrail, Azure Activity Logs). 2) Access Logs — кто обращался к сервису (S3 access logs, ALB logs). 3) System Logs — события ОС (/var/log/syslog, Event Viewer). 4) Application Logs — логи приложений. 5) Flow Logs — сетевой трафик (VPC Flow Logs). Хранение: централизованный сбор (SIEM), ротация (удаление старых), шифрование. Анализ: поиск по ключевым словам, построение дашбордов, алерты на подозрительные события." },
+    { q:"Аудит пользователей и операций", a:"Аудит — проверка и анализ действий пользователей и системы. Цели: обнаружение несанкционированных действий, compliance (соответствие стандартам), расследование инцидентов, оптимизация прав доступа. Что аудировать: создание/удаление ресурсов, изменение политик безопасности, входы/выходы пользователей, доступ к чувствительным данным, неудачные попытки аутентификации. Инструменты: CloudTrail (AWS), Azure Monitor Logs, Google Cloud Audit Logs, SIEM-системы (Splunk, ELK). Отчеты: кто создал инстанс в 3 часа ночи, кто удалил базу данных, кто изменил Security Group." },
+    { q:"Значение логирования для безопасности", a:"Логи — основа обнаружения и расследования инцидентов. Значение: 1) Обнаружение атак — аномальные паттерны (много неудачных входов, обращения с подозрительных IP). 2) Расследование — восстановление хронологии событий после инцидента. 3) Compliance — многие стандарты требуют хранения логов (PCI DSS — 1 год). 4) Forensics — судебная экспертиза, доказательства. 5) Мониторинг привилегированных пользователей — действия администраторов. 6) Оптимизация — анализ использования ресурсов. Важно: защита логов от изменения (immutable), централизованный сбор, корреляция событий из разных источников." }
+  ]},
+  { n:25, qs:[
+    { q:"Обеспечение высокой доступности сервисов", a:"High Availability (HA) — способность системы оставаться доступной при сбоях компонентов. Цель: минимизация downtime. Принципы: устранение единых точек отказа (SPOF), избыточность компонентов, автоматическое восстановление. Архитектура: Multi-AZ — размещение в нескольких зонах доступности, Multi-Region — в нескольких регионах. Компоненты: Load Balancer (распределение нагрузки), Auto Scaling (восстановление инстансов), репликация баз данных (master-slave), DNS failover (переключение при сбое). SLA: 99.9% (8.7 часов downtime/год), 99.99% (52 минуты), 99.999% (5 минут)." },
+    { q:"Понятие отказоустойчивости", a:"Fault Tolerance — способность системы продолжать работу при отказе компонентов без потери данных и остановки сервиса. Отличие от HA: HA допускает кратковременный downtime (переключение на резерв), FT — нет downtime вообще. Методы: RAID-массивы для дисков, кластеризация серверов (active-active), синхронная репликация баз данных (все копии всегда идентичны), hot standby (горячий резерв). Цена: FT дороже HA из-за полного дублирования ресурсов. Примеры: VMware Fault Tolerance (зеркалирование ВМ), базы данных с синхронной репликацией." },
+    { q:"Методы повышения доступности", a:"1) Резервирование — дублирование критичных компонентов (N+1, 2N). 2) Балансировка нагрузки — распределение между серверами (ALB, NLB). 3) Географическое распределение — размещение в разных зонах и регионах. 4) Автоматическое масштабирование — замена упавших инстансов. 5) Репликация данных — синхронная (zero data loss) и асинхронная (минимальная задержка). 6) Health Checks — проверка здоровья и исключение больных нод. 7) DNS Failover — переключение трафика при сбое. 8) Graceful Degradation — работа в ограниченном режиме при частичном сбое. 9) Chaos Engineering — намеренное создание сбоев для проверки устойчивости." }
+  ]},
+  { n:26, qs:[
+    { q:"Документирование облачной инфраструктуры", a:"Документация — описание архитектуры, конфигураций, процессов и процедур облачной инфраструктуры. Зачем нужна: передача знаний между сотрудниками, быстрое восстановление после инцидентов, onboarding новых членов команды, аудит и compliance, планирование изменений. Что документировать: схема архитектуры (диаграммы), инвентарь ресурсов (что где крутится), конфигурации сети и безопасности, runbooks (инструкции по типовым задачам), playbooks (реагирование на инциденты), контакты и эскалации." },
+    { q:"Назначение технической документации", a:"Техническая документация служит для: 1) Операционной поддержки — быстрое решение проблем без поиска информации. 2) Разработки — описание API, интеграций. 3) Администрирования — инструкции по настройке и обслуживанию. 4) Обучения — материалы для новых сотрудников. 5) Compliance — доказательство наличия процессов для аудиторов. 6) Планирования — основа для capacity planning и бюджетирования. 7) Восстановления — disaster recovery планы. Типы: as-built documentation (как построено), operational docs (как эксплуатировать), design docs (почему так построено)." },
+    { q:"Виды документации в IT", a:"1) Архитектурная — схемы, диаграммы (C4 model, UML). 2) Инженерная — конфигурации, параметры настройки. 3) Пользовательская — how-to guides, FAQ. 4) API Documentation — Swagger, OpenAPI. 5) Runbooks — пошаговые инструкции (как перезапустить сервис). 6) Playbooks — сценарии реагирования на инциденты. 7) Policies — политики безопасности, backup policy. 8) Процедурная — change management, onboarding. Инструменты: Confluence, Notion, GitHub Wiki, Draw.io (диаграммы), Markdown. Best practices: хранить вместе с кодом (docs-as-code), версионирование, регулярное обновление." }
+  ]},
+  { n:27, qs:[
+    { q:"Интеграция облачных и локальных систем", a:"Гибридная интеграция — соединение ресурсов в облаке и on-premise (локальном ЦОД). Сценарии: миграция части систем в облако, гибридные приложения (frontend в облаке, база on-premise), disaster recovery (бэкапы в облако), burst computing (пиковые нагрузки в облако). Методы интеграции: VPN (Site-to-Site) — защищенный туннель через интернет. Direct Connect / ExpressRoute / Cloud Interconnect — выделенная линия к облаку (ниже latency, выше безопасность). API Gateway — интеграция через API. Message Queue — асинхронная интеграция (SQS, Service Bus)." },
+    { q:"Преимущества гибридной инфраструктуры", a:"1) Гибкость — чувствительные данные остаются on-premise, масштабируемые нагрузки — в облаке. 2) Экономия — нет необходимости покупать железо под пиковые нагрузки (cloud bursting). 3) Безопасность — полный контроль над критичными данными. 4) Постепенная миграция — перенос систем поэтапно без big bang. 5) Отказоустойчивость — failover между on-premise и облаком. 6) Compliance — соответствие требованиям хранения данных в стране. 7) Использование существующих инвестиций — не выбрасывать работающее железо." },
+    { q:"Примеры интеграции", a:"1) Active Directory синхронизация — AD on-premise + Azure AD Connect для SSO в облачные сервисы. 2) Гибридная база данных — основная БД on-premise, реплика для отчетности в облаке. 3) Backup on-premise → Cloud — Veeam backup to S3. 4) API интеграция — on-premise ERP обращается к облачному CRM через API. 5) Гибридное хранилище — файловый шлюз (AWS Storage Gateway) кэширует часто используемые файлы локально, архивы — в облаке. 6) Kubernetes гибридный — кластер распределен между on-premise и облаком. 7) Message-based — on-premise система публикует события в облачную очередь для обработки." }
+  ]},
+  { n:28, qs:[
+    { q:"Использование стандартов при настройке облака", a:"Стандарты обеспечивают: безопасность, совместимость, переносимость, compliance. Ключевые стандарты: 1) ISO 27001 — управление информационной безопасностью. 2) ISO 27017 — безопасность в облаке. 3) ISO 27018 — защита персональных данных в облаке. 4) SOC 2 — контроль безопасности, доступности, конфиденциальности. 5) PCI DSS — для платежных данных. 6) GDPR — защита данных ЕС. 7) CIS Benchmarks — конкретные рекомендации по настройке AWS/Azure/GCP. Применение: выбирать провайдера с нужными сертификатами, настраивать ресурсы по CIS Benchmarks, регулярно аудировать соответствие." },
+    { q:"Нормативно-техническая документация", a:"НТД включает: 1) Законы и постановления — закон о персональных данных, закон об информации. 2) ГОСТы — государственные стандарты (ГОСТ Р ИСО/МЭК 27001). 3) Отраслевые стандарты — PCI DSS для платежей, HIPAA для медицины. 4) Внутренние документы организации — политики, инструкции, регламенты. 5) Документация провайдера — SLA, Terms of Service, Security Whitepapers. Значение: соблюдение законодательства, защита от штрафов, доказательство due diligence в случае инцидента, основа для договоров с провайдером." },
+    { q:"Роль стандартов в администрировании", a:"Стандарты помогают администраторам: 1) Безопасность — CIS Benchmarks дают готовые checklists безопасной конфигурации (закрыть порты, включить шифрование). 2) Процессы — ITIL описывает процессы управления ИТ-услугами (incident, change, problem management). 3) Качество — ISO стандарты обеспечивают системный подход. 4) Аудит — стандарты — критерии для проверки. 5) Обучение — стандарты — основа для тренингов. Применение: использовать CIS hardened images, следовать Well-Architected Framework (AWS), регулярно проверять соответствие с помощью Security Hub / Azure Security Center." }
+  ]},
+  { n:29, qs:[
+    { q:"Типичные ошибки при настройке облачной инфраструктуры", a:"1) Открытые Security Groups — 0.0.0.0/0 на критичные порты (SSH 22, RDP 3389). 2) Публичные бакеты S3 — доступ без аутентификации. 3) Root/API ключи в коде — hardcoded credentials. 4) Отсутствие бэкапов — надежда на облако как на волшебное место. 5) Неправильные IAM политики — слишком широкие права (* на все ресурсы). 6) Отключенное шифрование — данные в открытом виде. 7) Нет мониторинга — узнаем о проблемах от пользователей. 8) Неправильный размер инстансов — переплата или нехватка ресурсов. 9) Нет тегов — невозможно понять кто и зачем создал ресурс. 10) Vendor lock-in — использование проприетарных сервисов без стратегии выхода." },
+    { q:"Способы устранения ошибок", a:"1) Security Groups — принцип least privilege, доступ только с нужных IP, использование bastion host. 2) S3 — блокировать публичный доступ на уровне аккаунта, использовать bucket policies. 3) Credentials — Secrets Manager, переменные окружения, IAM Roles. 4) Бэкапы — автоматические backup plans, проверка восстановления. 5) IAM — регулярный аудит прав, использование IAM Access Analyzer. 6) Шифрование — включение encryption by default, KMS. 7) Мониторинг — CloudWatch alerts, логирование. 8) Размер — right-sizing через анализ метрик, auto-scaling. 9) Теги — обязательные теги (Owner, Project, Environment), политики на уровне организации. 10) Lock-in — использование open-source, мультиоблачные архитектуры, контейнеры." },
+    { q:"Профилактика сбоев в облаке", a:"Профилактика: 1) Мониторинг и алерты — раннее обнаружение проблем. 2) Регулярные бэкапы — и тестирование восстановления. 3) Патчинг — своевременное обновление ОС и ПО. 4) High Availability — multi-AZ, load balancing, auto-scaling. 5) Chaos Engineering — намеренное создание сбоев для проверки (AWS Fault Injection Simulator). 6) Capacity Planning — прогнозирование роста ресурсов. 7) Документация — runbooks для типовых проблем. 8) Обучение — подготовка команды. 9) Security hardening — CIS benchmarks, регулярные аудиты. 10) Disaster Recovery Plan — план восстановления, регулярные drill'ы (учения)." }
+  ]},
+  { n:30, qs:[
+    { q:"Перспективы развития облачных технологий", a:"Тренды: 1) Serverless — разработка без управления серверами (Lambda, Functions). 2) Edge Computing — вычисления близко к пользователю (CloudFront, Lambda@Edge). 3) Kubernetes и контейнеры — стандарт для оркестрации. 4) AI/ML as a Service — готовые модели для распознавания, анализа. 5) Multi-cloud — использование нескольких провайдеров для избежания vendor lock-in. 6) Green Cloud — экологичные дата-центры, углеродная нейтральность. 7) Quantum Computing — квантовые вычисления в облаке (Amazon Braket). 8) Confidential Computing — шифрование данных во время обработки. 9) FinOps — управление облачными затратами как дисциплина." },
+    { q:"Роль облаков в цифровизации", a:"Облака — основа цифровой трансформации: 1) Доступность технологий — AI, Big Data, IoT доступны даже малому бизнесу. 2) Скорость вывода продуктов — time-to-market сокращается с месяцев до дней. 3) Масштабируемость — рост без капитальных вложений. 4) Удаленная работа — доступ к корпоративным системам из любой точки. 5) Инновации — эксперименты без риска (создал, проверил, удалил). 6) Экосистемы — маркетплейсы приложений (SaaS). 7) Государственные услуги — электронное правительство на облачных платформах. Примеры: банки переходят на облачные core-banking, ритейл использует облачную аналитику, производство — IoT в облаке." },
+    { q:"Значение облачной инфраструктуры для бизнеса", a:"Бизнес-ценность: 1) Снижение затрат — переход от CapEx (покупка) к OpEx (аренда), экономия на IT-штате. 2) Гибкость — быстрое реагирование на изменения рынка. 3) Конкурентное преимущество — доступ к передовым технологиям. 4) Надежность — SLA 99.99%, профессиональная защита. 5) Глобальный охват — запуск сервиса в новой стране за минуты. 6) Фокус на бизнесе — вместо обслуживания серверов. 7) Экологичность — облачные дата-центры эффективнее частных. Риски: зависимость от провайдера, требования к компетенциям, безопасность. Вывод: облака — необходимость для современного бизнеса, но требуют правильного управления." }
+  ]}
+];
 
-async function getAIAnswer(question, ticketNum) {
-  const key = `t${ticketNum}_${question}`;
-  if (answerCache[key]) return answerCache[key];
-
-  const prompt = `Ты преподаватель по облачным технологиям. Дай чёткий, понятный и структурированный ответ на экзаменационный вопрос для студента техникума по специальности "Программное обеспечение".
-
-Предмет: ПМ 06 "Управление ресурсами облака и обслуживание облачной инфраструктуры"
-
-Вопрос: ${question}
-
-Требования к ответу:
-- 5-10 предложений, структурировано
-- Используй простой и понятный язык
-- Можешь использовать нумерацию или маркеры для списков
-- Приводи конкретные примеры (AWS, Azure, GCP, VMware и др.)
-- Без лишних вступлений — сразу к сути`;
-
-  const resp = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
-      messages: [{ role: "user", content: prompt }]
-    })
-  });
-  const data = await resp.json();
-  const answer = data.content?.[0]?.text || "Не удалось получить ответ. Попробуйте ещё раз.";
-  answerCache[key] = answer;
-  return answer;
-}
-
-// ── КАРТОЧКИ ─────────────────────────────────────────────────
+const DIFF_MAP = DIFF;
 let allCards = [];
-let filtered  = [];
-let current   = 0;
-let learned   = new Set(JSON.parse(localStorage.getItem('pm06_learned')||'[]'));
+let filtered = [];
+let current = 0;
+let learned = new Set(JSON.parse(localStorage.getItem('pm06_learned')||'[]'));
 let selectedTicket = 0;
 let diffFilter = 'all';
-let isFlipped = false;
-let isLoading = false;
 
-function buildCards() {
+function buildCards(){
   allCards = [];
   TICKETS.forEach(t => t.qs.forEach((q,i) => {
-    allCards.push({ ticket:t.n, qnum:i+1, q, diff:DIFF[t.n] });
+    allCards.push({ ticket: t.n, qnum: i+1, q: q.q, a: q.a, diff: DIFF[t.n] });
   }));
 }
 
-function applyFilter() {
+function applyFilter(){
   filtered = allCards.filter(c => {
-    const tOk = selectedTicket === 0 || c.ticket === selectedTicket;
-    const dOk = diffFilter === 'all' || c.diff === diffFilter;
-    return tOk && dOk;
+    const ticketOk = selectedTicket === 0 || c.ticket === selectedTicket;
+    const diffOk   = diffFilter === 'all' || c.diff === diffFilter;
+    return ticketOk && diffOk;
   });
   current = 0;
-  isFlipped = false;
   renderCard();
 }
 
-function renderCard() {
-  if (!filtered.length) {
+function renderCard(){
+  if(!filtered.length){
     document.getElementById('flashcard').className = 'flashcard';
     document.getElementById('cQuestion').textContent = 'Нет карточек для выбранного фильтра.';
     document.getElementById('cAnswer').textContent = '';
@@ -362,8 +441,6 @@ function renderCard() {
   const fc = document.getElementById('flashcard');
   fc.classList.remove('flipped','cf-easy','cf-med','cf-hard');
   fc.classList.add(CF_CLASS[d]);
-  isFlipped = false;
-
   document.getElementById('cTicket').textContent  = `БИЛЕТ №${c.ticket} · Вопрос ${c.qnum}/3`;
   document.getElementById('cTicketB').textContent = `БИЛЕТ №${c.ticket} · Вопрос ${c.qnum}/3`;
   document.getElementById('cBadge').textContent   = DIFF_LABEL[d];
@@ -371,85 +448,27 @@ function renderCard() {
   document.getElementById('cBadgeB').textContent  = DIFF_LABEL[d];
   document.getElementById('cBadgeB').className    = `diff-badge ${DIFF_CLASS[d]}`;
   document.getElementById('cQuestion').textContent = c.q;
-
-  // Reset answer area
-  const answerEl = document.getElementById('cAnswer');
-  const key = `t${c.ticket}_${c.q}`;
-  if (answerCache[key]) {
-    answerEl.innerHTML = `<div class="ai-badge">✨ AI-ответ</div><br>${formatAnswer(answerCache[key])}`;
-  } else {
-    answerEl.innerHTML = `<div class="ai-loading" id="aiLoading"><div class="ai-dots"><span></span><span></span><span></span></div>Нажмите на карточку для получения AI-ответа...</div>`;
-  }
-
+  document.getElementById('cAnswer').textContent   = c.a;
   const pct = ((current+1)/filtered.length*100).toFixed(0);
-  const pf = document.getElementById('progressFill');
+  const pf  = document.getElementById('progressFill');
   pf.style.width = pct+'%';
   pf.className = 'progress-fill ' + PF_CLASS[d];
-  document.getElementById('progressLabel').textContent = `${current+1} / ${filtered.length} · ✓ Знаю: ${learned.size}`;
+  document.getElementById('progressLabel').textContent = `${current+1} / ${filtered.length} карточек · ✓ Знаю: ${learned.size}`;
 }
 
-function formatAnswer(text) {
-  // Convert numbered lists and bullet points to styled HTML
-  return text
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
-    .replace(/\n/g,'<br>');
-}
-
-async function flipCard() {
-  if (isLoading) return;
-  if (!filtered.length) return;
-
-  if (!isFlipped) {
-    // Flip to answer side
-    document.getElementById('flashcard').classList.add('flipped');
-    isFlipped = true;
-
-    const c = filtered[current];
-    const key = `t${c.ticket}_${c.q}`;
-    if (!answerCache[key]) {
-      isLoading = true;
-      document.getElementById('cAnswer').innerHTML = `<div class="ai-loading"><div class="ai-dots"><span></span><span></span><span></span></div>Генерирую ответ...</div>`;
-      try {
-        const ans = await getAIAnswer(c.q, c.ticket);
-        document.getElementById('cAnswer').innerHTML = `<div class="ai-badge">✨ AI-ответ</div><br>${formatAnswer(ans)}`;
-      } catch(e) {
-        document.getElementById('cAnswer').innerHTML = `<span style="color:var(--hard)">Ошибка получения ответа. Проверьте соединение.</span>`;
-      }
-      isLoading = false;
-    }
-  } else {
-    document.getElementById('flashcard').classList.remove('flipped');
-    isFlipped = false;
-  }
-}
-
-function nextCard() {
-  current = (current+1) % filtered.length;
-  renderCard();
-}
-function prevCard() {
-  current = (current-1+filtered.length) % filtered.length;
-  renderCard();
-}
-function markLearned() {
-  const c = filtered[current];
+function flipCard(){ document.getElementById('flashcard').classList.toggle('flipped'); }
+function nextCard(){ current=(current+1)%filtered.length; renderCard(); }
+function prevCard(){ current=(current-1+filtered.length)%filtered.length; renderCard(); }
+function markLearned(){
+  const c=filtered[current];
   learned.add(c.ticket+'-'+c.qnum);
-  localStorage.setItem('pm06_learned', JSON.stringify([...learned]));
+  localStorage.setItem('pm06_learned',JSON.stringify([...learned]));
   nextCard();
 }
-function shuffle() {
-  filtered.sort(() => Math.random()-.5);
-  current = 0;
-  renderCard();
-}
-function resetLearned() {
-  learned.clear();
-  localStorage.setItem('pm06_learned','[]');
-  renderCard();
-}
+function shuffle(){ filtered.sort(()=>Math.random()-.5); current=0; renderCard(); }
+function resetLearned(){ learned.clear(); localStorage.setItem('pm06_learned','[]'); renderCard(); }
 
-function setDiffFilter(d, btn) {
+function setDiffFilter(d, btn){
   diffFilter = d;
   document.querySelectorAll('.diff-filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
@@ -459,7 +478,7 @@ function setDiffFilter(d, btn) {
   applyFilter();
 }
 
-function buildTicketFilter() {
+function buildTicketFilter(){
   const wrap = document.getElementById('ticketFilter');
   wrap.innerHTML = '';
   const all = document.createElement('button');
@@ -467,10 +486,7 @@ function buildTicketFilter() {
   all.textContent = 'Все';
   all.onclick = () => {
     selectedTicket = 0;
-    diffFilter = 'all';
     document.querySelectorAll('.ticket-btn').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.diff-filter-btn').forEach(b=>b.classList.remove('active'));
-    document.querySelector('.df-all').classList.add('active');
     all.classList.add('active');
     applyFilter();
   };
@@ -492,36 +508,28 @@ function buildTicketFilter() {
   });
 }
 
-// ── ТЕСТ ──────────────────────────────────────────────────────
+// QUIZ
 let quizQuestions=[], quizAnswered=0, quizCorrect=0;
-let quizAnswers={}; // key: qi, value: answer text
 
-async function buildQuiz() {
-  quizAnswers = {};
-  quizQuestions = TICKETS.map(t => {
+function buildQuiz(){
+  quizQuestions = [];
+  TICKETS.forEach(t => {
     const qi = Math.floor(Math.random()*3);
-    return { ticket:t.n, diff:DIFF[t.n], q:t.qs[qi], qIdx:qi };
+    const card = { ticket: t.n, diff: DIFF[t.n], ...t.qs[qi] };
+    const others = allCards.filter(c => c.ticket !== t.n);
+    const wrongs = others.sort(()=>Math.random()-.5).slice(0,3);
+    const opts = [card.a, ...wrongs.map(o=>o.a)].sort(()=>Math.random()-.5);
+    quizQuestions.push({ ticket: t.n, diff: DIFF[t.n], q: card.q, correct: card.a, opts });
   });
   quizQuestions.sort(()=>Math.random()-.5);
   quizAnswered=0; quizCorrect=0;
-  renderQuizShell();
-  // Pre-fetch answers for all questions
-  prefetchQuizAnswers();
+  renderQuiz();
 }
 
-async function prefetchQuizAnswers() {
-  for(const qq of quizQuestions) {
-    const key = `t${qq.ticket}_${qq.q}`;
-    if(!answerCache[key]) {
-      try { await getAIAnswer(qq.q, qq.ticket); } catch(e) {}
-    }
-  }
-}
-
-function renderQuizShell() {
+function renderQuiz(){
   const c = document.getElementById('quizContent');
   if(quizAnswered===quizQuestions.length && quizQuestions.length>0){
-    const pct=Math.round(quizCorrect/quizQuestions.length*100);
+    const pct = Math.round(quizCorrect/quizQuestions.length*100);
     c.innerHTML=`<div class="results">
       <h2>Тест завершён! 🎉</h2>
       <div class="score-big">${quizCorrect}/${quizQuestions.length}</div>
@@ -538,169 +546,65 @@ function renderQuizShell() {
     <button class="btn secondary" onclick="buildQuiz()">🔄 Новый тест</button>
   </div>`;
   quizQuestions.forEach((qq,i)=>{
-    const d=qq.diff;
-    const answered=qq._answered;
-    const key=`t${qq.ticket}_${qq.q}`;
-    const cachedAns=answerCache[key];
-    // Build 4 options: short snippet of correct answer + 3 wrong questions as distractors
-    if(!qq._opts){
-      // Options are other questions from different tickets
-      const others=allCards.filter(c=>c.ticket!==qq.ticket).sort(()=>Math.random()-.5).slice(0,3);
-      qq._opts=[{text:qq.q, isCorrect:true}, ...others.map(o=>({text:o.q,isCorrect:false}))].sort(()=>Math.random()-.5);
-    }
+    const d = qq.diff;
+    const answered = qq._answered;
     html+=`<div class="quiz-q ql-${d}" id="qq${i}">
       <div class="quiz-top">
         <span class="quiz-ticket-label">БИЛЕТ №${qq.ticket}</span>
         <span class="diff-badge ${DIFF_CLASS[d]}">${DIFF_LABEL[d]}</span>
       </div>
-      <div class="quiz-qtext">${i+1}. Какой вопрос соответствует описанию:<br><em style="color:var(--muted);font-size:.9rem">"${getTopicHint(qq.q)}"</em></div>
+      <div class="quiz-qtext">${i+1}. ${qq.q}</div>
       <div class="quiz-opts">`;
-    qq._opts.forEach((opt,oi)=>{
+    qq.opts.forEach((opt,oi)=>{
       let cls='';
-      if(answered){cls=(opt.isCorrect?'correct':(oi===qq._chosenIdx?'wrong':''))+' disabled';}
-      html+=`<button class="quiz-opt ${cls}" onclick="answerQuiz(${i},${oi})">${opt.text}</button>`;
+      if(answered){ cls=(opt===qq.correct?'correct':(opt===qq._chosen?'wrong':''))+' disabled'; }
+      const short=opt.length>180?opt.substring(0,180)+'…':opt;
+      html+=`<button class="quiz-opt ${cls}" onclick="answerQuiz(${i},${oi})">${short}</button>`;
     });
     html+=`</div>
       <div class="quiz-explanation ${answered?'show':''}">
-        ${answered?`<strong>✅ Правильный вопрос:</strong> ${qq.q}<br><br>${cachedAns?'<strong>Ответ:</strong> '+formatAnswer(cachedAns.substring(0,400))+'...':`<span style='color:var(--muted)'>Ответ загружается...</span>`}`:''}</div>
+        ${answered?`<strong>✅ Правильный ответ:</strong> ${qq.correct.substring(0,350)}${qq.correct.length>350?'…':''}`:''}</div>
     </div>`;
   });
-  c.innerHTML=html;
+  c.innerHTML = html;
 }
 
-function getTopicHint(q) {
-  // Return a hint based on the question topic
-  const hints = {
-    "Понятие облачных технологий и их назначение": "Технология предоставления вычислительных ресурсов через интернет по требованию",
-    "Основные характеристики облачных вычислений": "Самообслуживание, широкий доступ к сети, объединение ресурсов, гибкость, измеримость",
-    "Примеры использования облаков в организациях": "CRM в SaaS, хранение файлов, CI/CD, почта — конкретные сценарии применения",
-    "Архитектура облачной инфраструктуры": "Многоуровневая структура: вычисления, хранилище, сеть, управление",
-    "Роль серверов в облачной среде": "Физические или виртуальные машины, обрабатывающие запросы пользователей",
-    "Назначение облачных хранилищ данных": "Централизованное хранение, доступ из любой точки, масштабирование",
-    "Публичное облако: понятие и особенности": "Ресурсы принадлежат провайдеру, доступны через интернет, оплата по факту",
-    "Частное облако: преимущества и недостатки": "Ресурсы принадлежат организации, высокий контроль, но дорого",
-    "Гибридное облако и области его применения": "Сочетание публичного и частного облака для гибкости",
-    "Модели предоставления облачных услуг (IaaS, PaaS, SaaS)": "Три уровня: инфраструктура, платформа и готовое приложение",
-    "Характеристика модели IaaS": "Аренда виртуальных машин, сетей и хранилищ — ты управляешь ОС и выше",
-    "Характеристика модели SaaS": "Готовое приложение через браузер — провайдер управляет всем",
-    "Основные провайдеры облачных услуг": "Amazon, Microsoft, Google, Alibaba — крупнейшие игроки рынка",
-    "Краткая характеристика AWS": "Amazon Web Services — самый крупный провайдер, EC2, S3, RDS",
-    "Краткая характеристика Microsoft Azure": "Облако Microsoft, тесная интеграция с Windows и Office 365",
-    "Google Cloud Platform и его возможности": "Облако Google, сильная аналитика, BigQuery, Kubernetes (GKE)",
-    "Сравнение AWS, Azure и Google Cloud": "Доля рынка, цены, сильные стороны каждого провайдера",
-    "Критерии выбора облачного провайдера": "Цена, регион, безопасность, интеграция, SLA — факторы выбора",
-    "Понятие виртуализации": "Создание виртуального аналога физического ресурса (ВМ, сеть, диск)",
-    "Роль виртуализации в облачных технологиях": "Основа облака: несколько ВМ на одном физическом сервере",
-    "Типы виртуализации": "Серверная, десктопная, сетевая, хранилищ, приложений",
-    "Виртуальная машина: понятие": "Программная эмуляция компьютера с выделенными ресурсами",
-    "Основные параметры виртуальной машины": "vCPU, RAM, диск, сетевой интерфейс, образ ОС",
-    "Этапы создания виртуального сервера": "Выбор провайдера → образ → тип → сеть → ключи → запуск",
-    "Настройка CPU и RAM виртуальной машины": "Выбор типа инстанса, изменение конфигурации, автоскейлинг",
-    "Настройка дискового пространства": "SSD/HDD, размер тома, IOPS, подключение дополнительных дисков",
-    "Проверка доступности виртуального сервера": "ping, SSH-подключение, мониторинг статуса, health check",
-    "Понятие облачного хранилища": "Распределённое хранение данных на серверах провайдера",
-    "Типы облачных хранилищ": "Блочное, объектное (S3), файловое (NFS) — для разных задач",
-    "Преимущества облачного хранения данных": "Масштабируемость, доступность, надёжность, низкие затраты",
-    "Подключение облачного хранилища": "Монтирование NFS/SMB, SDK для объектного хранилища, API",
-    "Разграничение прав доступа к данным": "IAM-политики, ACL, роли — кто и что может делать с данными",
-    "Резервирование данных в облаке": "Geo-redundancy, репликация, снэпшоты — защита от потери данных",
-    "Понятие виртуальной сети": "VPC — изолированная сетевая среда внутри облака",
-    "Назначение сетевых настроек в облаке": "Маршрутизация, подсети, шлюзы — управление трафиком",
-    "Принципы работы виртуальных сетей": "Overlay-сети, SDN, инкапсуляция трафика (VXLAN, GRE)",
-    "IP-адресация в облачной инфраструктуре": "Приватные (RFC1918) и публичные IP, эластичные IP, DHCP",
-    "Настройка сетевых правил доступа": "Security Groups, ACL, firewall — разрешить/запретить порты",
-    "Проверка соединения между сервисами": "ping, curl, telnet, traceroute, облачные инструменты диагностики",
-    "Основы информационной безопасности в облаке": "Модель разделённой ответственности: провайдер и клиент",
-    "Угрозы безопасности облачной инфраструктуры": "Взлом API, утечки данных, DDoS, неправильная конфигурация",
-    "Методы защиты облачных ресурсов": "MFA, шифрование, WAF, мониторинг, минимальные привилегии",
-    "Управление пользователями в облаке": "IAM: создание, удаление, группы, политики для учётных записей",
-    "Настройка ролей и политик доступа": "RBAC — роль определяет набор прав для группы пользователей",
-    "Принцип минимальных привилегий": "Каждый пользователь получает только необходимые права, не больше",
-    "Шифрование данных в облаке": "AES-256, управление ключами KMS, шифрование на уровне диска",
-    "Шифрование при хранении и передаче данных": "At-rest (диски) и in-transit (TLS/HTTPS) — два вида защиты",
-    "Значение шифрования для безопасности": "Защита данных даже при физическом взломе или перехвате трафика",
-    "Понятие мониторинга облачных ресурсов": "Сбор метрик (CPU, RAM, сеть) для контроля состояния системы",
-    "Основные параметры мониторинга": "CPU, память, дисковый I/O, сетевой трафик, время отклика",
-    "Инструменты мониторинга в облаке": "CloudWatch (AWS), Azure Monitor, Cloud Monitoring (GCP), Grafana",
-    "Мониторинг загрузки процессора": "CPU utilization — порог alert, автоскейлинг по нагрузке",
-    "Мониторинг памяти и сети": "Memory usage, Network In/Out — ключевые метрики производительности",
-    "Настройка уведомлений о сбоях": "Алерты по порогам, SNS/email/Slack, PagerDuty интеграция",
-    "Понятие оптимизации ресурсов": "Снижение затрат без потери производительности — rightsizing",
-    "Анализ затрат в облачной среде": "Cost Explorer, теги ресурсов, расчёт TCO, отчёты по расходам",
-    "Методы снижения расходов": "Reserved Instances, Spot, auto-stop, удаление неиспользуемых ресурсов",
-    "Автоматическое масштабирование": "Auto Scaling Group — динамическое добавление/удаление ВМ",
-    "Горизонтальное и вертикальное масштабирование": "Scale out (больше серверов) vs Scale up (мощнее сервер)",
-    "Преимущества авто-масштабирования": "Высокая доступность, экономия, нет ручного вмешательства",
-    "Резервное копирование данных": "Backup — копия данных для восстановления в случае потери",
-    "Виды резервного копирования": "Полное, инкрементальное, дифференциальное — плюсы и минусы",
-    "Значение резервного копирования": "RTO и RPO — время восстановления и допустимые потери данных",
-    "Настройка автоматического резервного копирования": "Расписание (cron), AWS Backup, snapshot policy — автоматизация",
-    "Восстановление данных из резервной копии": "Point-in-time recovery, тестирование восстановления, RTO",
-    "Оценка надёжности системы бэкапов": "Тест восстановления, 3-2-1 правило, проверка целостности бэкапа",
-    "Администрирование облачной инфраструктуры": "Управление ресурсами, пользователями, политиками и обновлениями",
-    "Обновление компонентов облачных сервисов": "Rolling update, blue-green deployment, канареечный релиз",
-    "Установка патчей безопасности": "Patch management: автообновление ОС, окна обслуживания, тестирование",
-    "Журналирование действий в облаке": "CloudTrail (AWS) / Activity Log — история всех API-вызовов",
-    "Аудит пользователей и операций": "Кто, что, когда делал — журналы для расследования инцидентов",
-    "Значение логирования для безопасности": "Обнаружение аномалий, расследование, соответствие требованиям",
-    "Обеспечение высокой доступности сервисов": "Multi-AZ, load balancer, health checks — 99.9%+ uptime",
-    "Понятие отказоустойчивости": "Способность системы работать при сбоях отдельных компонентов",
-    "Методы повышения доступности": "Репликация, резервирование, балансировка нагрузки, CDN",
-    "Документирование облачной инфраструктуры": "Архитектурные схемы, runbooks, диаграммы сетей, IaC",
-    "Назначение технической документации": "Онбординг, troubleshooting, аудит, передача знаний",
-    "Виды документации в IT": "Архитектурная, API-документация, runbook, SLA, DR-план",
-    "Интеграция облачных и локальных систем": "Hybrid cloud: VPN, Direct Connect, API-шлюзы, синхронизация",
-    "Преимущества гибридной инфраструктуры": "Гибкость, соответствие нормам, поэтапная миграция в облако",
-    "Примеры интеграции": "AD + Azure AD, on-premise БД + облачное приложение, AWS Outposts",
-    "Использование стандартов при настройке облака": "ISO 27001, NIST, CIS Benchmarks — baseline конфигурации",
-    "Нормативно-техническая документация": "SLA, политика безопасности, процедуры изменений (ITIL/ITSM)",
-    "Роль стандартов в администрировании": "Унификация, снижение ошибок, соответствие аудиту",
-    "Типичные ошибки при настройке облачной инфраструктуры": "Открытые S3 buckets, слабые пароли, избыточные права, нет бэкапов",
-    "Способы устранения ошибок": "Диагностика логов, откат изменений, Terraform state, тест-среда",
-    "Профилактика сбоев в облаке": "IaC, code review, staging environment, runbooks, мониторинг",
-    "Перспективы развития облачных технологий": "Edge computing, serverless, ИИ-сервисы, квантовые вычисления",
-    "Роль облаков в цифровизации": "Ускорение разработки, снижение CAPEX, доступность для стартапов",
-    "Значение облачной инфраструктуры для бизнеса": "Гибкость, масштабируемость, экономия, глобальный охват"
-  };
-  return hints[q] || q.substring(0,80)+'...';
-}
-
-function answerQuiz(qi,oi){
-  const qq=quizQuestions[qi];
+function answerQuiz(qi, oi){
+  const qq = quizQuestions[qi];
   if(qq._answered) return;
-  qq._chosenIdx=oi;
-  qq._answered=true;
-  if(qq._opts[oi].isCorrect) quizCorrect++;
+  qq._chosen = qq.opts[oi];
+  qq._answered = true;
+  if(qq._chosen === qq.correct) quizCorrect++;
   quizAnswered++;
-  renderQuizShell();
-  setTimeout(()=>{const el=document.getElementById('qq'+qi);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});},80);
+  renderQuiz();
+  setTimeout(()=>{ const el=document.getElementById('qq'+qi); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); },80);
 }
 
-// ── ОБЗОР ────────────────────────────────────────────────────
+// OVERVIEW
 function buildOverview(){
-  const counts={easy:0,med:0,hard:0};
-  TICKETS.forEach(t=>counts[DIFF[t.n]]++);
+  const counts = { easy:0, med:0, hard:0 };
+  TICKETS.forEach(t => counts[DIFF[t.n]]++);
   document.getElementById('statRow').innerHTML=`
     <div class="stat-box"><div class="stat-num" style="color:var(--easy)">${counts.easy}</div><div class="stat-label">🟢 Простых билетов</div></div>
     <div class="stat-box"><div class="stat-num" style="color:var(--med)">${counts.med}</div><div class="stat-label">🟡 Средних билетов</div></div>
     <div class="stat-box"><div class="stat-num" style="color:var(--hard)">${counts.hard}</div><div class="stat-label">🔴 Сложных билетов</div></div>
     <div class="stat-box"><div class="stat-num" style="color:var(--accent)">90</div><div class="stat-label">Вопросов всего</div></div>`;
-  const g=document.getElementById('overviewGrid');
-  g.innerHTML='';
-  TICKETS.forEach(t=>{
-    const d=DIFF[t.n];
-    const card=document.createElement('div');
-    card.className=`ov-card ov-${d}`;
+  const g = document.getElementById('overviewGrid');
+  g.innerHTML = '';
+  TICKETS.forEach(t => {
+    const d = DIFF[t.n];
+    const card = document.createElement('div');
+    card.className = `ov-card ov-${d}`;
     card.innerHTML=`<h3>
       <span>Билет №${t.n}</span>
       <span class="diff-badge ${DIFF_CLASS[d]}">${DIFF_LABEL[d]}</span>
     </h3>
-    <ul>${t.qs.map((q,i)=>`<li>${i+1}. ${q}</li>`).join('')}</ul>`;
+    <ul>${t.qs.map((q,i)=>`<li>${i+1}. ${q.q}</li>`).join('')}</ul>`;
     g.appendChild(card);
   });
 }
 
-function showPage(id,btn){
+function showPage(id, btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -708,7 +612,6 @@ function showPage(id,btn){
   if(id==='quiz' && !quizQuestions.length) buildQuiz();
 }
 
-// ── ИНИЦИАЛИЗАЦИЯ ─────────────────────────────────────────────
 buildCards();
 buildTicketFilter();
 applyFilter();
