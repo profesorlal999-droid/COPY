@@ -3,165 +3,159 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Подготовка к экзамену — ПМ 08</title>
+<title>Подготовка к экзамену — ПМ 06</title>
 <style>
   :root {
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --card: #22263a;
-    --border: #2e3350;
-    --accent: #4f6ef7;
-    --text: #e8eaf6;
-    --muted: #8892b0;
+    --bg: #0a0e1a;
+    --surface: #131929;
+    --card: #1a2236;
+    --border: #243050;
+    --accent: #3d8ef0;
+    --accent2: #6c63ff;
+    --text: #e2e8f8;
+    --muted: #7a8aaa;
     --radius: 14px;
-
-    --easy: #22c55e;
-    --easy-bg: #052e16;
-    --easy-border: #166534;
-    --easy-glow: rgba(34,197,94,0.18);
-
-    --med: #f59e0b;
-    --med-bg: #1c1200;
-    --med-border: #92400e;
-    --med-glow: rgba(245,158,11,0.18);
-
-    --hard: #ef4444;
-    --hard-bg: #2d0a0a;
-    --hard-border: #7f1d1d;
-    --hard-glow: rgba(239,68,68,0.18);
+    --easy: #22c55e; --easy-bg: #052e16; --easy-border: #166534; --easy-glow: rgba(34,197,94,.18);
+    --med:  #f59e0b; --med-bg:  #1c1200; --med-border:  #92400e; --med-glow:  rgba(245,158,11,.18);
+    --hard: #ef4444; --hard-bg: #2d0a0a; --hard-border: #7f1d1d; --hard-glow: rgba(239,68,68,.18);
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
 
-  nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 1.5rem; display: flex; align-items: center; gap: 0; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; }
-  nav .brand { font-size: 1rem; font-weight: 700; color: var(--accent); padding: 1rem 1.5rem 1rem 0; border-right: 1px solid var(--border); margin-right: 1rem; white-space: nowrap; }
-  nav button { background: none; border: none; color: var(--muted); cursor: pointer; padding: 1.1rem 1.1rem; font-size: .9rem; font-weight: 600; border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap; }
-  nav button.active, nav button:hover { color: var(--text); border-bottom-color: var(--accent); }
-  nav .legend { margin-left: auto; display: flex; gap: .7rem; align-items: center; padding: .5rem 0; flex-wrap: wrap; }
-  nav .leg-item { display: flex; align-items: center; gap: .35rem; font-size: .78rem; color: var(--muted); }
-  nav .leg-dot { width: 10px; height: 10px; border-radius: 50%; }
+  nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;flex-wrap:wrap}
+  nav .brand{font-size:1rem;font-weight:700;color:var(--accent);padding:1rem 1.5rem 1rem 0;border-right:1px solid var(--border);margin-right:1rem;white-space:nowrap}
+  nav .brand span{color:var(--accent2)}
+  nav button{background:none;border:none;color:var(--muted);cursor:pointer;padding:1.1rem 1.1rem;font-size:.9rem;font-weight:600;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
+  nav button.active,nav button:hover{color:var(--text);border-bottom-color:var(--accent)}
+  nav .legend{margin-left:auto;display:flex;gap:.7rem;align-items:center;padding:.5rem 0;flex-wrap:wrap}
+  nav .leg-item{display:flex;align-items:center;gap:.35rem;font-size:.78rem;color:var(--muted)}
+  nav .leg-dot{width:10px;height:10px;border-radius:50%}
 
-  .page { display: none; padding: 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
-  .page.active { display: block; }
+  .page{display:none;padding:2rem 1.5rem;max-width:1100px;margin:0 auto}
+  .page.active{display:block}
 
-  .diff-badge { display: inline-block; padding: .2rem .6rem; border-radius: 99px; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-  .diff-easy  { background: var(--easy-bg);  color: var(--easy);  border: 1px solid var(--easy-border); }
-  .diff-med   { background: var(--med-bg);   color: var(--med);   border: 1px solid var(--med-border); }
-  .diff-hard  { background: var(--hard-bg);  color: var(--hard);  border: 1px solid var(--hard-border); }
+  .diff-badge{display:inline-block;padding:.2rem .6rem;border-radius:99px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  .diff-easy{background:var(--easy-bg);color:var(--easy);border:1px solid var(--easy-border)}
+  .diff-med {background:var(--med-bg); color:var(--med); border:1px solid var(--med-border)}
+  .diff-hard{background:var(--hard-bg);color:var(--hard);border:1px solid var(--hard-border)}
 
-  .controls { display: flex; flex-wrap: wrap; gap: .7rem; margin-bottom: 1.2rem; align-items: center; }
-  .ticket-grid { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.5rem; }
-  .ticket-btn { border: 2px solid transparent; color: #fff; padding: .32rem .65rem; border-radius: 8px; cursor: pointer; font-size: .82rem; font-weight: 700; transition: all .2s; opacity: .55; }
-  .ticket-btn:hover { opacity: .85; transform: translateY(-1px); }
-  .ticket-btn.active { opacity: 1; box-shadow: 0 0 10px 2px currentColor; }
-  .ticket-btn.tb-easy { background: var(--easy-bg); border-color: var(--easy); color: var(--easy); }
-  .ticket-btn.tb-med  { background: var(--med-bg);  border-color: var(--med);  color: var(--med); }
-  .ticket-btn.tb-hard { background: var(--hard-bg); border-color: var(--hard); color: var(--hard); }
-  .ticket-btn.tb-all  { background: var(--card); border-color: var(--border); color: var(--text); }
+  .controls{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:1.2rem;align-items:center}
+  .ticket-grid{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.5rem}
+  .ticket-btn{border:2px solid transparent;color:#fff;padding:.32rem .65rem;border-radius:8px;cursor:pointer;font-size:.82rem;font-weight:700;transition:all .2s;opacity:.55}
+  .ticket-btn:hover{opacity:.85;transform:translateY(-1px)}
+  .ticket-btn.active{opacity:1;box-shadow:0 0 10px 2px currentColor}
+  .ticket-btn.tb-easy{background:var(--easy-bg);border-color:var(--easy);color:var(--easy)}
+  .ticket-btn.tb-med {background:var(--med-bg); border-color:var(--med); color:var(--med)}
+  .ticket-btn.tb-hard{background:var(--hard-bg);border-color:var(--hard);color:var(--hard)}
+  .ticket-btn.tb-all {background:var(--card);border-color:var(--border);color:var(--text)}
 
-  .diff-filter { display: flex; gap: .5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-  .diff-filter-btn { padding: .35rem .9rem; border-radius: 8px; border: 2px solid; cursor: pointer; font-size: .82rem; font-weight: 700; transition: all .2s; }
-  .df-all  { background: var(--card); border-color: var(--border); color: var(--text); }
-  .df-easy { background: var(--easy-bg); border-color: var(--easy); color: var(--easy); }
-  .df-med  { background: var(--med-bg);  border-color: var(--med);  color: var(--med); }
-  .df-hard { background: var(--hard-bg); border-color: var(--hard); color: var(--hard); }
-  .diff-filter-btn.active { filter: brightness(1.4); box-shadow: 0 0 8px 2px currentColor; }
+  .diff-filter{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+  .diff-filter-btn{padding:.35rem .9rem;border-radius:8px;border:2px solid;cursor:pointer;font-size:.82rem;font-weight:700;transition:all .2s}
+  .df-all {background:var(--card);border-color:var(--border);color:var(--text)}
+  .df-easy{background:var(--easy-bg);border-color:var(--easy);color:var(--easy)}
+  .df-med {background:var(--med-bg); border-color:var(--med); color:var(--med)}
+  .df-hard{background:var(--hard-bg);border-color:var(--hard);color:var(--hard)}
+  .diff-filter-btn.active{filter:brightness(1.4);box-shadow:0 0 8px 2px currentColor}
 
-  .flashcard-wrap { perspective: 1200px; margin-bottom: 1.5rem; }
-  .flashcard { width: 100%; min-height: 300px; position: relative; transform-style: preserve-3d; transition: transform .5s ease; cursor: pointer; }
-  .flashcard.flipped { transform: rotateY(180deg); }
-  .card-face { position: absolute; width: 100%; min-height: 300px; backface-visibility: hidden; border-radius: var(--radius); padding: 2rem; display: flex; flex-direction: column; justify-content: center; border: 2px solid; }
-  .card-front { background: var(--card); }
-  .card-back  { transform: rotateY(180deg); }
+  .flashcard-wrap{perspective:1200px;margin-bottom:1.5rem}
+  .flashcard{width:100%;min-height:280px;position:relative;transform-style:preserve-3d;transition:transform .5s ease;cursor:pointer}
+  .flashcard.flipped{transform:rotateY(180deg)}
+  .card-face{position:absolute;width:100%;min-height:280px;backface-visibility:hidden;border-radius:var(--radius);padding:2rem;display:flex;flex-direction:column;justify-content:center;border:2px solid}
+  .card-front{background:var(--card)}
+  .card-back {transform:rotateY(180deg)}
 
-  .cf-easy .card-front { border-color: var(--easy-border); box-shadow: 0 0 24px var(--easy-glow); }
-  .cf-easy .card-back  { background: var(--easy-bg); border-color: var(--easy); box-shadow: 0 0 24px var(--easy-glow); }
-  .cf-med  .card-front { border-color: var(--med-border);  box-shadow: 0 0 24px var(--med-glow); }
-  .cf-med  .card-back  { background: var(--med-bg);  border-color: var(--med);  box-shadow: 0 0 24px var(--med-glow); }
-  .cf-hard .card-front { border-color: var(--hard-border); box-shadow: 0 0 24px var(--hard-glow); }
-  .cf-hard .card-back  { background: var(--hard-bg); border-color: var(--hard); box-shadow: 0 0 24px var(--hard-glow); }
+  .cf-easy .card-front{border-color:var(--easy-border);box-shadow:0 0 24px var(--easy-glow)}
+  .cf-easy .card-back {background:var(--easy-bg);border-color:var(--easy);box-shadow:0 0 24px var(--easy-glow)}
+  .cf-med  .card-front{border-color:var(--med-border); box-shadow:0 0 24px var(--med-glow)}
+  .cf-med  .card-back {background:var(--med-bg); border-color:var(--med); box-shadow:0 0 24px var(--med-glow)}
+  .cf-hard .card-front{border-color:var(--hard-border);box-shadow:0 0 24px var(--hard-glow)}
+  .cf-hard .card-back {background:var(--hard-bg);border-color:var(--hard);box-shadow:0 0 24px var(--hard-glow)}
 
-  .card-top { display: flex; align-items: center; gap: .7rem; margin-bottom: 1rem; flex-wrap: wrap; }
-  .card-ticket { font-size: .8rem; color: var(--muted); font-weight: 700; letter-spacing: .05em; }
-  .card-question { font-size: 1.2rem; font-weight: 600; line-height: 1.55; }
-  .card-hint { color: var(--muted); font-size: .83rem; margin-top: 1.5rem; }
-  .card-answer { font-size: .97rem; line-height: 1.75; }
-  .cf-easy .card-answer { color: #bbf7d0; }
-  .cf-med  .card-answer { color: #fde68a; }
-  .cf-hard .card-answer { color: #fecaca; }
+  .card-top{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;flex-wrap:wrap}
+  .card-ticket{font-size:.8rem;color:var(--muted);font-weight:700;letter-spacing:.05em}
+  .card-question{font-size:1.2rem;font-weight:600;line-height:1.55}
+  .card-hint{color:var(--muted);font-size:.83rem;margin-top:1.5rem}
+  .card-answer{font-size:.95rem;line-height:1.75}
+  .cf-easy .card-answer{color:#bbf7d0}
+  .cf-med  .card-answer{color:#fde68a}
+  .cf-hard .card-answer{color:#fecaca}
 
-  .card-nav { display: flex; gap: .8rem; align-items: center; flex-wrap: wrap; }
-  .btn { background: var(--accent); color: #fff; border: none; padding: .6rem 1.3rem; border-radius: 8px; cursor: pointer; font-size: .88rem; font-weight: 600; transition: opacity .2s; }
-  .btn:hover { opacity: .85; }
-  .btn.secondary { background: var(--card); border: 1px solid var(--border); color: var(--text); }
-  .btn.green { background: #16a34a; }
-  .progress-wrap { flex: 1; min-width: 140px; }
-  .progress-bar { background: var(--border); border-radius: 99px; height: 8px; overflow: hidden; }
-  .progress-fill { height: 100%; border-radius: 99px; transition: width .3s; }
-  .pf-easy { background: var(--easy); }
-  .pf-med  { background: var(--med); }
-  .pf-hard { background: var(--hard); }
-  .pf-all  { background: var(--accent); }
-  .progress-label { font-size: .78rem; color: var(--muted); margin-top: .35rem; }
+  .ai-loading{display:flex;align-items:center;gap:.7rem;color:var(--muted);font-size:.9rem}
+  .ai-dots{display:flex;gap:4px}
+  .ai-dots span{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:dot-bounce .8s infinite}
+  .ai-dots span:nth-child(2){animation-delay:.15s}
+  .ai-dots span:nth-child(3){animation-delay:.3s}
+  @keyframes dot-bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-8px)}}
 
-  .quiz-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
-  .quiz-q { background: var(--card); border-radius: var(--radius); padding: 1.6rem; margin-bottom: 1.2rem; border-left: 4px solid; }
-  .quiz-q.ql-easy { border-left-color: var(--easy); }
-  .quiz-q.ql-med  { border-left-color: var(--med); }
-  .quiz-q.ql-hard { border-left-color: var(--hard); }
-  .quiz-top { display: flex; align-items: center; gap: .6rem; margin-bottom: .8rem; flex-wrap: wrap; }
-  .quiz-ticket-label { font-size: .75rem; color: var(--muted); font-weight: 700; letter-spacing: .05em; }
-  .quiz-qtext { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; line-height: 1.5; }
-  .quiz-opts { display: grid; gap: .6rem; }
-  .quiz-opt { background: var(--surface); border: 1.5px solid var(--border); color: var(--text); padding: .75rem 1rem; border-radius: 10px; cursor: pointer; text-align: left; font-size: .88rem; transition: all .2s; line-height: 1.4; }
-  .quiz-opt:hover:not(.disabled) { border-color: var(--accent); background: #1e2a4a; }
-  .quiz-opt.correct  { border-color: var(--easy) !important; background: var(--easy-bg) !important; color: var(--easy) !important; }
-  .quiz-opt.wrong    { border-color: var(--hard) !important; background: var(--hard-bg) !important; color: var(--hard) !important; }
-  .quiz-opt.disabled { cursor: default; }
-  .quiz-explanation  { margin-top: .8rem; padding: .75rem 1rem; border-radius: 0 8px 8px 0; font-size: .85rem; line-height: 1.5; display: none; border-left: 3px solid; }
-  .quiz-explanation.show { display: block; }
-  .ql-easy .quiz-explanation { background: #052e16; border-left-color: var(--easy); color: #86efac; }
-  .ql-med  .quiz-explanation { background: #1c1200; border-left-color: var(--med);  color: #fde68a; }
-  .ql-hard .quiz-explanation { background: var(--hard-bg); border-left-color: var(--hard); color: #fca5a5; }
+  .ai-badge{display:inline-flex;align-items:center;gap:.35rem;background:rgba(61,142,240,.12);border:1px solid rgba(61,142,240,.3);border-radius:99px;padding:.15rem .6rem;font-size:.7rem;color:var(--accent);margin-bottom:.8rem;font-weight:600}
 
-  .results { text-align: center; padding: 3rem 1rem; }
-  .results h2 { font-size: 1.8rem; margin-bottom: .8rem; }
-  .score-big { font-size: 3.5rem; font-weight: 700; color: var(--accent); }
-  .results p { color: var(--muted); margin: .8rem 0 1.5rem; }
+  .card-nav{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
+  .btn{background:var(--accent);color:#fff;border:none;padding:.6rem 1.3rem;border-radius:8px;cursor:pointer;font-size:.88rem;font-weight:600;transition:opacity .2s}
+  .btn:hover{opacity:.85}
+  .btn.secondary{background:var(--card);border:1px solid var(--border);color:var(--text)}
+  .btn.green{background:#16a34a}
+  .progress-wrap{flex:1;min-width:140px}
+  .progress-bar{background:var(--border);border-radius:99px;height:8px;overflow:hidden}
+  .progress-fill{height:100%;border-radius:99px;transition:width .3s}
+  .pf-easy{background:var(--easy)}.pf-med{background:var(--med)}.pf-hard{background:var(--hard)}.pf-all{background:var(--accent)}
+  .progress-label{font-size:.78rem;color:var(--muted);margin-top:.35rem}
 
-  .ov-legend { display: flex; gap: 1rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
-  .ov-legend-item { display: flex; align-items: center; gap: .4rem; font-size: .82rem; }
-  .ov-dot { width: 12px; height: 12px; border-radius: 50%; }
-  .overview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; }
-  .ov-card { border-radius: var(--radius); padding: 1.1rem; border: 2px solid; }
-  .ov-card.ov-easy { background: var(--easy-bg); border-color: var(--easy-border); }
-  .ov-card.ov-med  { background: var(--med-bg);  border-color: var(--med-border); }
-  .ov-card.ov-hard { background: var(--hard-bg); border-color: var(--hard-border); }
-  .ov-card h3 { font-size: .82rem; font-weight: 700; margin-bottom: .6rem; display: flex; align-items: center; gap: .5rem; }
-  .ov-card.ov-easy h3 { color: var(--easy); }
-  .ov-card.ov-med  h3 { color: var(--med); }
-  .ov-card.ov-hard h3 { color: var(--hard); }
-  .ov-card ul { list-style: none; }
-  .ov-card li { font-size: .78rem; color: var(--muted); padding: .22rem 0; border-bottom: 1px solid var(--border); line-height: 1.35; }
-  .ov-card li:last-child { border: none; }
+  .quiz-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem}
+  .quiz-q{background:var(--card);border-radius:var(--radius);padding:1.6rem;margin-bottom:1.2rem;border-left:4px solid}
+  .quiz-q.ql-easy{border-left-color:var(--easy)}.quiz-q.ql-med{border-left-color:var(--med)}.quiz-q.ql-hard{border-left-color:var(--hard)}
+  .quiz-top{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem;flex-wrap:wrap}
+  .quiz-ticket-label{font-size:.75rem;color:var(--muted);font-weight:700;letter-spacing:.05em}
+  .quiz-qtext{font-size:1rem;font-weight:600;margin-bottom:1rem;line-height:1.5}
+  .quiz-opts{display:grid;gap:.6rem}
+  .quiz-opt{background:var(--surface);border:1.5px solid var(--border);color:var(--text);padding:.75rem 1rem;border-radius:10px;cursor:pointer;text-align:left;font-size:.88rem;transition:all .2s;line-height:1.4}
+  .quiz-opt:hover:not(.disabled){border-color:var(--accent);background:#1a2d4a}
+  .quiz-opt.correct{border-color:var(--easy)!important;background:var(--easy-bg)!important;color:var(--easy)!important}
+  .quiz-opt.wrong  {border-color:var(--hard)!important;background:var(--hard-bg)!important;color:var(--hard)!important}
+  .quiz-opt.disabled{cursor:default}
+  .quiz-explanation{margin-top:.8rem;padding:.75rem 1rem;border-radius:0 8px 8px 0;font-size:.85rem;line-height:1.5;display:none;border-left:3px solid}
+  .quiz-explanation.show{display:block}
+  .ql-easy .quiz-explanation{background:#052e16;border-left-color:var(--easy);color:#86efac}
+  .ql-med  .quiz-explanation{background:#1c1200;border-left-color:var(--med); color:#fde68a}
+  .ql-hard .quiz-explanation{background:var(--hard-bg);border-left-color:var(--hard);color:#fca5a5}
 
-  .stat-row { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-  .stat-box { flex: 1; min-width: 120px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; text-align: center; }
-  .stat-num { font-size: 1.8rem; font-weight: 700; }
-  .stat-label { font-size: .78rem; color: var(--muted); margin-top: .2rem; }
+  .results{text-align:center;padding:3rem 1rem}
+  .results h2{font-size:1.8rem;margin-bottom:.8rem}
+  .score-big{font-size:3.5rem;font-weight:700;color:var(--accent)}
+  .results p{color:var(--muted);margin:.8rem 0 1.5rem}
+
+  .ov-legend{display:flex;gap:1rem;margin-bottom:1.2rem;flex-wrap:wrap}
+  .ov-legend-item{display:flex;align-items:center;gap:.4rem;font-size:.82rem}
+  .ov-dot{width:12px;height:12px;border-radius:50%}
+  .overview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem}
+  .ov-card{border-radius:var(--radius);padding:1.1rem;border:2px solid}
+  .ov-card.ov-easy{background:var(--easy-bg);border-color:var(--easy-border)}
+  .ov-card.ov-med {background:var(--med-bg); border-color:var(--med-border)}
+  .ov-card.ov-hard{background:var(--hard-bg);border-color:var(--hard-border)}
+  .ov-card h3{font-size:.82rem;font-weight:700;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+  .ov-card.ov-easy h3{color:var(--easy)}.ov-card.ov-med h3{color:var(--med)}.ov-card.ov-hard h3{color:var(--hard)}
+  .ov-card ul{list-style:none}
+  .ov-card li{font-size:.78rem;color:var(--muted);padding:.22rem 0;border-bottom:1px solid var(--border);line-height:1.35}
+  .ov-card li:last-child{border:none}
+
+  .stat-row{display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+  .stat-box{flex:1;min-width:120px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center}
+  .stat-num{font-size:1.8rem;font-weight:700}
+  .stat-label{font-size:.78rem;color:var(--muted);margin-top:.2rem}
+
+  .topic-tag{display:inline-block;background:rgba(108,99,255,.12);border:1px solid rgba(108,99,255,.25);color:#9b96ff;border-radius:6px;padding:.1rem .5rem;font-size:.72rem;margin-right:.4rem;margin-top:.4rem}
 
   @media(max-width:600px){
-    nav .brand { border-right: none; }
-    nav .legend { display: none; }
-    .card-question { font-size: 1rem; }
-    .card-face { padding: 1.4rem; }
+    nav .brand{border-right:none}
+    nav .legend{display:none}
+    .card-question{font-size:1rem}
+    .card-face{padding:1.4rem}
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="brand">🔐 ПМ 08</div>
+  <div class="brand">☁️ ПМ <span>06</span></div>
   <button class="active" onclick="showPage('flashcards',this)">🃏 Карточки</button>
   <button onclick="showPage('quiz',this)">📝 Тест</button>
   <button onclick="showPage('overview',this)">📋 Все билеты</button>
@@ -169,6 +163,7 @@
     <div class="leg-item"><div class="leg-dot" style="background:#22c55e"></div>Простые</div>
     <div class="leg-item"><div class="leg-dot" style="background:#f59e0b"></div>Средние</div>
     <div class="leg-item"><div class="leg-dot" style="background:#ef4444"></div>Сложные</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--accent)"></div>AI-ответы</div>
   </div>
 </nav>
 
@@ -193,14 +188,20 @@
           <span class="diff-badge" id="cBadge"></span>
         </div>
         <div class="card-question" id="cQuestion"></div>
-        <div class="card-hint">👆 Нажмите, чтобы увидеть ответ</div>
+        <div class="card-hint">👆 Нажмите, чтобы получить AI-ответ</div>
       </div>
       <div class="card-face card-back">
         <div class="card-top">
           <span class="card-ticket" id="cTicketB"></span>
           <span class="diff-badge" id="cBadgeB"></span>
+          <span class="ai-badge">✨ AI-ответ</span>
         </div>
-        <div class="card-answer" id="cAnswer"></div>
+        <div class="card-answer" id="cAnswer">
+          <div class="ai-loading" id="aiLoading">
+            <div class="ai-dots"><span></span><span></span><span></span></div>
+            Генерирую ответ...
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -220,10 +221,11 @@
 </div>
 
 <div id="overview" class="page">
-  <h2 style="margin-bottom:1rem">Все 30 экзаменационных билетов</h2>
+  <h2 style="margin-bottom:.5rem">Все 30 экзаменационных билетов</h2>
+  <p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem">ПМ 06 · Управление ресурсами облака и обслуживание облачной инфраструктуры · РО 6.1</p>
   <div class="ov-legend">
-    <div class="ov-legend-item"><div class="ov-dot" style="background:#22c55e"></div><span>🟢 Простые — определения и базовые понятия</span></div>
-    <div class="ov-legend-item"><div class="ov-dot" style="background:#f59e0b"></div><span>🟡 Средние — нужно вникнуть</span></div>
+    <div class="ov-legend-item"><div class="ov-dot" style="background:#22c55e"></div><span>🟢 Простые — базовые понятия</span></div>
+    <div class="ov-legend-item"><div class="ov-dot" style="background:#f59e0b"></div><span>🟡 Средние — нужно разобраться</span></div>
     <div class="ov-legend-item"><div class="ov-dot" style="background:#ef4444"></div><span>🔴 Сложные — требуют понимания</span></div>
   </div>
   <div class="stat-row" id="statRow"></div>
@@ -231,201 +233,121 @@
 </div>
 
 <script>
-const DIFF = {
-  1:'med', 2:'easy', 3:'med', 4:'easy', 5:'easy',
-  6:'easy', 7:'med', 8:'easy', 9:'med', 10:'hard',
-  11:'med', 12:'med', 13:'easy', 14:'med', 15:'med',
-  16:'easy', 17:'med', 18:'hard', 19:'easy', 20:'med',
-  21:'med', 22:'med', 23:'easy', 24:'easy', 25:'hard',
-  26:'hard', 27:'med', 28:'hard', 29:'hard', 30:'hard'
-};
-
-const DIFF_LABEL = { easy:'Простой', med:'Средний', hard:'Сложный' };
-const DIFF_CLASS = { easy:'diff-easy', med:'diff-med', hard:'diff-hard' };
-const CF_CLASS   = { easy:'cf-easy',  med:'cf-med',  hard:'cf-hard'  };
-const TB_CLASS   = { easy:'tb-easy',  med:'tb-med',  hard:'tb-hard'  };
-const PF_CLASS   = { easy:'pf-easy',  med:'pf-med',  hard:'pf-hard'  };
-
+// ── ДАННЫЕ БИЛЕТОВ ────────────────────────────────────────────
 const TICKETS = [
-  { n:1, qs:[
-    { q:"Какие алгоритмы шифрования используются в VPN?", a:"VPN шифрует данные, чтобы никто не мог их подслушать. Для этого используют: AES — самый популярный и быстрый алгоритм (AES-256 — стандарт надёжности), RSA/ECDH — нужны, чтобы безопасно договориться о ключе в начале соединения, HMAC-SHA256 — проверяет, что данные не были подменены в пути. Протоколы: OpenVPN использует AES + TLS, WireGuard — ChaCha20, IPSec — AES с RSA. Проще говоря: AES шифрует сам трафик, RSA помогает обменяться ключом, SHA проверяет целостность." },
-    { q:"Какие этапы включает конфигурирование ПО безопасности?", a:"Настройка ПО безопасности — это не просто установить и забыть. Этапы: 1) Анализ — что нужно защитить, от чего, какие есть требования; 2) Установка — развернуть ПО на серверах или ПК; 3) Базовая настройка — изменить пароли по умолчанию, задать начальные параметры; 4) Политики — прописать правила (кому что запрещено/разрешено); 5) Интеграция — подключить к SIEM, Active Directory и другим системам; 6) Тест — убедиться что работает и не мешает нормальной работе; 7) Документация — зафиксировать конфигурацию; 8) Мониторинг — регулярно следить и обновлять." },
-    { q:"По каким критериям проводится оценка антивирусных программ?", a:"Хороший антивирус оценивают по: Уровень обнаружения — сколько % вирусов он находит (проверяется тестами AV-TEST); Ложные срабатывания — чем меньше 'ложной тревоги', тем лучше; Скорость работы — не тормозит ли компьютер при сканировании; Потребление ресурсов — сколько оперативки и процессора съедает; Актуальность баз — как часто обновляются базы с сигнатурами вирусов; Поведенческий анализ — умеет ли ловить новые неизвестные вирусы; Управление — удобна ли централизованная консоль для организации; Цена — соответствует ли цена качеству." }
-  ]},
-  { n:2, qs:[
-    { q:"Какие виды шифрования используются в протоколе TLS?", a:"TLS (это то, что делает HTTPS) использует сразу несколько видов шифрования: Асимметричное (RSA, ECDSA) — в самом начале соединения, чтобы обменяться ключами. Похоже на замок с двумя ключами: публичным закрываешь, приватным открываешь. Симметричное (AES, ChaCha20) — для шифрования самих данных. Один ключ у обоих сторон. Очень быстрое. Хэширование (SHA-256) — не шифрует, а проверяет целостность. Если данные изменили — хэш не совпадёт. В современном TLS 1.3 убрали все слабые алгоритмы и оставили только надёжные." },
-    { q:"Что понимается под системой управления информационной безопасностью?", a:"СУИБ (или ISMS по-английски) — это не просто антивирус. Это вся система: правила, процессы, люди и технологии, которые вместе защищают информацию в организации. Представь это как книгу правил + инструменты + ответственных людей. Включает: политику ИБ (что и как защищаем), оценку рисков (что может пойти не так), меры защиты (технические и организационные), мониторинг (следим за тем, что происходит), аудит (проверяем, всё ли работает). Основа — стандарт ISO 27001. Работает по циклу: Планируй → Делай → Проверяй → Улучшай." },
-    { q:"Как применяется искусственный интеллект в кибербезопасности?", a:"ИИ помогает безопасникам справляться с огромным потоком угроз: Обнаружение аномалий — ИИ учится, как ведут себя пользователи в норме, и поднимает тревогу когда что-то идёт не так. Анализ вирусов — определяет вредоносное ПО даже без готовых сигнатур, по поведению. Антифишинг — анализирует текст письма и ссылки, определяет мошенничество. Автоматическое реагирование — без человека блокирует подозрительный хост. Прогнозирование атак — предсказывает, что может быть атаковано следующим. Минус: атакующие тоже используют ИИ — для генерации фишинга и обхода защит." }
-  ]},
-  { n:3, qs:[
-    { q:"Какие документы входят в состав нормативной базы по ИБ?", a:"Нормативная база — это все правила и законы, по которым нужно обеспечивать безопасность информации. Делится на уровни: Международные стандарты: ISO/IEC 27001 (главный стандарт по СУИБ), ISO/IEC 27002 (практические меры защиты), NIST SP 800 (американские руководства). Законодательство РК: Закон 'Об информатизации', Закон 'О персональных данных', нормативные акты МЦРИАП. Внутренние документы организации: Политика ИБ, Инструкции по защите данных, Регламенты по паролям, резервному копированию и т.д., Планы реагирования на инциденты." },
-    { q:"Назовите преимущества и недостатки симметричного шифрования.", a:"Симметричное шифрование — это когда у обоих сторон одинаковый ключ, как один ключ от замка. Примеры: AES, DES, ChaCha20. Плюсы: Быстрое — в сотни раз быстрее асимметричного. Подходит для больших объёмов данных. Простое в реализации. Мало ресурсов. Минусы: Главная проблема — как передать ключ получателю безопасно? Если ключ перехватят — всё зашифрованное станет доступным. Не масштабируется: для 100 людей нужно 4950 разных ключей. Нет подтверждения личности — непонятно, от кого на самом деле пришло сообщение. На практике симметричное шифрование используют вместе с асимметричным: асимметричное передаёт ключ, симметричное шифрует данные." },
-    { q:"Перечислите основные элементы безопасной архитектуры ИС.", a:"Безопасная архитектура — это когда защита встроена в систему с самого начала. Основные элементы: Межсетевой экран (Firewall) — охранник на входе, проверяет весь трафик. DMZ — 'буферная зона' между интернетом и внутренней сетью, туда вынесены публичные серверы. IDS/IPS — системы, которые замечают и блокируют атаки внутри сети. VPN — зашифрованный туннель для удалённого доступа. Сегментация сети — разделение на зоны, чтобы взломав один отдел, не добрались до других. Система контроля доступа (IAM) — кто и к чему может обращаться. Шифрование данных — и при хранении, и при передаче. SIEM — центральная система мониторинга всех событий." }
-  ]},
-  { n:4, qs:[
-    { q:"Что такое IDS и IPS? В чём их основное различие?", a:"IDS (Intrusion Detection System) — система обнаружения вторжений. Следит за трафиком и поведением, и если видит что-то подозрительное — сообщает администратору. Это как охранник, который кричит 'Тревога!', но сам никого не задерживает. IPS (Intrusion Prevention System) — система предотвращения вторжений. Делает то же самое, но автоматически блокирует угрозу. Это охранник, который и кричит, и задерживает нарушителя. Главное отличие: IDS = только обнаружение (пассивная). IPS = обнаружение + блокировка (активная). IPS ставится прямо в разрыв кабеля (inline), IDS — рядом, не в разрыв. Примеры: Snort, Suricata — могут работать в обоих режимах." },
-    { q:"Что такое протокол TLS и для чего он применяется?", a:"TLS (Transport Layer Security) — это протокол, который шифрует данные при передаче по сети. Без TLS данные идут открытым текстом — любой посредник может их прочитать. С TLS — всё зашифровано. TLS обеспечивает три вещи: Конфиденциальность — данные нельзя прочитать в пути. Целостность — данные нельзя незаметно изменить. Аутентификацию — подтверждает, что сайт настоящий (через сертификат). Где используется: HTTPS (сайты), защищённая почта, VPN, мессенджеры, банкинг. Как распознать: зелёный замочек или https:// в браузере — это TLS в работе. Актуальная версия: TLS 1.3. Старые TLS 1.0 и 1.1 устарели и отключены." },
-    { q:"Почему важен принцип непрерывного улучшения СУИБ?", a:"Представь, что ты выучил защиту от прошлогодних атак, а хакеры уже придумали новые. Вот почему СУИБ нельзя настроить один раз и забыть. Принцип: Plan (Планируй) → Do (Делай) → Check (Проверяй) → Act (Улучшай) — и всё по кругу. Причины непрерывного улучшения: Угрозы меняются каждый день. Появляются новые уязвимости в ПО. Бизнес растёт — добавляются новые системы и сотрудники. Инциденты выявляют слабые места. Законы и стандарты обновляются. Если остановиться — защита устареет, и атакующие найдут дырку." }
-  ]},
-  { n:5, qs:[
-    { q:"Что понимается под вредоносным ПО (MALWARE)?", a:"Malware (вредоносное ПО) — любая программа, созданная чтобы навредить, украсть данные или получить контроль над системой без разрешения пользователя. Основные виды: Вирус — заражает файлы и распространяется при их запуске. Червь — сам распространяется по сети, не нужно запускать файл. Троян — притворяется полезной программой, а внутри — зловред. Ransomware (вымогатель) — шифрует все файлы и требует деньги за разблокировку. Spyware — тихо следит за пользователем, крадёт пароли. Rootkit — прячется глубоко в системе, скрывает своё присутствие. Keylogger — записывает всё, что вы печатаете на клавиатуре. Adware — показывает навязчивую рекламу." },
-    { q:"Какие основные виды программно-аппаратных средств ИБ вы знаете? Приведите примеры.", a:"Программно-аппаратные средства — это устройства и ПО, которые защищают информацию. Аппаратные средства (физические устройства): HSM (Hardware Security Module) — защищённое устройство для хранения криптоключей, используется в банках; Токены (YubiKey) — флешка-ключ для двухфакторной аутентификации; Смарт-карты — пластиковая карта с чипом для входа в систему; Аппаратные фаерволы — Cisco ASA, Fortinet FortiGate; Биометрические устройства — сканеры отпечатков пальцев. Программные средства: Антивирусы — Kaspersky, Dr.Web; SIEM — Splunk (мониторинг событий); DLP — InfoWatch (контроль утечек); VPN-клиенты — OpenVPN, WireGuard." },
-    { q:"Какие средства используются для контроля выполнения требований ИБ?", a:"Контроль — это проверка того, что все требования безопасности реально выполняются, а не только написаны в инструкции. Средства контроля: SIEM-системы — автоматически собирают и анализируют логи со всей инфраструктуры. Сканеры уязвимостей (Nessus, OpenVAS) — ищут дыры в системах. Аудит ИБ — внутренние или внешние проверки соответствия стандартам. Пентест — этичный хакер имитирует реальную атаку и находит слабые места. DLP — следит, чтобы конфиденциальные данные не вытекали наружу. Анализ журналов — ручной или автоматический просмотр логов. PAM — контроль действий привилегированных пользователей (администраторов)." }
-  ]},
-  { n:6, qs:[
-    { q:"Перечислите основные типы фаерволов.", a:"Фаервол (межсетевой экран) — это охранник сети, который проверяет трафик по правилам. Типы: Пакетный фильтр — самый простой. Смотрит только на заголовки пакетов (IP-адрес, порт). Не видит содержимое. Stateful (с отслеживанием состояния) — умнее: помнит, что соединение уже установлено, и не проверяет каждый пакет заново. Прикладной (Proxy/Application) — смотрит внутрь трафика на уровне приложений (HTTP, FTP). Медленнее, но глубже. NGFW (Next Generation Firewall) — всё вместе: фаервол + IPS + DPI + контроль приложений. Cisco, Fortinet, Palo Alto. WAF (Web Application Firewall) — специально для защиты веб-сайтов от SQL-инъекций, XSS и т.д." },
-    { q:"Назовите основные симметричные и асимметричные алгоритмы шифрования.", a:"Симметричные (один ключ для всего): AES — стандарт. 128/256 бит. Используется везде: HTTPS, VPN, шифрование дисков. DES — старый, 56-битный ключ. Взламывается. Не использовать! 3DES — улучшенный DES. Тоже устаревает. ChaCha20 — современный, быстрый на мобильных. Используется в TLS 1.3. Асимметричные (публичный + приватный ключ): RSA — самый известный. Ключи 2048–4096 бит. Для обмена ключами и подписей. ECC/ECDSA — на эллиптических кривых. Короткие ключи, высокая стойкость. Используется в TLS, блокчейне. DSA — только для цифровых подписей. DH/ECDH — не шифрует данные, а помогает двум сторонам договориться об общем секрете." },
-    { q:"Какие основные подсистемы входят в структуру информационной системы?", a:"Информационная система — это не просто компьютеры. Это сложный организм из нескольких подсистем: Сбора данных — получает информацию из источников (датчики, ввод пользователя, внешние системы). Хранения — базы данных, файловые серверы, архивы. Обработки — серверы приложений, бизнес-логика, вычисления. Передачи — сеть, протоколы, маршрутизаторы. Представления — интерфейс пользователя (UI), веб, мобильное приложение. Управления и безопасности — администрирование, права доступа, аутентификация. Резервирования — бэкапы, восстановление после сбоев. Все подсистемы взаимосвязаны, и безопасность нужна на каждом уровне." }
-  ]},
-  { n:7, qs:[
-    { q:"Назовите преимущества и недостатки программно-аппаратных средств ИБ. Почему важно применять?", a:"Плюсы: Комплексная защита — одно устройство закрывает несколько угроз сразу. Высокая скорость — аппаратное ускорение криптографии намного быстрее программного. Надёжность — аппаратную часть сложнее взломать удалённо. Централизованное управление — один интерфейс для всей защиты. Минусы: Дорого — как купить, так и обслуживать. Нужны специалисты — без квалифицированных людей не настроишь. Vendor lock-in — привязка к одному производителю. Нужно обновлять — прошивки и ПО тоже бывают уязвимы. Почему важны: Современные ИС хранят критичные данные. Только технические меры не спасают, нужен комплекс. Без них защита будет дырявой." },
-    { q:"Какие основные виды киберугроз вы знаете?", a:"Киберугрозы делятся по типу воздействия: Вредоносное ПО — вирусы, трояны, ransomware, spyware. Сетевые атаки — DDoS (перегрузка сервера), Man-in-the-Middle (перехват трафика), сниффинг (прослушка). Социальная инженерия — фишинг, звонки от 'службы безопасности банка', претекстинг. Инсайдерские угрозы — намеренные или случайные действия своих сотрудников. APT (Advanced Persistent Threat) — целевые долгосрочные атаки, часто государственного уровня. Атаки на цепочки поставок — взлом через поставщика ПО или оборудования. Zero-day — использование неизвестной уязвимости, для которой ещё нет патча." },
-    { q:"Какие программные средства используются для защиты информации?", a:"Программные средства защиты — ПО, которое работает на серверах и ПК: Антивирусы (Kaspersky, Dr.Web, ESET) — ловят вредоносное ПО по сигнатурам и поведению. Программные фаерволы (iptables, Windows Firewall) — контроль сетевых подключений. SIEM (Splunk, QRadar) — собирает логи со всей инфраструктуры и ищет аномалии. DLP (InfoWatch, Symantec DLP) — не даёт конфиденциальным данным утечь через почту, USB, мессенджеры. EDR (CrowdStrike, Defender) — глубокий мониторинг конечных устройств. Сканеры уязвимостей (Nessus, OpenVAS) — ищут дыры в конфигурациях. Средства шифрования (VeraCrypt, BitLocker) — шифруют диск или файлы." }
-  ]},
-  { n:8, qs:[
-    { q:"Для каких целей используется VPN в организации?", a:"VPN — это зашифрованный туннель через интернет. В организации он нужен для: Удалённая работа — сотрудник дома или в командировке подключается к офисной сети так, будто сидит в офисе. Объединение офисов (Site-to-Site VPN) — два офиса в разных городах работают как одна сеть. Защита передачи данных — в публичных Wi-Fi кафе никто не сможет перехватить трафик. Безопасный доступ к внутренним ресурсам — CRM, базы данных, файловые серверы доступны только через VPN. Изоляция отделов — разные отделы подключаются к разным VPN-сегментам. Соответствие требованиям — многие стандарты (PCI DSS, HIPAA) требуют шифрование при передаче данных." },
-    { q:"Какие меры сетевой безопасности применяются в архитектуре ИС?", a:"Сеть защищается многоуровнево: Межсетевые экраны (NGFW) — фильтруют трафик на границе сети. DMZ — публичные серверы (сайт, почта) вынесены в отдельную зону, не во внутреннюю сеть. Сегментация (VLAN) — бухгалтерия, IT, склад — разные подсети, не могут просто так достучаться друг до друга. IDS/IPS — мониторят трафик внутри сети. VPN — зашифрованный туннель для удалёнщиков. NAC (Network Access Control) — проверяет устройство перед подключением (антивирус обновлён? ОС не устарела?). Шифрование трафика (TLS, IPSec) — данные зашифрованы при передаче. Мониторинг сети (NetFlow) — фиксирует кто куда подключается." },
-    { q:"Какие существуют модели управления доступом?", a:"Управление доступом — это кто и к чему может обращаться. Основные модели: DAC (Дискреционная) — владелец файла сам решает, кому дать доступ. Как права на файлы в Windows/Linux. Просто, но рискованно. MAC (Мандатная) — доступ определяется системой на основе меток секретности ('Секретно', 'Совершенно секретно'). Используется в военных/госсистемах. RBAC (На основе ролей) — права привязаны к должности: 'менеджер', 'бухгалтер', 'администратор'. Самая популярная в бизнесе. ABAC (На основе атрибутов) — гибкая: учитывает время, место, тип устройства. Можно настроить 'доступ только в рабочее время с корпоративного ПК'." }
-  ]},
-  { n:9, qs:[
-    { q:"Какие методы используются для защиты криптографических ключей?", a:"Ключ — это самое ценное в криптографии. Если его украдут, вся защита рухнет. Методы защиты: HSM (Hardware Security Module) — специальный чип/устройство, ключи генерируются и хранятся внутри, никогда не выходят наружу в открытом виде. Используется в банках и CA. Разделение ключей (схема Шамира) — ключ делится на несколько частей, хранящихся у разных людей. Чтобы восстановить ключ, нужно собрать N из M частей. Шифрование ключей — ключи шифруются мастер-ключом и хранятся в зашифрованном хранилище. Ротация — регулярная замена ключей. Если ключ и утечёт, старые данные уже перешифрованы. Строгий доступ — только авторизованные системы и люди. Аудит — всё логируется." },
-    { q:"Какие факторы влияют на производительность VPN?", a:"Почему VPN иногда медленный? Вот причины: Алгоритм шифрования — AES с аппаратным ускорением (есть в современных CPU) в разы быстрее, чем без него. ChaCha20 быстрее на мобильных без AES-NI. Протокол — WireGuard самый быстрый, OpenVPN медленнее, L2TP/IPSec — посередине. Мощность сервера — слабый сервер будет бутылочным горлышком при 100+ пользователях. Ширина канала — VPN не может быть быстрее базового интернета. Расстояние до сервера — чем дальше сервер, тем больше задержка. MTU/фрагментация — VPN добавляет заголовки, из-за чего пакеты могут фрагментироваться. Нагрузка — сколько одновременно подключено пользователей." },
-    { q:"Что понимается под программным обеспечением безопасности?", a:"ПО безопасности — это вся категория программ, которые защищают информацию и системы. Включает: Антивирусы и антишпионы — ловят вредоносный код. Программные фаерволы — контролируют сетевые соединения на уровне ОС. VPN-клиенты и серверы — создают зашифрованные туннели. SIEM-системы — собирают и анализируют логи безопасности. DLP — предотвращают утечки данных. EDR — мониторят поведение на конечных устройствах. Сканеры уязвимостей — находят дыры в конфигурации. Средства шифрования (BitLocker, VeraCrypt) — шифруют диски и файлы. Антиспам и антифишинг — фильтруют почту. Задача всего этого ПО: предотвратить атаку, обнаружить её и помочь среагировать." }
-  ]},
-  { n:10, qs:[
-    { q:"В чем заключается прогнозирование киберугроз?", a:"Прогнозирование — это не угадывание, а системный анализ информации об угрозах, чтобы подготовиться заранее. Называется Threat Intelligence (разведка угроз). Как это работает: Мониторинг источников — даркнет, хакерские форумы, отчёты вендоров безопасности. Анализ IoC (индикаторов компрометации) — хэши вредоносных файлов, IP-адреса атакующих, вредоносные домены. Матрица MITRE ATT&CK — каталог тактик и техник реальных хакерских группировок. ML-модели — предсказывают атаки на основе исторических данных. Обмен данными — организации делятся информацией об угрозах друг с другом (ISAC). Цель — перейти от реагирования к проактивной защите: закрыть дыры до того, как ими воспользуются." },
-    { q:"Какую роль играет разграничение прав доступа в обеспечении безопасности ИС?", a:"Разграничение доступа — один из главных принципов безопасности. Суть: каждый пользователь и процесс должны иметь только те права, которые нужны для работы, и не больше. Почему это важно: Ограничение ущерба — если взломают аккаунт бухгалтера, атакующий не получит доступ к базе данных разработчиков. Принцип минимальных привилегий — чем меньше прав, тем меньше поверхность атаки. Защита от инсайдеров — сотрудник не сможет скачать то, к чему не имеет доступа. Аудируемость — каждое обращение к ресурсу привязано к конкретному человеку. Соответствие стандартам — ISO 27001, GDPR требуют контроля доступа. Реализуется через: Active Directory, LDAP, RBAC, IAM-системы." },
-    { q:"Что понимается под программно-аппаратными средствами ИБ? Их назначение и функции.", a:"Программно-аппаратные средства ИБ — это технические решения, где аппаратная часть и ПО работают вместе для защиты информации. Назначение: Обеспечить конфиденциальность (никто посторонний не прочитает), целостность (данные не изменены без ведома) и доступность (система работает тогда, когда нужно). Основные функции: Аутентификация — проверить, кто входит (токены, смарт-карты, биометрия). Шифрование — защитить данные (HSM, TPM). Контроль доступа — определить, что кому разрешено. Мониторинг — отслеживать события безопасности (NGFW, IPS). Контроль целостности — убедиться, что ПО и данные не изменены. Фильтрация трафика — блокировать вредоносный трафик. Примеры: Cisco NGFW, Fortinet, HSM, TPM-чипы в ноутбуках." }
-  ]},
-  { n:11, qs:[
-    { q:"В чём отличие симметричного и асимметричного шифрования?", a:"Симметричное шифрование: Один ключ — и для шифрования, и для расшифровки. Как один ключ от замка. Быстрое — подходит для больших данных. Проблема: как безопасно передать ключ? Примеры: AES, DES, ChaCha20. Асимметричное шифрование: Два ключа — публичный (раздаётся всем) и приватный (только у владельца). Что зашифровано публичным — расшифровывается только приватным. Медленное — не для больших данных. Решает проблему передачи ключа: публичный можно публиковать открыто. Примеры: RSA, ECC, DSA. На практике — гибридный подход: асимметричное обменивается симметричным ключом → симметричное шифрует данные. Именно так работает TLS/HTTPS." },
-    { q:"Какие методы используются в системах IDS/IPS для обнаружения атак?", a:"IDS/IPS использует несколько методов обнаружения: Сигнатурный анализ — база данных 'отпечатков' известных атак. Быстро и точно для известных угроз, но бесполезно против новых. Как антивирус. Поведенческий (аномальный) анализ — система запоминает 'нормальное' поведение сети. Отклонение = тревога. Ловит новые атаки, но больше ложных срабатываний. Анализ протоколов — проверяет, соответствует ли трафик стандартам протоколов (вдруг HTTP-трафик содержит SQL-инъекцию). Анализ на основе политик — правила: 'подключение в 3 ночи — подозрительно'. ML/ИИ-методы — самообучающиеся модели. Умеют обнаруживать сложные скрытые атаки. Лучший результат — когда методы работают вместе." },
-    { q:"Какие аппаратные средства применяются для обеспечения ИБ? Примеры и назначение.", a:"Аппаратные средства — физические устройства для защиты: HSM (Hardware Security Module) — спец. чип, который хранит криптоключи так, что они никогда не выходят наружу. Используется в банках, удостоверяющих центрах, ЦБ. TPM (Trusted Platform Module) — чип на материнской плате ноутбука. Хранит ключи BitLocker, проверяет целостность загрузки ОС. Аппаратные токены (YubiKey) — USB-ключ, при утере пароля всё равно не войти без токена. Смарт-карты — корпоративные пропуска с чипом для входа в систему. Аппаратные NGFW (Cisco ASA, Fortinet) — выделенные устройства для защиты периметра сети. Биометрические считыватели — сканеры отпечатков, радужки глаза." }
-  ]},
-  { n:12, qs:[
-    { q:"Что понимается под криптографической защитой информации?", a:"Криптографическая защита — это защита информации с помощью математических преобразований (шифрования). Без нужного ключа прочитать данные невозможно. Решает 4 задачи: Конфиденциальность — зашифровал, только получатель с ключом прочитает. Целостность — хэш-функция (SHA-256) показывает, не изменили ли данные. Аутентификация — цифровая подпись (RSA/ECDSA) подтверждает, что документ подписал именно этот человек. Неотказуемость — нельзя отрицать, что подписал, потому что подпись уникальна. СКЗИ — это сертифицированные средства криптозащиты (ViPNet, КриптоПро в России/СНГ, OpenSSL повсеместно). Применяется везде: HTTPS, электронная подпись, VPN, шифрование дисков." },
-    { q:"Что такое DDoS-атака и какова её цель?", a:"DDoS (Distributed Denial of Service) — распределённая атака отказом в обслуживании. Суть: тысячи и миллионы заражённых устройств (ботнет) одновременно посылают запросы к жертве, перегружая её сервер или сеть. Сервер падает — сайт или сервис становится недоступным. Цели атаки: Вывести из строя конкурента. Финансово навредить (каждый час простоя интернет-магазина = убытки). Вымогательство — 'заплати или сервер упадёт'. Скрытие другой атаки — пока все занимаются DDoS, хакеры тихо лезут в другое место. Политический/активистский мотив. Защита: CDN (Cloudflare), Anti-DDoS сервисы, rate limiting (ограничение запросов), scrubbing centers (очистка трафика)." },
-    { q:"В чем суть концепции Zero Trust?", a:"Zero Trust — нулевое доверие. Главный принцип: 'Не доверяй никому и ничему по умолчанию — всегда проверяй'. Старый подход: всё внутри корпоративной сети — доверенное. Zero Trust говорит: неважно, внутри ты или снаружи — проверяй каждый раз. Как работает: Верифицируй каждый запрос — каждый пользователь и устройство аутентифицируются при каждом обращении. Минимальные привилегии — доступ только к тому, что нужно прямо сейчас. Предполагай взлом — строй защиту так, будто атакующий уже внутри. Микросегментация — разбей сеть на маленькие изолированные зоны. Постоянный мониторинг — всё логируется. Актуально, потому что сотрудники работают удалённо, из облака, с мобильных — периметра больше нет." }
-  ]},
-  { n:13, qs:[
-    { q:"Что такое аутентификация и контроль доступа?", a:"Аутентификация — это проверка: 'Ты правда тот, за кого себя выдаёшь?' Три фактора: Знание — пароль, PIN-код. Владение — токен, SMS, смарт-карта. Биометрия — отпечаток пальца, лицо. Контроль доступа — это уже после аутентификации: 'Что тебе разрешено делать?' Определяет, к каким ресурсам, файлам, функциям у пользователя есть доступ. Связь: Сначала аутентификация — система убеждается кто ты. Потом авторизация — определяет твои права. Потом контроль доступа — применяет эти права при каждом обращении к ресурсу. Пример: Войти в систему (аутентификация) → получить доступ к своим файлам, но не к чужим (контроль доступа)." },
-    { q:"Какие средства используются для защиты доступа пользователей?", a:"Защита доступа — многоуровневая задача: Пароли + политики — минимальная длина 8+ символов, обязательные буквы/цифры/символы, смена раз в квартал. MFA/2FA (многофакторная аутентификация) — пароль + SMS-код, или пароль + приложение Google Authenticator. Если пароль украли, без второго фактора не войти. SSO (Single Sign-On) — один вход для всех корпоративных систем. Удобно пользователям, централизован контроль. IAM-системы (Active Directory, LDAP) — централизованное управление учётными записями всей организации. PAM (Privileged Access Management) — особый контроль за администраторами: все их действия записываются. VPN — удалённый доступ только через зашифрованный туннель. Блокировка после N ошибок — защита от перебора паролей." },
-    { q:"Какие требования ИБ учитываются при проектировании архитектуры ИС?", a:"Security by Design — безопасность встраивается с самого начала, а не прикручивается потом. Основные требования: Конфиденциальность — шифрование данных как в хранилище, так и при передаче. Целостность — контроль изменений (хэши, цифровые подписи, версионирование). Доступность — резервирование серверов, защита от DDoS, планы восстановления. Разграничение доступа — проектируется RBAC/ABAC с самого начала. Аутентификация — надёжный механизм входа, желательно MFA. Аудит — все действия логируются, логи защищены от удаления. Сегментация — критичные системы изолированы. Соответствие стандартам — GDPR, ISO 27001, локальное законодательство. Чем позже добавляешь безопасность, тем дороже и сложнее." }
-  ]},
-  { n:14, qs:[
-    { q:"Какие алгоритмы относятся к асимметричному шифрованию?", a:"Асимметричные алгоритмы используют пару ключей: публичный + приватный. Основные алгоритмы: RSA (Rivest–Shamir–Adleman) — самый старый и известный. Безопасность основана на сложности разложения большого числа на простые множители. Длина ключа: 2048–4096 бит. Использование: HTTPS, S/MIME, подписи. ECC (Elliptic Curve Cryptography) — на эллиптических кривых. Более короткий ключ при той же стойкости (256 бит ECC ≈ 3072 бит RSA). Быстрее RSA. ECDSA — вариант ECC для цифровых подписей. DSA (Digital Signature Algorithm) — только для подписей, не для шифрования. DH (Diffie-Hellman) и ECDH — технически не шифруют, но помогают двум сторонам договориться об общем секрете. Используется в TLS для обмена ключами." },
-    { q:"Какие способы обнаружения кибератак используются в организации?", a:"Обнаружение атак — многослойный процесс: SIEM (Splunk, QRadar) — собирает события со всей инфраструктуры и ищет паттерны атак через корреляцию. IDS/IPS — анализирует сетевой трафик на признаки атак в реальном времени. EDR (CrowdStrike, Microsoft Defender) — следит за поведением на каждом компьютере: что запущено, что изменено. Анализ логов — системные, сетевые, прикладные логи. Honeypot — ловушка: специально уязвимый сервер-приманка. Кто его трогает — атакующий. Threat Intelligence — база данных плохих IP и доменов, сравниваем с трафиком. NTA (Network Traffic Analysis) — анализ поведения сети целиком. SOC — специалисты, которые круглосуточно наблюдают за всеми этими системами." },
-    { q:"Почему аутентификация и авторизация важны для ИБ организации?", a:"Без аутентификации — любой может войти под чужим именем. Без авторизации — вошедший получает доступ ко всему. Почему критически важны: Первый рубеж защиты — без надёжного входа всё остальное бесполезно. Ограничение ущерба от взлома — если взломан аккаунт рядового сотрудника, авторизация не даст добраться до критичных систем. Принцип минимальных привилегий — каждый получает ровно столько прав, сколько нужно для работы. Аудируемость — все действия в системе привязаны к конкретному человеку (кто и когда открыл файл). Защита от инсайдеров — сотрудник не может получить доступ к тому, что не входит в его обязанности. Соответствие требованиям — GDPR, ISO 27001 требуют контроля доступа." }
-  ]},
-  { n:15, qs:[
-    { q:"В чём различие между клиент-серверной и многоуровневой архитектурой?", a:"Клиент-серверная (2-уровневая): Клиент (ПК пользователя) — интерфейс + часть бизнес-логики. Сервер — база данных. Просто, но плохо масштабируется. При 1000 пользователях сервер перегружается. Пример: старые бухгалтерские программы. Многоуровневая (N-tier, обычно 3): Уровень представления — браузер, мобильное приложение. Уровень бизнес-логики — сервер приложений (обрабатывает запросы). Уровень данных — база данных. Плюсы: легко масштабировать каждый уровень отдельно. Безопаснее: база данных изолирована, к ней нет прямого доступа. Каждый уровень можно обновлять независимо. Пример: любой современный веб-сайт. С точки зрения безопасности: многоуровневая лучше — атакующий не добирается сразу до БД." },
-    { q:"В чем заключается управляемость VPN-систем?", a:"Управляемость — это насколько удобно и эффективно можно администрировать VPN. Что входит в управляемость: Централизованная консоль — один интерфейс для управления всеми туннелями, пользователями и политиками. Мониторинг в реальном времени — видеть статус соединений, нагрузку, кто подключён. Управление пользователями — легко добавить/удалить пользователя, назначить права. Интеграция с IAM — подключить к Active Directory: убрал сотрудника из AD — автоматически потерял доступ к VPN. Логирование — все подключения фиксируются (кто, когда, откуда). Автоматическое обновление клиентов — не нужно обновлять вручную на 500 компьютерах. API — можно интегрировать с другими системами. Централизованная управляемость снижает риск ошибок и упрощает аудит." },
-    { q:"Для чего необходимы учёт и контроль процедур безопасности?", a:"Учёт и контроль — это не бюрократия, а реальная необходимость: Подтверждение выполнения — без документации невозможно доказать, что требования выполняются (нужно аудиторам, регуляторам). Выявление отклонений — если процедура не выполнена (антивирус не обновлён, пароль не сменён) — это сигнал угрозы. Ответственность — каждый сотрудник знает, что его действия фиксируются. Это дисциплинирует. Анализ инцидентов — логи позволяют восстановить картину произошедшего: кто что делал в момент взлома. Улучшение процессов — данные контроля показывают, где система слабая. Соответствие стандартам — ISO 27001 прямо требует документированные и контролируемые процедуры." }
-  ]},
-  { n:16, qs:[
-    { q:"Что понимается под эффективностью криптографических средств?", a:"Эффективность СКЗИ — это насколько хорошо средство справляется с задачей защиты при реальных условиях использования. Критерии эффективности: Криптостойкость — насколько сложно взломать при атаке перебором или математическим методом. AES-256 стойче AES-128. Производительность — скорость шифрования/расшифровки (Мбит/с). Для потоковой передачи нужна высокая скорость. Ресурсоёмкость — сколько CPU и RAM потребляет. Важно для встроенных систем и мобильных. Соответствие стандартам — наличие сертификатов (ГОСТ, NIST, FIPS). Стойкость к атакам — включая side-channel (по времени, потреблению энергии). Масштабируемость — работает ли при большой нагрузке. Правильная реализация — даже стойкий алгоритм можно реализовать с ошибками." },
-    { q:"Какие основные виды ПО безопасности вы знаете?", a:"ПО безопасности — большая категория. Основные виды: Антивирусное ПО — Kaspersky, ESET, Windows Defender. Обнаружение и удаление вредоносных программ. Программные фаерволы — iptables (Linux), Windows Firewall. Контроль сетевых соединений на уровне ОС. VPN-клиенты — OpenVPN, WireGuard, Cisco AnyConnect. Зашифрованный туннель. SIEM-системы — Splunk, IBM QRadar. Сбор и анализ событий безопасности. DLP — Symantec DLP, InfoWatch. Предотвращение утечек данных. EDR — CrowdStrike, Microsoft Defender for Endpoint. Мониторинг конечных устройств. Сканеры уязвимостей — Nessus, OpenVAS. Поиск дыр в системах. Средства шифрования — VeraCrypt, BitLocker. WAF — ModSecurity, Cloudflare. Защита веб-приложений." },
-    { q:"Что такое киберугроза?", a:"Киберугроза — это любая потенциальная или реальная возможность нанести вред информационным системам, данным или инфраструктуре через цифровые каналы. Компоненты угрозы: Источник — кто создаёт угрозу: хакер-одиночка, организованная группа, государство, инсайдер. Мотив — зачем: деньги, шпионаж, конкуренция, вандализм, политика. Вектор — как: через интернет, почту, физический доступ, социальную инженерию. Уязвимость — слабое место, которое эксплуатируется. Примеры киберугроз: фишинговое письмо, DDoS-атака на сайт, вирус в скачанном файле, слив базы данных через SQL-инъекцию, утечка через сотрудника. Угроза ≠ инцидент. Угроза — потенциальная проблема, инцидент — когда угроза реализовалась." }
-  ]},
-  { n:17, qs:[
-    { q:"Почему социальная инженерия будет оставаться актуальной угрозой?", a:"Социальная инженерия — манипуляция людьми, а не взлом техники. Атакующий убеждает жертву самостоятельно дать пароль, перевести деньги или открыть вредоносный файл. Почему не исчезнет: Люди всегда будут ошибаться — никакой патч не исправит человеческую психологию. Технические защиты становятся лучше — значит атаковать людей проще, чем системы. ИИ усиливает атаки — deepfake-звонок от 'директора', персонализированное письмо с деталями из LinkedIn. Доверие — базовая потребность, люди склонны доверять авторитетам и срочным просьбам. Масштаб — одно письмо можно отправить миллиону человек. Защита: обучение сотрудников, проверка через официальные каналы, MFA (даже зная пароль — не войти без токена)." },
-    { q:"Какую роль играет нормативная документация в обеспечении ИБ?", a:"Нормативная документация — это правила игры. Без неё каждый делает как хочет. Роль: Единые требования — все в организации знают, что защищать и как. Ответственность — документы определяют кто отвечает за каждое направление. Основа аудита — проверяющий смотрит: 'Есть политика ИБ? Есть. Выполняется? Проверяем.' Дисциплинирующий эффект — сотрудники знают правила и последствия нарушения. Правовая защита — при инциденте наличие политик ИБ доказывает, что организация принимала разумные меры. Непрерывное улучшение — документация фиксирует изменения и прогресс. Стандартизация обучения — новый сотрудник читает инструкции и знает что делать. Итог: документация переводит безопасность из устных договорённостей в систему." },
-    { q:"По каким критериям выбирается VPN-решение для организации?", a:"Выбор VPN — стратегическое решение. Критерии: Протокол безопасности — WireGuard (быстрый, современный), IKEv2/IPSec (надёжный, корпоративный), OpenVPN (гибкий, открытый). Масштабируемость — сколько одновременных пользователей и туннелей поддерживает. Производительность — пропускная способность, задержка. Управляемость — есть ли нормальная консоль управления, API, отчёты. Интеграция — подключается ли к Active Directory, MFA, SIEM. Отказоустойчивость — есть ли резервирование, что будет при падении сервера. Безопасность — поддержка современных алгоритмов, аудиты кода (если OpenVPN). Поддержка платформ — работает ли на Windows/Mac/Linux/iOS/Android. Стоимость и поддержка. Соответствие нормативам." }
-  ]},
-  { n:18, qs:[
-    { q:"Почему протокол SSL считается устаревшим?", a:"SSL — предшественник TLS. Создан в 90-х годах. Считается устаревшим по нескольким причинам: Критические уязвимости: POODLE (2014) — атака на SSL 3.0, позволяла расшифровать сессию; BEAST, CRIME, DROWN — другие атаки на SSL 2.0 и 3.0. Слабые алгоритмы — SSL использовал RC4 (взломан), MD5 (коллизии), устаревшие режимы. Нет PFS (Perfect Forward Secrecy) — если приватный ключ сервера утечёт, можно расшифровать ВСЕ прошлые сессии. Официально запрещён — RFC 7568 (2015) запретил SSL 3.0. Все браузеры отключили поддержку SSL. Замена: TLS 1.2 (ещё используется) и TLS 1.3 (рекомендуется) — полностью убрали слабые алгоритмы и добавили обязательный PFS." },
-    { q:"Какие факторы будут влиять на информационную безопасность в будущем?", a:"Будущее ИБ определяется технологическими трендами: Квантовые компьютеры — угрожают сломать RSA и ECC (математика уже не та). Готовится постквантовая криптография (NIST уже стандартизировал CRYSTALS-Kyber). ИИ как оружие — автоматическая генерация эксплойтов, персонализированный фишинг, deepfake голосов. IoT-взрыв — миллиарды слабозащищённых 'умных' устройств. Расширение облаков — размытие периметра, атаки на облачные API. Кибервойны — атаки государств на критическую инфраструктуру (электростанции, банки). Ransomware 2.0 — не просто шифруют, но и публикуют данные ('двойное вымогательство'). Ужесточение законов — больше требований к приватности и безопасности данных." },
-    { q:"Назовите основные этапы жизненного цикла ключей. Что понимается под масштабируемостью VPN?", a:"Жизненный цикл ключей — ключ не вечен, у него есть этапы: 1) Генерация — создание с помощью криптостойкого генератора случайных чисел (HSM). 2) Распределение — безопасная передача авторизованным сторонам. 3) Хранение — защищённое хранение (HSM, зашифрованные хранилища, KMS). 4) Использование — применение по назначению. 5) Ротация — плановая замена ключа новым. 6) Архивирование — хранение для расшифровки старых данных. 7) Уничтожение — надёжное удаление (перезапись, физическое уничтожение HSM). Масштабируемость VPN: способность системы обслуживать больше пользователей и туннелей без деградации производительности. Масштабируемая VPN: легко добавить 100 новых сотрудников без полной перенастройки инфраструктуры." }
-  ]},
-  { n:19, qs:[
-    { q:"Что понимается под средствами защиты информации?", a:"СЗИ (Средства защиты информации) — весь арсенал инструментов для обеспечения безопасности данных. Классификация по типу: Технические (аппаратные) — физические устройства: HSM, токены, биометрические считыватели, аппаратные фаерволы. Программные — ПО: антивирусы, SIEM, DLP, шифровальщики, VPN-клиенты. Программно-аппаратные — комбинация: межсетевые экраны, VPN-шлюзы, IPS-устройства. Организационные — не техника, а люди и процессы: политики, инструкции, обучение, аудиты. Криптографические (СКЗИ) — специализированные средства шифрования и электронной подписи. Физические — замки на серверных, камеры видеонаблюдения, СКУД (системы контроля и управления доступом). Комплексный подход требует всех типов СЗИ одновременно." },
-    { q:"Дайте определение архитектуры информационной системы.", a:"Архитектура ИС — это концептуальная схема того, как устроена информационная система: из каких компонентов состоит, как они взаимодействуют, и на каких принципах построена. Аналогия: архитектура дома — план этажей, расположение комнат, инженерные системы. Уровни архитектуры ИС: Аппаратный — серверы, сети, рабочие станции. Системный — ОС, СУБД, промежуточное ПО. Прикладной — бизнес-приложения, сервисы. Уровень данных — базы данных, хранилища. Сетевой — топология, протоколы. Безопасность — средства защиты на каждом уровне. Типы архитектур: клиент-серверная, многоуровневая (N-tier), микросервисная, SOA. Хорошая архитектура учитывает безопасность изначально (Security by Design)." },
-    { q:"Что такое двухфакторная аутентификация и зачем используется? Виды вредоносного ПО.", a:"2FA (двухфакторная аутентификация) — для входа нужно подтвердить личность двумя разными способами из разных категорий. Пример: пароль (то, что знаешь) + SMS-код (то, чем владеешь). Зачем нужна: даже если пароль украли через фишинг или утечку базы — без второго фактора войти нельзя. Варианты второго фактора: SMS-код, TOTP-приложение (Google Authenticator), аппаратный токен (YubiKey), биометрия. Основные виды вредоносного ПО: Вирус — заражает файлы. Червь — самораспространяется по сети. Троян — маскируется под полезное ПО. Ransomware — шифрует файлы, требует выкуп. Spyware — шпионит, крадёт данные. Rootkit — прячется в системе, скрывает активность. Keylogger — записывает нажатия клавиш. Adware — показывает рекламу." }
-  ]},
-  { n:20, qs:[
-    { q:"Что такое управление криптографическими ключами?", a:"Key Management — процесс полного жизненного цикла ключей: от создания до уничтожения. Задачи: Генерация — создать криптостойкий ключ. Хранение — хранить в защищённом месте (HSM, KMS). Распределение — безопасно передать тем, кому нужен доступ. Ротация — регулярно менять ключи. Отзыв — немедленно отозвать скомпрометированный ключ. Уничтожение — надёжно уничтожить устаревший ключ. Инструменты: HSM — аппаратный модуль, ключи не выходят наружу. KMS (Key Management Service) — AWS KMS, Azure Key Vault, HashiCorp Vault — облачное управление ключами. PKI — инфраструктура открытых ключей (сертификаты, удостоверяющие центры). Если ключ скомпрометирован — вся шифрованная информация под угрозой. Поэтому управление ключами = управление самой ценной частью системы защиты." },
-    { q:"Для чего используются Firewall, IDS/IPS и VPN? Их роль в защите сети.", a:"Три кита сетевой безопасности — они защищают разные аспекты: Межсетевой экран (Firewall) — охранник на входе. Контролирует, какой трафик пускать в сеть и выпускать из неё. Работает по правилам: 'этот порт закрыт', 'этот IP заблокирован'. Разграничивает сетевые зоны. IDS/IPS — 'детектор угроз внутри'. Firewall проверяет на входе, а IDS/IPS мониторит что происходит уже внутри сети. IDS сигнализирует, IPS блокирует. Ловит атаки, которые прошли через firewall. VPN — 'безопасный туннель'. Шифрует трафик между сотрудником (дом/кафе) и офисной сетью. Без VPN данные в публичной сети — открытый текст. Вместе: Firewall защищает периметр → VPN обеспечивает безопасный доступ снаружи → IDS/IPS мониторит всё внутри." },
-    { q:"Почему важно использовать комплексный подход к защите информационных систем?", a:"Комплексный подход — Defence in Depth (эшелонированная оборона). Суть: нет одного универсального решения, поэтому используют несколько слоёв защиты. Аналогия: средневековый замок — ров, стены, башни, охрана, тайники. Почему необходим: Нет серебряной пули — ни антивирус, ни фаервол, ни VPN в одиночку не защитит от всех угроз. Разные векторы атак — сеть, почта, физический доступ, сотрудники. Если пробит один слой — следующий сдерживает. Снижение риска = технические меры + организационные + физические. Непрерывность защиты — при отказе одного компонента система не разваливается. Требования стандартов — ISO 27001, PCI DSS требуют многоуровневой защиты." }
-  ]},
-  { n:21, qs:[
-    { q:"Как осуществляется мониторинг VPN?", a:"Мониторинг VPN — это постоянное наблюдение за состоянием и безопасностью VPN-инфраструктуры. Что отслеживается: Статус туннелей — все ли соединения активны, нет ли разрывов. Нагрузка — пропускная способность, количество одновременных пользователей. Аутентификация — успешные и неудачные попытки входа (много неудачных = атака перебором). Аномальный трафик — нетипичные объёмы или необычные направления. Журналы подключений — кто, когда, откуда подключился, сколько трафика прошло. Инструменты: Встроенная консоль VPN-шлюза, SIEM (централизованный сбор логов), Zabbix/Nagios — мониторинг доступности, NetFlow-анализаторы — анализ трафика. Оповещения: при разрыве туннеля, при подозрительном IP, при превышении нагрузки — автоматическое уведомление администратора." },
-    { q:"Какие методы аутентификации пользователей вы знаете?", a:"Аутентификация — доказать, что ты это ты. Методы: По паролю — самый простой. Логин + пароль. Уязвим к утечкам и фишингу. OTP (One-Time Password) — одноразовый пароль. SMS-код или TOTP (Google Authenticator, Яндекс.Ключ). Аппаратные токены (YubiKey) — физическое устройство. Нажал кнопку — сгенерировался код. Смарт-карты + PIN — корпоративные карточки с чипом. Биометрия — отпечаток пальца, распознавание лица, голоса, сетчатки. По сертификату — X.509 сертификат + приватный ключ. Используется в корпоративных VPN. Kerberos — протокол на основе 'тикетов', используется в Active Directory. SAML/OAuth/OpenID Connect — федеративная аутентификация для SSO. Надёжнее всего — комбинация нескольких факторов (MFA)." },
-    { q:"Почему важна интеграция средств защиты?", a:"Интеграция — это когда все инструменты безопасности работают вместе как единая система, а не по отдельности. Без интеграции: антивирус видит одно, IDS — другое, SIEM — третье. Никто не видит полной картины. С интеграцией: SIEM собирает события из всех источников и коррелирует их. Одно событие в антивирусе + подозрительный трафик в IDS + странный логин в AD = SIEM поднимает тревогу. Преимущества: Единая видимость — вся безопасность в одном окне. Автоматическое реагирование (SOAR) — IDS обнаружил атаку → автоматически заблокирован хост → уведомление команде. Согласованные политики — изменение правила применяется везде сразу. Меньше человеческих ошибок. Снижение затрат — меньше ручной работы. Пример: IAM + VPN + AD = уволил сотрудника в AD → автоматически потерял доступ к VPN." }
-  ]},
-  { n:22, qs:[
-    { q:"Как обеспечивается защита компьютеров и серверов? Назначение антивирусов, патчей и DLP.", a:"Защита конечных устройств — многоуровневая: Антивирусное ПО: обнаруживает и удаляет вредоносное ПО. Современные антивирусы используют не только сигнатуры, но и поведенческий анализ. Обязательно на каждом ПК и сервере. Системы обновлений (Patch Management): уязвимости в ОС и ПО — главный вектор атак. Своевременная установка патчей закрывает дыры. Автоматизируется через WSUS (Windows), SCCM, Ansible. DLP (Data Loss Prevention): следит за конфиденциальными данными. Блокирует копирование на USB, отправку по почте, загрузку в облако. Защищает от случайных и намеренных утечек. Плюс: EDR (глубокий мониторинг), шифрование дисков (BitLocker), контроль привилегий, запрет запуска неизвестных программ (Application Whitelisting)." },
-    { q:"Приведите примеры интеграции инструментов безопасности.", a:"Интеграция инструментов = когда 1+1 = 3. Реальные примеры: SIEM + Firewall + IDS/IPS — SIEM собирает логи с фаервола и IDS, коррелирует: 100 блокировок с одного IP + попытки входа = атака перебором → автоматическая блокировка IP. IAM + VPN — Single Sign-On: одни учётные данные AD для входа в корпоративную сеть и в VPN. Уволил человека — сразу потерял доступ везде. EDR + SIEM — телеметрия с конечных устройств (запуски процессов, сетевые соединения) поступает в SIEM и обогащает картину атаки. SOAR + SIEM — SIEM обнаружил, SOAR автоматически: изолировал заражённый хост, создал тикет, уведомил команду. DLP + почтовый шлюз — DLP увидел попытку отправить паспортные данные → почтовый шлюз заблокировал письмо." },
-    { q:"Что такое атаки на цепочки поставок?", a:"Атака на цепочку поставок (Supply Chain Attack) — хакер не атакует жертву напрямую, а через её доверенного поставщика. Логика: защититься от прямой атаки сложно, а вот у поставщика ПО может быть слабее защита. Взламывают поставщика, встраивают вредоносный код в его продукт — и вот он попадает к сотням организаций с официальным обновлением. Громкие примеры: SolarWinds (2020) — в обновление ПО SolarWinds Orion встроили бэкдор. Жертвами стали Microsoft, FireEye, несколько ведомств США. XZ Utils (2024) — бэкдор в популярную библиотеку сжатия Linux. Почему опасно: обновление приходит с доверенного сервера с валидной подписью. Обычный пользователь не подозревает угрозы. Защита: проверка хэшей обновлений, SBOM (перечень компонентов ПО), Zero Trust к сторонним инструментам." }
-  ]},
-  { n:23, qs:[
-    { q:"Что такое виртуальная частная сеть (VPN)?", a:"VPN (Virtual Private Network) — технология, создающая защищённый зашифрованный 'туннель' через публичную сеть (интернет). Представь: ты едешь по общественной дороге (интернет), но в бронированной машине (VPN). Снаружи видно, что машина едет, но что внутри — неизвестно. Как работает: VPN-клиент на твоём компьютере шифрует весь трафик, отправляет зашифрованный поток к VPN-серверу, VPN-сервер расшифровывает и отправляет дальше. Для веб-сайта ты выглядишь как VPN-сервер, а не как ты. Применение: удалённый доступ сотрудников к офисной сети, объединение нескольких офисов, защита в публичном Wi-Fi, анонимизация. Протоколы: OpenVPN, WireGuard, IKEv2/IPSec, L2TP." },
-    { q:"В чём разница между аутентификацией и авторизацией?", a:"Легко запутаться, но это разные вещи: Аутентификация — проверка личности. Вопрос: 'КТО ТЫ?' Доказываешь, что ты — это ты. Способы: пароль, биометрия, токен. Авторизация — проверка прав. Вопрос: 'ЧТО ТЕБЕ МОЖНО?' После того как система узнала кто ты — определяет твои права. Порядок строгий: сначала аутентификация, потом авторизация. Пример: Зашёл в систему с паролем (аутентификация) → система видит, что ты 'Менеджер по продажам' → разрешает доступ к CRM, но не к бухгалтерии (авторизация). Ещё пример из жизни: паспорт в аэропорту — аутентификация (проверка личности). Посадочный талон — авторизация (право зайти в самолёт)." },
-    { q:"Какие задачи решает криптография?", a:"Криптография — наука о защите информации с помощью математики. Решает 4 главные задачи: Конфиденциальность — зашифровать так, чтобы только получатель с ключом мог прочитать. Даже если перехватят — ничего не поймут. Инструмент: шифрование (AES, RSA). Целостность — убедиться, что данные не были изменены в пути. Инструмент: хэш-функции (SHA-256). Хэш изменился? Данные подделали. Аутентификация — подтвердить личность. 'Этот документ подписан именно этим человеком.' Инструмент: цифровая подпись (RSA, ECDSA). Неотказуемость — нельзя потом сказать 'я это не подписывал'. Раз подписал приватным ключом — это доказуемо. Применяется везде: HTTPS, электронная подпись, шифрование дисков, мессенджеры (E2E-шифрование)." }
-  ]},
-  { n:24, qs:[
-    { q:"Почему важно учитывать будущие тенденции при построении системы ИБ?", a:"Система безопасности строится сегодня, но должна работать и завтра. Почему нужно смотреть в будущее: Квантовые компьютеры — через 10–15 лет смогут сломать RSA и ECC. Если не готовиться сейчас, придётся экстренно переделывать всю инфраструктуру. Нужна постквантовая криптография. ИИ-атаки — завтра фишинг будет так персонализирован, что его не отличить от настоящего письма от коллеги. Новые технологии = новые векторы — IoT, 5G, облака вводят новые уязвимости. Архитектурные решения — заменить криптографический алгоритм потом = огромная работа. Проще заложить гибкость изначально. Законодательство — требования к безопасности ужесточаются. Несоответствие = штрафы. Вывод: безопасность — не статичная система, а живой организм, который нужно проектировать с учётом будущего." },
-    { q:"Какие алгоритмы считаются устаревшими и почему?", a:"Алгоритмы устаревают, когда: находят математические уязвимости или длина ключа слишком короткая для современных компьютеров. Устаревшие алгоритмы: DES (56-битный ключ) — взламывается за несколько часов перебором. Официально взломан ещё в 1999 году. MD5 (хэш-функция) — найдены коллизии: два разных файла с одинаковым MD5. Нельзя для паролей и подписей. SHA-1 — коллизия найдена в 2017 году (атака SHAttered). Браузеры перестали доверять сертификатам SHA-1. RC4 — статистические уязвимости, запрещён в TLS (RFC 7465, 2015). RSA с ключом 512/1024 бит — взламывается. Минимум — 2048 бит. SSL 2.0 и 3.0 — критические уязвимости (POODLE и др.). Замены: DES → AES, MD5/SHA-1 → SHA-256, RC4 → ChaCha20/AES-GCM, SSL → TLS 1.3." },
-    { q:"Что такое фишинг и каковы его основные признаки?", a:"Фишинг — вид мошенничества, когда атакующий притворяется доверенным отправителем (банк, коллега, сервис), чтобы заставить жертву раскрыть пароль, данные карты или кликнуть на вредоносную ссылку. Название от рыбалки: закидывают 'наживку' — ждут, кто клюнет. Основные признаки фишингового письма: Срочность и запугивание — 'Ваш аккаунт будет заблокирован через 24 часа!'. Подозрительный адрес отправителя — support@paypa1.com вместо paypal.com. Ссылки ведут не туда — текст 'сбербанк.рф', а реальный URL — другой. Запрашивают конфиденциальные данные — пароль, CVV карты, СНИЛС. Грамматические ошибки, странные формулировки. Неожиданные вложения — 'Ваш счёт-фактура' от незнакомого отправителя. Слишком хорошее предложение — 'Вы выиграли iPhone!'." }
-  ]},
-  { n:25, qs:[
-    { q:"Назовите основные элементы структуры СУИБ.", a:"СУИБ по стандарту ISO 27001 имеет чёткую структуру из нескольких элементов: Контекст организации — понимание внутренней среды (бизнес-процессы, активы) и внешней (законы, конкуренты, угрозы). Лидерство — поддержка руководства, назначение ответственных, утверждение политики ИБ. Планирование — оценка рисков (что может пойти не так и с какой вероятностью), постановка целей ИБ. Поддержка — ресурсы, компетенции сотрудников, осведомлённость, документация. Операции — реализация всех мер защиты (Приложение A ISO 27001 содержит 93 меры). Оценка эффективности — внутренние аудиты, измерение показателей, анализ со стороны руководства. Улучшение — корректирующие действия по результатам аудита, непрерывное совершенствование." },
-    { q:"Какие факторы влияют на производительность СКЗИ?", a:"СКЗИ (Средства криптографической защиты информации) — их скорость зависит от: Алгоритм шифрования — симметричный AES значительно быстрее асимметричного RSA. RSA используют только для ключей, AES — для данных. Длина ключа — AES-256 немного медленнее AES-128, но стойче. RSA-4096 медленнее RSA-2048. Аппаратное ускорение — процессоры Intel/AMD имеют инструкции AES-NI: аппаратное шифрование в 10x быстрее программного. GPU тоже ускоряет. Режим шифрования — GCM быстрее в параллельном режиме чем CBC. Объём данных — накладные расходы инициализации алгоритма. Нагрузка системы — другие процессы конкурируют за CPU. Качество реализации — оптимизированный код быстрее 'наивной' реализации. Сеть — для сетевых СКЗИ важна пропускная способность канала." },
-    { q:"Для каких задач используется асимметричное шифрование?", a:"Асимметричное шифрование медленное, поэтому используется только там, где нужны его уникальные свойства: Обмен ключами — главное применение! Стороны используют RSA или ECDH, чтобы договориться о симметричном ключе для дальнейшего общения. Именно так начинается TLS/HTTPS. Цифровые подписи — автор подписывает документ своим приватным ключом. Любой может проверить подпись публичным ключом. Используется в: электронном документообороте, сертификатах TLS, блокчейне. Аутентификация — в SSH и TLS можно использовать сертификат вместо пароля. PKI (инфраструктура открытых ключей) — сертификаты удостоверяющих центров, подтверждающие подлинность публичных ключей. Шифрование небольших данных — иногда шифруется сам симметричный ключ. НЕ используют для потоковой передачи данных — там AES." }
-  ]},
-  { n:26, qs:[
-    { q:"Какие механизмы управления используются в СУИБ?", a:"СУИБ работает через конкретные механизмы управления: Политика ИБ — главный документ: цели, принципы, ответственность. Утверждается руководством. Управление рисками — регулярная оценка: что может произойти, какова вероятность, какой ущерб, как снизить. Внутренний аудит — независимая проверка того, работают ли меры защиты. Проводится минимум раз в год. Анализ со стороны руководства — топ-менеджмент раз в год пересматривает СУИБ: актуальна ли политика? Достигнуты ли цели? Корректирующие действия — когда аудит нашёл несоответствие: зафиксировать, найти причину, устранить, проверить. KPI и метрики — измеримые показатели: 'среднее время обнаружения инцидента', 'процент закрытых уязвимостей'. Обучение и осведомлённость — сотрудники знают правила ИБ и почему это важно. Управление инцидентами — процедура реагирования на инциденты безопасности." },
-    { q:"Назовите основные типы VPN.", a:"VPN классифицируют по архитектуре и протоколу: По архитектуре: Remote Access VPN — один пользователь подключается к корпоративной сети. Самый распространённый случай: сотрудник работает из дома. Site-to-Site VPN — два офиса соединяются в одну сеть через интернет. Клиентское ПО не нужно — шлюзы соединяются между собой. Client-to-Client (Peer-to-Peer) — прямое соединение между двумя устройствами. По протоколу: IPSec VPN — корпоративный стандарт. Надёжный, но сложный в настройке. SSL/TLS VPN — работает через браузер или лёгкий клиент. Порт 443 — редко блокируется. OpenVPN — открытый код, гибкий. WireGuard — современный, быстрый, простой код (4000 строк vs 100000 у OpenVPN). L2TP/IPSec — старый, но широко поддерживается." },
-    { q:"Какие будущие угрозы можно выделить?", a:"Ландшафт угроз меняется вместе с технологиями: Квантовые атаки — квантовый компьютер сломает RSA и ECC (алгоритм Шора). Нужна постквантовая криптография (CRYSTALS-Kyber уже стандартизирован NIST). ИИ-управляемые атаки — автоматическая генерация эксплойтов, гиперперсонализированный фишинг, deepfake в видеозвонках. Атаки на IoT — миллиарды умных устройств с минимальной защитой (умные розетки, камеры, промышленные датчики). Ransomware 2.0 — двойное вымогательство: шифруют И угрожают опубликовать данные. Кибервойны — атаки государств на критическую инфраструктуру: электросети, водоснабжение, больницы. Атаки на облака — неправильно настроенные S3 bucket, захват IAM-токенов. Deepfake-мошенничество — 'звонок директора' с просьбой срочно перевести деньги." }
-  ]},
-  { n:27, qs:[
-    { q:"Какие существуют виды фишинговых атак?", a:"Фишинг — большое семейство атак. Виды: Email-фишинг (массовый) — рассылка миллионам людей. 'Ваш аккаунт взломан, кликните здесь.' Spear Phishing (целевой) — изучили жертву (LinkedIn, соцсети) и написали персонализированное письмо. Гораздо эффективнее. Whaling (охота на китов) — target: топ-менеджеры и директора. Письмо выглядит как от совета директоров или регуляторов. Вишинг (Vishing) — фишинг голосом. Звонят якобы из банка/службы безопасности: 'С вашей карты пытаются снять деньги'. Смишинг (Smishing) — фишинг через SMS. 'Ваша посылка задержана, перейдите по ссылке.' Clone Phishing — берут настоящее письмо от реального отправителя и меняют ссылку на вредоносную. QR-фишинг — вредоносный QR-код в офисе, на рекламе, в письме." },
-    { q:"Опишите основные этапы реагирования на киберинциденты.", a:"Реагирование на инциденты (Incident Response) — структурированный процесс по стандарту NIST SP 800-61: 1) Подготовка — ещё до инцидента. Разработать план, назначить команду, настроить инструменты обнаружения, провести учения. 2) Обнаружение и анализ — заметили что-то подозрительное. Определить: это реальный инцидент или ложная тревога? Оценить масштаб, тип атаки, пострадавшие системы. 3) Сдерживание — не дать распространиться. Изолировать заражённый хост, заблокировать вредоносный IP, отключить компрометированный аккаунт. 4) Уничтожение — удалить вредонос, закрыть уязвимость, которую использовали. 5) Восстановление — вернуть системы в работу из чистого бэкапа, убедиться что всё нормально. 6) Извлечение уроков — разбор полётов: почему произошло, что изменить, чтобы не повторилось." },
-    { q:"Какие меры относятся к организации работы средств защиты?", a:"Организация работы СЗИ — административные и процедурные меры: Назначение ответственных — у каждого СЗИ есть владелец: кто следит, обновляет, реагирует. Регламент обслуживания — плановые работы: когда обновляются базы, проводится техобслуживание, тестирование. Управление конфигурациями — все настройки задокументированы, изменения проходят через процесс согласования (Change Management). Обучение персонала — пользователи знают как работать с СЗИ, администраторы обучены настройке и реагированию. Управление инцидентами — чёткие инструкции: что делать при срабатывании, кому звонить, как эскалировать. Документирование — все конфигурации, инциденты, изменения фиксируются. Тестирование — регулярная проверка: работают ли средства защиты так, как задумано." }
-  ]},
-  { n:28, qs:[
-    { q:"Назовите основные методы обнаружения вирусов в антивирусных программах.", a:"Современный антивирус — это не просто 'база сигнатур'. Он использует несколько методов: Сигнатурный анализ — база данных 'цифровых отпечатков' известных вирусов. Быстро, точно, но только для известных угроз. Обновляется несколько раз в день. Эвристический анализ — ищет подозрительный код даже без точного совпадения с сигнатурой. 'Этот код похож на вирус — слишком много попыток изменить реестр.' Поведенческий анализ — запускает программу и смотрит что она делает. Пытается зашифровать все файлы? Это ransomware — блокировать! Эмуляция (Sandbox) — запускает подозрительный файл в изолированной виртуальной среде без риска для реальной системы. Облачный анализ — отправляет хэш файла в облако: 'видели ли мы этот файл раньше?'. ML-классификаторы — обучены на миллионах образцов, умеют обобщать." },
-    { q:"Как осуществляется контроль работы средств защиты информации?", a:"Контроль СЗИ — это убедиться, что защита реально работает, а не только числится на бумаге. Методы: Мониторинг журналов (логов) — антивирус что-то заблокировал? Фаервол что-то отклонил? Всё фиксируется и анализируется. SIEM — централизованный сбор и корреляция событий со всех СЗИ. Проверка актуальности — обновлены ли антивирусные базы? Актуальная ли версия ПО? Патчи установлены? Тестовые сценарии — имитация угрозы: 'скачаем тестовый EICAR-файл — обнаружит ли антивирус?' Сканирование уязвимостей (Nessus) — ищет слабые места в конфигурациях. Аудит конфигурации — сравнение с эталонной конфигурацией (CIS Benchmark). Пентест — раз в год нанять этичного хакера проверить реальную защиту. Отчётность — регулярные отчёты для руководства: состояние защиты, инциденты, тенденции." },
-    { q:"Каковы цели и задачи СУИБ?", a:"СУИБ существует не ради бумаг, а для защиты бизнеса. Цели: Защитить информацию — конфиденциальность (только уполномоченные), целостность (данные не изменены), доступность (работает когда нужно). Управлять рисками — не устранить все риски (невозможно), а снизить до приемлемого уровня. Соответствовать требованиям — законам (GDPR, закон о персданных РК), стандартам (ISO 27001), отраслевым нормам. Задачи СУИБ: Идентифицировать информационные активы и их ценность. Оценить риски для каждого актива. Выбрать и внедрить меры контроля (из Приложения A ISO 27001). Мониторить эффективность мер. Проводить внутренние аудиты. Реагировать на инциденты. Непрерывно улучшать систему (цикл PDCA)." }
-  ]},
-  { n:29, qs:[
-    { q:"В чём заключается принцип минимальных привилегий?", a:"Принцип минимальных привилегий (Least Privilege, PoLP) — каждый пользователь, процесс или сервис должен иметь ровно столько прав, сколько нужно для работы. Не больше. Никогда. Зачем это нужно: Ограничение ущерба при взломе — взломали аккаунт менеджера? Он имеет доступ только к CRM, не к базе данных и не к серверам. Сдерживание атаки — атакующий не может двигаться дальше по сети. Защита от инсайдеров — сотрудник не скачает данные, к которым у него нет доступа. Уменьшение поверхности атаки. Практически: Разработчик не нужно прав администратора домена. Веб-сервер запускается от непривилегированного пользователя, не от root. Сервисные аккаунты имеют только права на свои задачи. Регулярный пересмотр прав — убирать лишние." },
-    { q:"Какие ошибки чаще всего допускаются при установке СЗИ?", a:"Установить СЗИ и настроить правильно — разные вещи. Типичные ошибки: Настройки по умолчанию — оставили дефолтные пароли, дефолтные правила. Атакующие знают настройки по умолчанию наизусть. Слишком мягкие политики — чтобы 'не мешать работе' разрешили всё подряд. Защита номинальная. Отсутствие тестирования — установили, но не проверили работает ли. Правило в фаерволе может быть неверным. Нет интеграции — СЗИ работает само по себе, события не попадают в SIEM — картина неполная. Нет документации — кто настраивал, какие правила, почему именно так? Через год никто не знает. Слишком много исключений — добавляли исключения 'временно', они стали постоянными и создали бреши. Не обновляют — установили и забыли. Уязвимости в самом СЗИ растут. Не учат пользователей — самый крутой антивирус не поможет, если пользователь сам выключит его." },
-    { q:"Какие новые технологии используются для защиты информации?", a:"Безопасность развивается вместе с угрозами. Новые технологии: ИИ и ML в безопасности — обнаружение аномалий, поведенческий анализ, автоматизация реагирования (SOAR). Zero Trust Architecture — микросегментация, постоянная верификация, принцип 'не доверяй никому'. SASE (Secure Access Service Edge) — объединение сетевых и облачных функций безопасности в одном облачном сервисе. Постквантовая криптография — новые алгоритмы, устойчивые к квантовым компьютерам (CRYSTALS-Kyber, Dilithium). SOAR (Security Orchestration, Automation & Response) — автоматическое реагирование на инциденты без ручного вмешательства. Deception Technology (Ловушки) — продвинутые honeypot-системы, создающие ложную инфраструктуру для атакующих. Blockchain для аудита — неизменяемые журналы событий. Confidential Computing — шифрование даже во время обработки данных." }
-  ]},
-  { n:30, qs:[
-    { q:"Почему анализ архитектуры ИС важен для обеспечения ИБ организации?", a:"Нельзя защитить то, что не понимаешь. Анализ архитектуры — фундамент всей безопасности. Почему важен: Понимание, что защищать — где хранятся данные, как они передаются, какие компоненты критичны. Выявление слабых мест — только понимая архитектуру, можно найти уязвимые места: открытые порты, незащищённые API, прямой доступ к БД. Правильное размещение СЗИ — фаервол нужно поставить именно там, где он реально перехватит трафик. Оценка поверхности атаки — чем сложнее система, тем больше точек входа для атакующего. Разработка модели угроз — STRIDE, PASTA — без карты архитектуры не построишь. Security by Design — лучше встроить защиту при проектировании, чем переделывать потом. Планирование непрерывности — какие компоненты критичны для работоспособности?" },
-    { q:"В чём преимущества и недостатки парольной аутентификации?", a:"Пароли — самый старый метод аутентификации. До сих пор везде. Преимущества: Простота — не нужно специального оборудования. Дёшево — нулевая стоимость внедрения. Универсальность — работает на любом устройстве и платформе. Легко сменить — если скомпрометирован, меняешь за секунду. Знакомо всем — не нужно обучение. Недостатки: Утечки баз данных — миллиарды паролей уже в даркнете. Слабые пароли — '123456' до сих пор в топе. Переиспользование — один пароль на 20 сайтах. Фишинг — человека легко обмануть и он сам введёт пароль. Подбор (брутфорс) — автоматический перебор. Забывают — 'Забыли пароль?' — самая нажимаемая кнопка. Вывод: пароли нужно дополнять вторым фактором (MFA), а не заменять полностью." },
-    { q:"Назовите основные виды средств защиты информации. Роль цифровых сертификатов в TLS.", a:"Основные виды СЗИ: Технические (аппаратные) — HSM, токены, смарт-карты, биометрические считыватели, аппаратные NGFW. Программные — антивирусы, SIEM, DLP, IDS/IPS, VPN-клиенты, шифровальщики. Программно-аппаратные — межсетевые экраны, VPN-шлюзы, IPS-устройства. Криптографические (СКЗИ) — средства шифрования и электронной подписи. Организационные — политики, инструкции, обучение, аудиты. Физические — СКУД, видеонаблюдение, сейфы, замки серверных. Цифровые сертификаты в TLS: Сертификат X.509 — электронный 'паспорт' сервера. Подписан доверенным Удостоверяющим Центром (CA: DigiCert, Let's Encrypt). Содержит: публичный ключ сервера, кому выдан (домен), срок действия, подпись CA. Зачем нужен: без сертификата при HTTPS злоумышленник мог бы подсунуть свой ключ ('человек посередине'). Сертификат доказывает: 'этот публичный ключ — реально от google.com, а не от хакера'." }
-  ]}
+  { n:1,  qs:["Понятие облачных технологий и их назначение","Основные характеристики облачных вычислений","Примеры использования облаков в организациях"] },
+  { n:2,  qs:["Архитектура облачной инфраструктуры","Роль серверов в облачной среде","Назначение облачных хранилищ данных"] },
+  { n:3,  qs:["Публичное облако: понятие и особенности","Частное облако: преимущества и недостатки","Гибридное облако и области его применения"] },
+  { n:4,  qs:["Модели предоставления облачных услуг (IaaS, PaaS, SaaS)","Характеристика модели IaaS","Характеристика модели SaaS"] },
+  { n:5,  qs:["Основные провайдеры облачных услуг","Краткая характеристика AWS","Краткая характеристика Microsoft Azure"] },
+  { n:6,  qs:["Google Cloud Platform и его возможности","Сравнение AWS, Azure и Google Cloud","Критерии выбора облачного провайдера"] },
+  { n:7,  qs:["Понятие виртуализации","Роль виртуализации в облачных технологиях","Типы виртуализации"] },
+  { n:8,  qs:["Виртуальная машина: понятие","Основные параметры виртуальной машины","Этапы создания виртуального сервера"] },
+  { n:9,  qs:["Настройка CPU и RAM виртуальной машины","Настройка дискового пространства","Проверка доступности виртуального сервера"] },
+  { n:10, qs:["Понятие облачного хранилища","Типы облачных хранилищ","Преимущества облачного хранения данных"] },
+  { n:11, qs:["Подключение облачного хранилища","Разграничение прав доступа к данным","Резервирование данных в облаке"] },
+  { n:12, qs:["Понятие виртуальной сети","Назначение сетевых настроек в облаке","Принципы работы виртуальных сетей"] },
+  { n:13, qs:["IP-адресация в облачной инфраструктуре","Настройка сетевых правил доступа","Проверка соединения между сервисами"] },
+  { n:14, qs:["Основы информационной безопасности в облаке","Угрозы безопасности облачной инфраструктуры","Методы защиты облачных ресурсов"] },
+  { n:15, qs:["Управление пользователями в облаке","Настройка ролей и политик доступа","Принцип минимальных привилегий"] },
+  { n:16, qs:["Шифрование данных в облаке","Шифрование при хранении и передаче данных","Значение шифрования для безопасности"] },
+  { n:17, qs:["Понятие мониторинга облачных ресурсов","Основные параметры мониторинга","Инструменты мониторинга в облаке"] },
+  { n:18, qs:["Мониторинг загрузки процессора","Мониторинг памяти и сети","Настройка уведомлений о сбоях"] },
+  { n:19, qs:["Понятие оптимизации ресурсов","Анализ затрат в облачной среде","Методы снижения расходов"] },
+  { n:20, qs:["Автоматическое масштабирование","Горизонтальное и вертикальное масштабирование","Преимущества авто-масштабирования"] },
+  { n:21, qs:["Резервное копирование данных","Виды резервного копирования","Значение резервного копирования"] },
+  { n:22, qs:["Настройка автоматического резервного копирования","Восстановление данных из резервной копии","Оценка надёжности системы бэкапов"] },
+  { n:23, qs:["Администрирование облачной инфраструктуры","Обновление компонентов облачных сервисов","Установка патчей безопасности"] },
+  { n:24, qs:["Журналирование действий в облаке","Аудит пользователей и операций","Значение логирования для безопасности"] },
+  { n:25, qs:["Обеспечение высокой доступности сервисов","Понятие отказоустойчивости","Методы повышения доступности"] },
+  { n:26, qs:["Документирование облачной инфраструктуры","Назначение технической документации","Виды документации в IT"] },
+  { n:27, qs:["Интеграция облачных и локальных систем","Преимущества гибридной инфраструктуры","Примеры интеграции"] },
+  { n:28, qs:["Использование стандартов при настройке облака","Нормативно-техническая документация","Роль стандартов в администрировании"] },
+  { n:29, qs:["Типичные ошибки при настройке облачной инфраструктуры","Способы устранения ошибок","Профилактика сбоев в облаке"] },
+  { n:30, qs:["Перспективы развития облачных технологий","Роль облаков в цифровизации","Значение облачной инфраструктуры для бизнеса"] },
 ];
 
-const DIFF_MAP = DIFF;
+// Сложность билетов
+const DIFF = {
+  1:'easy',2:'easy',3:'easy',4:'med',5:'easy',
+  6:'med',7:'easy',8:'easy',9:'med',10:'easy',
+  11:'med',12:'med',13:'med',14:'hard',15:'hard',
+  16:'hard',17:'easy',18:'med',19:'med',20:'hard',
+  21:'easy',22:'med',23:'med',24:'hard',25:'hard',
+  26:'med',27:'hard',28:'med',29:'hard',30:'easy'
+};
+
+const DIFF_LABEL={easy:'Простой',med:'Средний',hard:'Сложный'};
+const DIFF_CLASS={easy:'diff-easy',med:'diff-med',hard:'diff-hard'};
+const CF_CLASS  ={easy:'cf-easy', med:'cf-med', hard:'cf-hard'};
+const TB_CLASS  ={easy:'tb-easy', med:'tb-med', hard:'tb-hard'};
+const PF_CLASS  ={easy:'pf-easy', med:'pf-med', hard:'pf-hard'};
+
+// ── AI-КЭШ ────────────────────────────────────────────────────
+const answerCache = {};
+
+async function getAIAnswer(question, ticketNum) {
+  const key = `t${ticketNum}_${question}`;
+  if (answerCache[key]) return answerCache[key];
+
+  const prompt = `Ты преподаватель по облачным технологиям. Дай чёткий, понятный и структурированный ответ на экзаменационный вопрос для студента техникума по специальности "Программное обеспечение".
+
+Предмет: ПМ 06 "Управление ресурсами облака и обслуживание облачной инфраструктуры"
+
+Вопрос: ${question}
+
+Требования к ответу:
+- 5-10 предложений, структурировано
+- Используй простой и понятный язык
+- Можешь использовать нумерацию или маркеры для списков
+- Приводи конкретные примеры (AWS, Azure, GCP, VMware и др.)
+- Без лишних вступлений — сразу к сути`;
+
+  const resp = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 1000,
+      messages: [{ role: "user", content: prompt }]
+    })
+  });
+  const data = await resp.json();
+  const answer = data.content?.[0]?.text || "Не удалось получить ответ. Попробуйте ещё раз.";
+  answerCache[key] = answer;
+  return answer;
+}
+
+// ── КАРТОЧКИ ─────────────────────────────────────────────────
 let allCards = [];
-let filtered = [];
-let current = 0;
-let learned = new Set(JSON.parse(localStorage.getItem('pm08_learned')||'[]'));
+let filtered  = [];
+let current   = 0;
+let learned   = new Set(JSON.parse(localStorage.getItem('pm06_learned')||'[]'));
 let selectedTicket = 0;
 let diffFilter = 'all';
+let isFlipped = false;
+let isLoading = false;
 
-function buildCards(){
+function buildCards() {
   allCards = [];
   TICKETS.forEach(t => t.qs.forEach((q,i) => {
-    allCards.push({ ticket: t.n, qnum: i+1, q: q.q, a: q.a, diff: DIFF[t.n] });
+    allCards.push({ ticket:t.n, qnum:i+1, q, diff:DIFF[t.n] });
   }));
 }
 
-function applyFilter(){
+function applyFilter() {
   filtered = allCards.filter(c => {
-    const ticketOk = selectedTicket === 0 || c.ticket === selectedTicket;
-    const diffOk   = diffFilter === 'all' || c.diff === diffFilter;
-    return ticketOk && diffOk;
+    const tOk = selectedTicket === 0 || c.ticket === selectedTicket;
+    const dOk = diffFilter === 'all' || c.diff === diffFilter;
+    return tOk && dOk;
   });
   current = 0;
+  isFlipped = false;
   renderCard();
 }
 
-function renderCard(){
-  if(!filtered.length){
+function renderCard() {
+  if (!filtered.length) {
     document.getElementById('flashcard').className = 'flashcard';
     document.getElementById('cQuestion').textContent = 'Нет карточек для выбранного фильтра.';
     document.getElementById('cAnswer').textContent = '';
@@ -440,6 +362,8 @@ function renderCard(){
   const fc = document.getElementById('flashcard');
   fc.classList.remove('flipped','cf-easy','cf-med','cf-hard');
   fc.classList.add(CF_CLASS[d]);
+  isFlipped = false;
+
   document.getElementById('cTicket').textContent  = `БИЛЕТ №${c.ticket} · Вопрос ${c.qnum}/3`;
   document.getElementById('cTicketB').textContent = `БИЛЕТ №${c.ticket} · Вопрос ${c.qnum}/3`;
   document.getElementById('cBadge').textContent   = DIFF_LABEL[d];
@@ -447,27 +371,85 @@ function renderCard(){
   document.getElementById('cBadgeB').textContent  = DIFF_LABEL[d];
   document.getElementById('cBadgeB').className    = `diff-badge ${DIFF_CLASS[d]}`;
   document.getElementById('cQuestion').textContent = c.q;
-  document.getElementById('cAnswer').textContent   = c.a;
+
+  // Reset answer area
+  const answerEl = document.getElementById('cAnswer');
+  const key = `t${c.ticket}_${c.q}`;
+  if (answerCache[key]) {
+    answerEl.innerHTML = `<div class="ai-badge">✨ AI-ответ</div><br>${formatAnswer(answerCache[key])}`;
+  } else {
+    answerEl.innerHTML = `<div class="ai-loading" id="aiLoading"><div class="ai-dots"><span></span><span></span><span></span></div>Нажмите на карточку для получения AI-ответа...</div>`;
+  }
+
   const pct = ((current+1)/filtered.length*100).toFixed(0);
-  const pf  = document.getElementById('progressFill');
+  const pf = document.getElementById('progressFill');
   pf.style.width = pct+'%';
   pf.className = 'progress-fill ' + PF_CLASS[d];
-  document.getElementById('progressLabel').textContent = `${current+1} / ${filtered.length} карточек · ✓ Знаю: ${learned.size}`;
+  document.getElementById('progressLabel').textContent = `${current+1} / ${filtered.length} · ✓ Знаю: ${learned.size}`;
 }
 
-function flipCard(){ document.getElementById('flashcard').classList.toggle('flipped'); }
-function nextCard(){ current=(current+1)%filtered.length; renderCard(); }
-function prevCard(){ current=(current-1+filtered.length)%filtered.length; renderCard(); }
-function markLearned(){
-  const c=filtered[current];
+function formatAnswer(text) {
+  // Convert numbered lists and bullet points to styled HTML
+  return text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\n/g,'<br>');
+}
+
+async function flipCard() {
+  if (isLoading) return;
+  if (!filtered.length) return;
+
+  if (!isFlipped) {
+    // Flip to answer side
+    document.getElementById('flashcard').classList.add('flipped');
+    isFlipped = true;
+
+    const c = filtered[current];
+    const key = `t${c.ticket}_${c.q}`;
+    if (!answerCache[key]) {
+      isLoading = true;
+      document.getElementById('cAnswer').innerHTML = `<div class="ai-loading"><div class="ai-dots"><span></span><span></span><span></span></div>Генерирую ответ...</div>`;
+      try {
+        const ans = await getAIAnswer(c.q, c.ticket);
+        document.getElementById('cAnswer').innerHTML = `<div class="ai-badge">✨ AI-ответ</div><br>${formatAnswer(ans)}`;
+      } catch(e) {
+        document.getElementById('cAnswer').innerHTML = `<span style="color:var(--hard)">Ошибка получения ответа. Проверьте соединение.</span>`;
+      }
+      isLoading = false;
+    }
+  } else {
+    document.getElementById('flashcard').classList.remove('flipped');
+    isFlipped = false;
+  }
+}
+
+function nextCard() {
+  current = (current+1) % filtered.length;
+  renderCard();
+}
+function prevCard() {
+  current = (current-1+filtered.length) % filtered.length;
+  renderCard();
+}
+function markLearned() {
+  const c = filtered[current];
   learned.add(c.ticket+'-'+c.qnum);
-  localStorage.setItem('pm08_learned',JSON.stringify([...learned]));
+  localStorage.setItem('pm06_learned', JSON.stringify([...learned]));
   nextCard();
 }
-function shuffle(){ filtered.sort(()=>Math.random()-.5); current=0; renderCard(); }
-function resetLearned(){ learned.clear(); localStorage.setItem('pm08_learned','[]'); renderCard(); }
+function shuffle() {
+  filtered.sort(() => Math.random()-.5);
+  current = 0;
+  renderCard();
+}
+function resetLearned() {
+  learned.clear();
+  localStorage.setItem('pm06_learned','[]');
+  renderCard();
+}
 
-function setDiffFilter(d, btn){
+function setDiffFilter(d, btn) {
   diffFilter = d;
   document.querySelectorAll('.diff-filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
@@ -477,7 +459,7 @@ function setDiffFilter(d, btn){
   applyFilter();
 }
 
-function buildTicketFilter(){
+function buildTicketFilter() {
   const wrap = document.getElementById('ticketFilter');
   wrap.innerHTML = '';
   const all = document.createElement('button');
@@ -485,7 +467,10 @@ function buildTicketFilter(){
   all.textContent = 'Все';
   all.onclick = () => {
     selectedTicket = 0;
+    diffFilter = 'all';
     document.querySelectorAll('.ticket-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.diff-filter-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelector('.df-all').classList.add('active');
     all.classList.add('active');
     applyFilter();
   };
@@ -507,28 +492,36 @@ function buildTicketFilter(){
   });
 }
 
-// QUIZ
+// ── ТЕСТ ──────────────────────────────────────────────────────
 let quizQuestions=[], quizAnswered=0, quizCorrect=0;
+let quizAnswers={}; // key: qi, value: answer text
 
-function buildQuiz(){
-  quizQuestions = [];
-  TICKETS.forEach(t => {
+async function buildQuiz() {
+  quizAnswers = {};
+  quizQuestions = TICKETS.map(t => {
     const qi = Math.floor(Math.random()*3);
-    const card = { ticket: t.n, diff: DIFF[t.n], ...t.qs[qi] };
-    const others = allCards.filter(c => c.ticket !== t.n);
-    const wrongs = others.sort(()=>Math.random()-.5).slice(0,3);
-    const opts = [card.a, ...wrongs.map(o=>o.a)].sort(()=>Math.random()-.5);
-    quizQuestions.push({ ticket: t.n, diff: DIFF[t.n], q: card.q, correct: card.a, opts });
+    return { ticket:t.n, diff:DIFF[t.n], q:t.qs[qi], qIdx:qi };
   });
   quizQuestions.sort(()=>Math.random()-.5);
   quizAnswered=0; quizCorrect=0;
-  renderQuiz();
+  renderQuizShell();
+  // Pre-fetch answers for all questions
+  prefetchQuizAnswers();
 }
 
-function renderQuiz(){
+async function prefetchQuizAnswers() {
+  for(const qq of quizQuestions) {
+    const key = `t${qq.ticket}_${qq.q}`;
+    if(!answerCache[key]) {
+      try { await getAIAnswer(qq.q, qq.ticket); } catch(e) {}
+    }
+  }
+}
+
+function renderQuizShell() {
   const c = document.getElementById('quizContent');
   if(quizAnswered===quizQuestions.length && quizQuestions.length>0){
-    const pct = Math.round(quizCorrect/quizQuestions.length*100);
+    const pct=Math.round(quizCorrect/quizQuestions.length*100);
     c.innerHTML=`<div class="results">
       <h2>Тест завершён! 🎉</h2>
       <div class="score-big">${quizCorrect}/${quizQuestions.length}</div>
@@ -545,65 +538,169 @@ function renderQuiz(){
     <button class="btn secondary" onclick="buildQuiz()">🔄 Новый тест</button>
   </div>`;
   quizQuestions.forEach((qq,i)=>{
-    const d = qq.diff;
-    const answered = qq._answered;
+    const d=qq.diff;
+    const answered=qq._answered;
+    const key=`t${qq.ticket}_${qq.q}`;
+    const cachedAns=answerCache[key];
+    // Build 4 options: short snippet of correct answer + 3 wrong questions as distractors
+    if(!qq._opts){
+      // Options are other questions from different tickets
+      const others=allCards.filter(c=>c.ticket!==qq.ticket).sort(()=>Math.random()-.5).slice(0,3);
+      qq._opts=[{text:qq.q, isCorrect:true}, ...others.map(o=>({text:o.q,isCorrect:false}))].sort(()=>Math.random()-.5);
+    }
     html+=`<div class="quiz-q ql-${d}" id="qq${i}">
       <div class="quiz-top">
         <span class="quiz-ticket-label">БИЛЕТ №${qq.ticket}</span>
         <span class="diff-badge ${DIFF_CLASS[d]}">${DIFF_LABEL[d]}</span>
       </div>
-      <div class="quiz-qtext">${i+1}. ${qq.q}</div>
+      <div class="quiz-qtext">${i+1}. Какой вопрос соответствует описанию:<br><em style="color:var(--muted);font-size:.9rem">"${getTopicHint(qq.q)}"</em></div>
       <div class="quiz-opts">`;
-    qq.opts.forEach((opt,oi)=>{
+    qq._opts.forEach((opt,oi)=>{
       let cls='';
-      if(answered){ cls=(opt===qq.correct?'correct':(opt===qq._chosen?'wrong':''))+' disabled'; }
-      const short=opt.length>180?opt.substring(0,180)+'…':opt;
-      html+=`<button class="quiz-opt ${cls}" onclick="answerQuiz(${i},${oi})">${short}</button>`;
+      if(answered){cls=(opt.isCorrect?'correct':(oi===qq._chosenIdx?'wrong':''))+' disabled';}
+      html+=`<button class="quiz-opt ${cls}" onclick="answerQuiz(${i},${oi})">${opt.text}</button>`;
     });
     html+=`</div>
       <div class="quiz-explanation ${answered?'show':''}">
-        ${answered?`<strong>✅ Правильный ответ:</strong> ${qq.correct.substring(0,350)}${qq.correct.length>350?'…':''}`:''}</div>
+        ${answered?`<strong>✅ Правильный вопрос:</strong> ${qq.q}<br><br>${cachedAns?'<strong>Ответ:</strong> '+formatAnswer(cachedAns.substring(0,400))+'...':`<span style='color:var(--muted)'>Ответ загружается...</span>`}`:''}</div>
     </div>`;
   });
-  c.innerHTML = html;
+  c.innerHTML=html;
 }
 
-function answerQuiz(qi, oi){
-  const qq = quizQuestions[qi];
+function getTopicHint(q) {
+  // Return a hint based on the question topic
+  const hints = {
+    "Понятие облачных технологий и их назначение": "Технология предоставления вычислительных ресурсов через интернет по требованию",
+    "Основные характеристики облачных вычислений": "Самообслуживание, широкий доступ к сети, объединение ресурсов, гибкость, измеримость",
+    "Примеры использования облаков в организациях": "CRM в SaaS, хранение файлов, CI/CD, почта — конкретные сценарии применения",
+    "Архитектура облачной инфраструктуры": "Многоуровневая структура: вычисления, хранилище, сеть, управление",
+    "Роль серверов в облачной среде": "Физические или виртуальные машины, обрабатывающие запросы пользователей",
+    "Назначение облачных хранилищ данных": "Централизованное хранение, доступ из любой точки, масштабирование",
+    "Публичное облако: понятие и особенности": "Ресурсы принадлежат провайдеру, доступны через интернет, оплата по факту",
+    "Частное облако: преимущества и недостатки": "Ресурсы принадлежат организации, высокий контроль, но дорого",
+    "Гибридное облако и области его применения": "Сочетание публичного и частного облака для гибкости",
+    "Модели предоставления облачных услуг (IaaS, PaaS, SaaS)": "Три уровня: инфраструктура, платформа и готовое приложение",
+    "Характеристика модели IaaS": "Аренда виртуальных машин, сетей и хранилищ — ты управляешь ОС и выше",
+    "Характеристика модели SaaS": "Готовое приложение через браузер — провайдер управляет всем",
+    "Основные провайдеры облачных услуг": "Amazon, Microsoft, Google, Alibaba — крупнейшие игроки рынка",
+    "Краткая характеристика AWS": "Amazon Web Services — самый крупный провайдер, EC2, S3, RDS",
+    "Краткая характеристика Microsoft Azure": "Облако Microsoft, тесная интеграция с Windows и Office 365",
+    "Google Cloud Platform и его возможности": "Облако Google, сильная аналитика, BigQuery, Kubernetes (GKE)",
+    "Сравнение AWS, Azure и Google Cloud": "Доля рынка, цены, сильные стороны каждого провайдера",
+    "Критерии выбора облачного провайдера": "Цена, регион, безопасность, интеграция, SLA — факторы выбора",
+    "Понятие виртуализации": "Создание виртуального аналога физического ресурса (ВМ, сеть, диск)",
+    "Роль виртуализации в облачных технологиях": "Основа облака: несколько ВМ на одном физическом сервере",
+    "Типы виртуализации": "Серверная, десктопная, сетевая, хранилищ, приложений",
+    "Виртуальная машина: понятие": "Программная эмуляция компьютера с выделенными ресурсами",
+    "Основные параметры виртуальной машины": "vCPU, RAM, диск, сетевой интерфейс, образ ОС",
+    "Этапы создания виртуального сервера": "Выбор провайдера → образ → тип → сеть → ключи → запуск",
+    "Настройка CPU и RAM виртуальной машины": "Выбор типа инстанса, изменение конфигурации, автоскейлинг",
+    "Настройка дискового пространства": "SSD/HDD, размер тома, IOPS, подключение дополнительных дисков",
+    "Проверка доступности виртуального сервера": "ping, SSH-подключение, мониторинг статуса, health check",
+    "Понятие облачного хранилища": "Распределённое хранение данных на серверах провайдера",
+    "Типы облачных хранилищ": "Блочное, объектное (S3), файловое (NFS) — для разных задач",
+    "Преимущества облачного хранения данных": "Масштабируемость, доступность, надёжность, низкие затраты",
+    "Подключение облачного хранилища": "Монтирование NFS/SMB, SDK для объектного хранилища, API",
+    "Разграничение прав доступа к данным": "IAM-политики, ACL, роли — кто и что может делать с данными",
+    "Резервирование данных в облаке": "Geo-redundancy, репликация, снэпшоты — защита от потери данных",
+    "Понятие виртуальной сети": "VPC — изолированная сетевая среда внутри облака",
+    "Назначение сетевых настроек в облаке": "Маршрутизация, подсети, шлюзы — управление трафиком",
+    "Принципы работы виртуальных сетей": "Overlay-сети, SDN, инкапсуляция трафика (VXLAN, GRE)",
+    "IP-адресация в облачной инфраструктуре": "Приватные (RFC1918) и публичные IP, эластичные IP, DHCP",
+    "Настройка сетевых правил доступа": "Security Groups, ACL, firewall — разрешить/запретить порты",
+    "Проверка соединения между сервисами": "ping, curl, telnet, traceroute, облачные инструменты диагностики",
+    "Основы информационной безопасности в облаке": "Модель разделённой ответственности: провайдер и клиент",
+    "Угрозы безопасности облачной инфраструктуры": "Взлом API, утечки данных, DDoS, неправильная конфигурация",
+    "Методы защиты облачных ресурсов": "MFA, шифрование, WAF, мониторинг, минимальные привилегии",
+    "Управление пользователями в облаке": "IAM: создание, удаление, группы, политики для учётных записей",
+    "Настройка ролей и политик доступа": "RBAC — роль определяет набор прав для группы пользователей",
+    "Принцип минимальных привилегий": "Каждый пользователь получает только необходимые права, не больше",
+    "Шифрование данных в облаке": "AES-256, управление ключами KMS, шифрование на уровне диска",
+    "Шифрование при хранении и передаче данных": "At-rest (диски) и in-transit (TLS/HTTPS) — два вида защиты",
+    "Значение шифрования для безопасности": "Защита данных даже при физическом взломе или перехвате трафика",
+    "Понятие мониторинга облачных ресурсов": "Сбор метрик (CPU, RAM, сеть) для контроля состояния системы",
+    "Основные параметры мониторинга": "CPU, память, дисковый I/O, сетевой трафик, время отклика",
+    "Инструменты мониторинга в облаке": "CloudWatch (AWS), Azure Monitor, Cloud Monitoring (GCP), Grafana",
+    "Мониторинг загрузки процессора": "CPU utilization — порог alert, автоскейлинг по нагрузке",
+    "Мониторинг памяти и сети": "Memory usage, Network In/Out — ключевые метрики производительности",
+    "Настройка уведомлений о сбоях": "Алерты по порогам, SNS/email/Slack, PagerDuty интеграция",
+    "Понятие оптимизации ресурсов": "Снижение затрат без потери производительности — rightsizing",
+    "Анализ затрат в облачной среде": "Cost Explorer, теги ресурсов, расчёт TCO, отчёты по расходам",
+    "Методы снижения расходов": "Reserved Instances, Spot, auto-stop, удаление неиспользуемых ресурсов",
+    "Автоматическое масштабирование": "Auto Scaling Group — динамическое добавление/удаление ВМ",
+    "Горизонтальное и вертикальное масштабирование": "Scale out (больше серверов) vs Scale up (мощнее сервер)",
+    "Преимущества авто-масштабирования": "Высокая доступность, экономия, нет ручного вмешательства",
+    "Резервное копирование данных": "Backup — копия данных для восстановления в случае потери",
+    "Виды резервного копирования": "Полное, инкрементальное, дифференциальное — плюсы и минусы",
+    "Значение резервного копирования": "RTO и RPO — время восстановления и допустимые потери данных",
+    "Настройка автоматического резервного копирования": "Расписание (cron), AWS Backup, snapshot policy — автоматизация",
+    "Восстановление данных из резервной копии": "Point-in-time recovery, тестирование восстановления, RTO",
+    "Оценка надёжности системы бэкапов": "Тест восстановления, 3-2-1 правило, проверка целостности бэкапа",
+    "Администрирование облачной инфраструктуры": "Управление ресурсами, пользователями, политиками и обновлениями",
+    "Обновление компонентов облачных сервисов": "Rolling update, blue-green deployment, канареечный релиз",
+    "Установка патчей безопасности": "Patch management: автообновление ОС, окна обслуживания, тестирование",
+    "Журналирование действий в облаке": "CloudTrail (AWS) / Activity Log — история всех API-вызовов",
+    "Аудит пользователей и операций": "Кто, что, когда делал — журналы для расследования инцидентов",
+    "Значение логирования для безопасности": "Обнаружение аномалий, расследование, соответствие требованиям",
+    "Обеспечение высокой доступности сервисов": "Multi-AZ, load balancer, health checks — 99.9%+ uptime",
+    "Понятие отказоустойчивости": "Способность системы работать при сбоях отдельных компонентов",
+    "Методы повышения доступности": "Репликация, резервирование, балансировка нагрузки, CDN",
+    "Документирование облачной инфраструктуры": "Архитектурные схемы, runbooks, диаграммы сетей, IaC",
+    "Назначение технической документации": "Онбординг, troubleshooting, аудит, передача знаний",
+    "Виды документации в IT": "Архитектурная, API-документация, runbook, SLA, DR-план",
+    "Интеграция облачных и локальных систем": "Hybrid cloud: VPN, Direct Connect, API-шлюзы, синхронизация",
+    "Преимущества гибридной инфраструктуры": "Гибкость, соответствие нормам, поэтапная миграция в облако",
+    "Примеры интеграции": "AD + Azure AD, on-premise БД + облачное приложение, AWS Outposts",
+    "Использование стандартов при настройке облака": "ISO 27001, NIST, CIS Benchmarks — baseline конфигурации",
+    "Нормативно-техническая документация": "SLA, политика безопасности, процедуры изменений (ITIL/ITSM)",
+    "Роль стандартов в администрировании": "Унификация, снижение ошибок, соответствие аудиту",
+    "Типичные ошибки при настройке облачной инфраструктуры": "Открытые S3 buckets, слабые пароли, избыточные права, нет бэкапов",
+    "Способы устранения ошибок": "Диагностика логов, откат изменений, Terraform state, тест-среда",
+    "Профилактика сбоев в облаке": "IaC, code review, staging environment, runbooks, мониторинг",
+    "Перспективы развития облачных технологий": "Edge computing, serverless, ИИ-сервисы, квантовые вычисления",
+    "Роль облаков в цифровизации": "Ускорение разработки, снижение CAPEX, доступность для стартапов",
+    "Значение облачной инфраструктуры для бизнеса": "Гибкость, масштабируемость, экономия, глобальный охват"
+  };
+  return hints[q] || q.substring(0,80)+'...';
+}
+
+function answerQuiz(qi,oi){
+  const qq=quizQuestions[qi];
   if(qq._answered) return;
-  qq._chosen = qq.opts[oi];
-  qq._answered = true;
-  if(qq._chosen === qq.correct) quizCorrect++;
+  qq._chosenIdx=oi;
+  qq._answered=true;
+  if(qq._opts[oi].isCorrect) quizCorrect++;
   quizAnswered++;
-  renderQuiz();
-  setTimeout(()=>{ const el=document.getElementById('qq'+qi); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); },80);
+  renderQuizShell();
+  setTimeout(()=>{const el=document.getElementById('qq'+qi);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});},80);
 }
 
-// OVERVIEW
+// ── ОБЗОР ────────────────────────────────────────────────────
 function buildOverview(){
-  const counts = { easy:0, med:0, hard:0 };
-  TICKETS.forEach(t => counts[DIFF[t.n]]++);
+  const counts={easy:0,med:0,hard:0};
+  TICKETS.forEach(t=>counts[DIFF[t.n]]++);
   document.getElementById('statRow').innerHTML=`
     <div class="stat-box"><div class="stat-num" style="color:var(--easy)">${counts.easy}</div><div class="stat-label">🟢 Простых билетов</div></div>
     <div class="stat-box"><div class="stat-num" style="color:var(--med)">${counts.med}</div><div class="stat-label">🟡 Средних билетов</div></div>
     <div class="stat-box"><div class="stat-num" style="color:var(--hard)">${counts.hard}</div><div class="stat-label">🔴 Сложных билетов</div></div>
     <div class="stat-box"><div class="stat-num" style="color:var(--accent)">90</div><div class="stat-label">Вопросов всего</div></div>`;
-  const g = document.getElementById('overviewGrid');
-  g.innerHTML = '';
-  TICKETS.forEach(t => {
-    const d = DIFF[t.n];
-    const card = document.createElement('div');
-    card.className = `ov-card ov-${d}`;
+  const g=document.getElementById('overviewGrid');
+  g.innerHTML='';
+  TICKETS.forEach(t=>{
+    const d=DIFF[t.n];
+    const card=document.createElement('div');
+    card.className=`ov-card ov-${d}`;
     card.innerHTML=`<h3>
       <span>Билет №${t.n}</span>
       <span class="diff-badge ${DIFF_CLASS[d]}">${DIFF_LABEL[d]}</span>
     </h3>
-    <ul>${t.qs.map((q,i)=>`<li>${i+1}. ${q.q}</li>`).join('')}</ul>`;
+    <ul>${t.qs.map((q,i)=>`<li>${i+1}. ${q}</li>`).join('')}</ul>`;
     g.appendChild(card);
   });
 }
 
-function showPage(id, btn){
+function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -611,6 +708,7 @@ function showPage(id, btn){
   if(id==='quiz' && !quizQuestions.length) buildQuiz();
 }
 
+// ── ИНИЦИАЛИЗАЦИЯ ─────────────────────────────────────────────
 buildCards();
 buildTicketFilter();
 applyFilter();
